@@ -1,0 +1,13 @@
+<mat-card class="custom-card" *ngIf="state">
+    <mat-card-header>
+        <mat-card-title>{{state.title}}</mat-card-title>
+        <mat-card-subtitle>{{state.comment}}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-card-content>
+        <router-outlet></router-outlet>
+    </mat-card-content>
+    <mat-card-actions>
+        <button mat-button (click)="prev()">Назад</button>
+        <button mat-button (click)="next()">Далее</button>
+    </mat-card-actions>
+</mat-card>
