@@ -1,28 +1,28 @@
-<div>
-    <input type="radio" id="window" name="constrtype" value="window">
+<div *ngIf="state">
+    <input type="radio" id="window" name="constrtype" value="window" (change)="changeTemplate(1)" [checked]="state.simpleJSON.template === 1">
     <label for="window">Окно</label>
     <br>
-    <input type="radio" id="window-one-imp" name="constrtype" value="window-one-imp">
+    <input type="radio" id="window-one-imp" name="constrtype" value="window-one-imp" (change)="changeTemplate(2)" [checked]="state.simpleJSON.template === 2">
     <label for="window-one-imp">Окно с импостом</label>
     <br>
-    <input type="radio" id="window-two-imp" name="constrtype" value="window-two-imp">
+    <input type="radio" id="window-two-imp" name="constrtype" value="window-two-imp" (change)="changeTemplate(3)" [checked]="state.simpleJSON.template === 3">
     <label for="window-two-imp">Окно с импостами</label>
     <br>
-    <input type="radio" id="door" name="constrtype" value="door">
+    <input type="radio" id="door" name="constrtype" value="door" (change)="changeTemplate(20)" [checked]="state.simpleJSON.template === 20">
     <label for="door">Дверь</label>
     <br>
-    <input type="radio" id="door-with-impost" name="constrtype" value="door-with-impost">
+    <input type="radio" id="door-with-impost" name="constrtype" value="door-with-impost" (change)="changeTemplate(21)" [checked]="state.simpleJSON.template === 21">
     <label for="door-with-impost">Дверь с импостом</label>
     <br>
-    <input type="radio" id="balkon-left" name="constrtype" value="balkon-left">
+    <input type="radio" id="balkon-left" name="constrtype" value="balkon-left" (change)="changeTemplate(4)" [checked]="state.simpleJSON.template === 4">
     <label for="balkon-left">Балконный блок левый</label>
     <br>
-    <input type="radio" id="balkon-right" name="constrtype" value="balkon-right">
+    <input type="radio" id="balkon-right" name="constrtype" value="balkon-right" (change)="changeTemplate(5)" [checked]="state.simpleJSON.template === 5">
     <label for="balkon-right">Балконный блок правый</label>
     <br>
-    <input type="radio" id="balkon-left-imp" name="constrtype" value="balkon-left-imp">
+    <input type="radio" id="balkon-left-imp" name="constrtype" value="balkon-left-imp" (change)="changeTemplate(6)" [checked]="state.simpleJSON.template === 6">
     <label for="balkon-left-imp">Балконный блок левый с импостом</label>
     <br>
-    <input type="radio" id="balkon-right-imp" name="constrtype" value="balkon-right-imp">
+    <input type="radio" id="balkon-right-imp" name="constrtype" value="balkon-right-imp" (change)="changeTemplate(7)" [checked]="state.simpleJSON.template === 7">
     <label for="balkon-right-imp">Балконный блок правый с импостом</label>
 </div>

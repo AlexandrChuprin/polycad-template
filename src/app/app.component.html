@@ -1,16 +1,15 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <h1>Prod-Line</h1>
+    <h1>ProdLine</h1>
     <span class="menu-spacer"></span>
     <div>
-      <a mat-button [routerLink]="'/constrtype'">Конструктив</a>
-      <a mat-button [routerLink]="'/colors'">Цвета</a>
-      <a mat-button [routerLink]="'/options'">Опции</a>
-      <a mat-button [routerLink]="'/systems'">Системы</a>
-      <a mat-button [routerLink]="'/params'">Параметры</a>
-      <a mat-button [routerLink]="'/result'">Результат</a>
-      <a mat-button [routerLink]="'/basket'">Корзина</a>
-
+      <a mat-button [ngStyle]="getStyle('constrtype')" [routerLink]="'/constrtype'">Конструктив</a>
+      <a mat-button [ngStyle]="getStyle('colors')" [routerLink]="'/colors'">Цвета</a>
+      <a mat-button [ngStyle]="getStyle('options')" [routerLink]="'/options'">Опции</a>
+      <a mat-button [ngStyle]="getStyle('systems')" [routerLink]="'/systems'">Системы</a>
+      <a mat-button [ngStyle]="getStyle('params')" [routerLink]="'/params'">Параметры</a>
+      <a mat-button [ngStyle]="getStyle('result')" [routerLink]="'/result'">Результат</a>
+      <a mat-button [ngStyle]="getStyle('basket')" [routerLink]="'/basket'">Корзина</a>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

@@ -1,16 +1,16 @@
 <div>
-    <input type="checkbox" id="moskit" name="options" value="moskit">
+    <input type="checkbox" id="moskit" name="options" value="moskit" (change)="setOption('Москиная сетка', $event.target.value)" [checked]="isChecked('Москиная сетка')">
     <label for="moskit">Москитная сетка</label>
     <br>
-    <input type="checkbox" id="sill" name="options" value="sill">
+    <input type="checkbox" id="sill" name="options" value="sill" (change)="setOption('Подоконник', $event.target.value)" [checked]="isChecked('Подоконник')">
     <label for="sill">Подоконник</label>
     <br>
-    <input type="checkbox" id="fillet" name="options" value="fillet">
+    <input type="checkbox" id="fillet" name="options" value="fillet" (change)="setOption('Отлив', $event.target.value)" [checked]="isChecked('Отлив')">
     <label for="fillet">Отлив</label>
     <br>
-    <input type="checkbox" id="child-lock" name="options" value="child-lock">
+    <input type="checkbox" id="child-lock" name="options" value="child-lock" (change)="setOption('Детский замок', $event.target.value)" [checked]="isChecked('Детский замок')">
     <label for="child-lock">Детский замок</label>
     <br>
-    <input type="checkbox" id="microventilation" name="options" value="microventilation">
+    <input type="checkbox" id="microventilation" name="options" value="microventilation" (change)="setOption('Микропроветривание', $event.target.value)" [checked]="isChecked('Микропроветривание')">
     <label for="microventilation">Микропроветривание</label>
 </div>

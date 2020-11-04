@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { StoreAction } from './actions/store-action';
 import { State } from './classes/state';
 
 @Injectable({
@@ -21,5 +22,7 @@ export class StateProviderService {
     this.next(this.lastState);
   }
 
-
+  process(action: StoreAction) {
+    this.next(action.perform(this.lastState));
+  }
 }

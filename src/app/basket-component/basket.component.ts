@@ -7,5 +7,6 @@ import { CommonComponent } from '../common/common.component';
   styleUrls: ['./basket.component.scss']
 })
 export class BasketComponent extends CommonComponent {
-
+  title = 'Корзина';
+  comment = 'ваш заказ';
 }

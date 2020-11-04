@@ -1,3 +1,46 @@
-<div *ngIf="state">
-    <h3>{{state.constrtype.name}}</h3>
+<div *ngIf="state" style="display: flex;">
+    <div *ngIf="state.simpleJSON.template < 20" style="flex: 1;">
+        <h3>Окно</h3>
+        <h4>Размеры:</h4>
+        <label for="height">Высота</label>
+        <input type="number" id="height" name="params" value="{{state.simpleJSON.height}}" (change)="setWindowHeight($event.target.value)">
+        <br>
+        <label for="width">Ширина</label>
+        <input type="number" id="width" name="params" value="{{state.simpleJSON.width}}" (change)="setWindowWidth($event.target.value)">
+        <br>
+        <h4>Створки:</h4>
+        <div *ngFor="let stvorka of state.simpleJSON.fields; let idx = index;">
+            <label for="open-type-{{idx}}">Створка {{idx + 1}}:</label>
+            <select name="open-type-{{idx}}" id="open-type-{{idx}}" (change)="setOpenTypeWindow(idx, $event.target.value)">
+                <option value="none" [selected]="stvorka.open_type === 'none'">{{openTypeDescription('none')}}</option>
+                <option value="left" [selected]="stvorka.open_type === 'left'">{{openTypeDescription('left')}}</option>
+                <option value="right" [selected]="stvorka.open_type === 'right'">{{openTypeDescription('right')}}</option>
+                <option value="down" [selected]="stvorka.open_type === 'down'">{{openTypeDescription('down')}}</option>
+                <option value="up" [selected]="stvorka.open_type === 'up'">{{openTypeDescription('up')}}</option>
+                <option value="left-down" [selected]="stvorka.open_type === 'left-down'">{{openTypeDescription('left-down')}}</option>
+                <option value="right-down" [selected]="stvorka.open_type === 'right-down'">{{openTypeDescription('right-down')}}</option>
+            </select>
+        </div>
+    </div>
+
+    <div *ngIf="state.simpleJSON.template >= 4" style="flex: 1;">
+        <h3>Дверь</h3>
+        <h4>Размеры:</h4>
+        <label for="height">Высота</label>
+        <input type="number" id="height" name="params" value="{{state.simpleJSON.height_door}}" (change)="setDoorHeight($event.target.value)">
+        <br>
+        <label for="width">Ширина</label>
+        <input type="number" id="width" name="params" value="{{state.simpleJSON.width_door}}" (change)="setDoorWidth($event.target.value)">
+        <br>
+        <h4>Створки:</h4>
+        <div *ngFor="let stvorka of state.simpleJSON.fields_door; let idx = index;">
+            <label for="door-open-type-{{idx}}">Створка:</label>
+            <select name="door-open-type-{{idx}}" id="door-open-type-{{idx}}" (change)="setOpenTypeDoor($event.target.value)">
+                <option value="left" [selected]="stvorka.open_type === 'left'">{{openTypeDescription('left')}}</option>
+                <option value="right" [selected]="stvorka.open_type === 'right'">{{openTypeDescription('right')}}</option>
+                <option value="left-down" [selected]="stvorka.open_type === 'left-down'">{{openTypeDescription('left-down')}}</option>
+                <option value="right-down" [selected]="stvorka.open_type === 'right-down'">{{openTypeDescription('right-down')}}</option>
+            </select>
+        </div>
+    </div>
 </div>

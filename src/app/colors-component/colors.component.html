@@ -1,16 +1,16 @@
 <h3>Цвет изнутри</h3>
 <div>
-    <input type="radio" id="color-in-white" name="color-in" value="white">
+    <input type="radio" id="color-in-white" name="color-in" value="white" (change)="setColorIn('Белый')" [checked]="isColorInChecked('Белый')">
     <label for="color-in-white">Белый</label>
     <br>
-    <input type="radio" id="color-in-brown" name="color-in" value="brown">
+    <input type="radio" id="color-in-brown" name="color-in" value="brown" (change)="setColorIn('Коричневый')" [checked]="isColorInChecked('Коричневый')">
     <label for="color-in-brown">Коричневый</label>
 </div>
 <h3>Цвет снаружи</h3>
 <div>
-    <input type="radio" id="color-out-white" name="color-out" value="white">
+    <input type="radio" id="color-out-white" name="color-out" value="white" (change)="setColorOut('Белый')" [checked]="isColorOutChecked('Белый')">
     <label for="color-out-white">Белый</label>
     <br>
-    <input type="radio" id="color-out-brown" name="color-out" value="brown">
+    <input type="radio" id="color-out-brown" name="color-out" value="brown" (change)="setColorOut('Коричневый')" [checked]="isColorOutChecked('Коричневый')">
     <label for="color-out-brown">Коричневый</label>
 </div>
