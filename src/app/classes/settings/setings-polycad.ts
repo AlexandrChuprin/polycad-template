@@ -37,7 +37,7 @@ export class SettingsPolycad {
     ];
 
     static prepare() {
-        const settings = new Settings();
+        const settings = SettingsPolycad.settings;
 
         if (SettingsPolycad.profileSystems.length) {
             settings.profile_systems = [...SettingsPolycad.profileSystems];

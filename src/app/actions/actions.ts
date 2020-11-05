@@ -47,8 +47,8 @@ export class SelectTemplate extends StoreAction {
             stateUpdated.simpleJSON.imposts_door = [];
             stateUpdated.simpleJSON.fields_door = [];
         } else if (this.template === 4) {
-            stateUpdated.simpleJSON.width = 1000;
-            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.width = 700;
+            stateUpdated.simpleJSON.height = 1200;
             stateUpdated.simpleJSON.imposts = [];
             stateUpdated.simpleJSON.fields = [
                 {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill
@@ -59,9 +59,9 @@ export class SelectTemplate extends StoreAction {
             stateUpdated.simpleJSON.fields_door = [
                 {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
             ];
-        } else if (this.template === 5) {
-            stateUpdated.simpleJSON.width = 1000;
-            stateUpdated.simpleJSON.height = 800;
+        } else if (this.template === 6) {
+            stateUpdated.simpleJSON.width = 700;
+            stateUpdated.simpleJSON.height = 1200;
             stateUpdated.simpleJSON.imposts = [];
             stateUpdated.simpleJSON.fields = [
                 {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill
@@ -72,9 +72,9 @@ export class SelectTemplate extends StoreAction {
             stateUpdated.simpleJSON.fields_door = [
                 {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill,
             ];
-        } else if (this.template === 6) {
+        } else if (this.template === 5) {
             stateUpdated.simpleJSON.width = 1000;
-            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.height = 1200;
             stateUpdated.simpleJSON.imposts = [500];
             stateUpdated.simpleJSON.fields = [
                 {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
@@ -88,7 +88,7 @@ export class SelectTemplate extends StoreAction {
             ];
         } else if (this.template === 7) {
             stateUpdated.simpleJSON.width = 1000;
-            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.height = 1200;
             stateUpdated.simpleJSON.imposts = [500];
             stateUpdated.simpleJSON.fields = [
                 {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill,

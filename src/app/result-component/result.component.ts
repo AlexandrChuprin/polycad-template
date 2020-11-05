@@ -42,7 +42,9 @@ export class ResultComponent extends CommonComponent {
     description += `\nПрофильная система: ${this.state.simpleJSON.profile}`;
     description += `\nФурнитурная система: ${this.state.simpleJSON.furniture}`;
     description += `\nПакеты: ${this.state.simpleJSON.glass}`;
-    description += `\nОпции: ${this.state.simpleJSON.idoptions}`;
+    if (this.state.simpleJSON.idoptions.length) {
+      description += `\nОпции: ${this.state.simpleJSON.idoptions}`;
+    }
     return description;
   }
 

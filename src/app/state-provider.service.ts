@@ -93,7 +93,9 @@ export class StateProviderService {
     templateUpdated.models.forEach(m => m.furniture_system = simpleJSON.furniture);
     templateUpdated.models.forEach(m => m.fill_marking = simpleJSON.glass);
     templateUpdated.models.forEach(m => m.front_color = simpleJSON.color_out);
+    templateUpdated.models.forEach(m => m.color_outside_marking = simpleJSON.color_out);
     templateUpdated.models.forEach(m => m.back_color = simpleJSON.color_in);
+    templateUpdated.models.forEach(m => m.color_inside_marking = simpleJSON.color_in);
 
     return templateUpdated;
   }
