@@ -9,6 +9,120 @@ export class SelectTemplate extends StoreAction {
     perform(state: State) {
         const stateUpdated = super.perform(state);
         stateUpdated.simpleJSON.template = this.template;
+        stateUpdated.simpleJSON.idtemplate = this.template.toString();
+        if (this.template === 1) {
+            stateUpdated.simpleJSON.width = 600;
+            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.imposts = [];
+            stateUpdated.simpleJSON.fields = [
+                {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+            stateUpdated.simpleJSON.width_door = 0;
+            stateUpdated.simpleJSON.height_door = 0;
+            stateUpdated.simpleJSON.imposts_door = [];
+            stateUpdated.simpleJSON.fields_door = [];
+        } else if (this.template === 2) {
+            stateUpdated.simpleJSON.width = 1000;
+            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.imposts = [500];
+            stateUpdated.simpleJSON.fields = [
+                {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
+                {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+            stateUpdated.simpleJSON.width_door = 0;
+            stateUpdated.simpleJSON.height_door = 0;
+            stateUpdated.simpleJSON.imposts_door = [];
+            stateUpdated.simpleJSON.fields_door = [];
+        } else if (this.template === 3) {
+            stateUpdated.simpleJSON.width = 1500;
+            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.imposts = [500, 500];
+            stateUpdated.simpleJSON.fields = [
+                {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
+                {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill,
+                {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+            stateUpdated.simpleJSON.width_door = 0;
+            stateUpdated.simpleJSON.height_door = 0;
+            stateUpdated.simpleJSON.imposts_door = [];
+            stateUpdated.simpleJSON.fields_door = [];
+        } else if (this.template === 4) {
+            stateUpdated.simpleJSON.width = 1000;
+            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.imposts = [];
+            stateUpdated.simpleJSON.fields = [
+                {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+            stateUpdated.simpleJSON.width_door = 600;
+            stateUpdated.simpleJSON.height_door = 2000;
+            stateUpdated.simpleJSON.imposts_door = [];
+            stateUpdated.simpleJSON.fields_door = [
+                {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
+            ];
+        } else if (this.template === 5) {
+            stateUpdated.simpleJSON.width = 1000;
+            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.imposts = [];
+            stateUpdated.simpleJSON.fields = [
+                {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+            stateUpdated.simpleJSON.width_door = 600;
+            stateUpdated.simpleJSON.height_door = 2000;
+            stateUpdated.simpleJSON.imposts_door = [];
+            stateUpdated.simpleJSON.fields_door = [
+                {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill,
+            ];
+        } else if (this.template === 6) {
+            stateUpdated.simpleJSON.width = 1000;
+            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.imposts = [500];
+            stateUpdated.simpleJSON.fields = [
+                {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
+                {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+            stateUpdated.simpleJSON.width_door = 600;
+            stateUpdated.simpleJSON.height_door = 2000;
+            stateUpdated.simpleJSON.imposts_door = [];
+            stateUpdated.simpleJSON.fields_door = [
+                {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
+            ];
+        } else if (this.template === 7) {
+            stateUpdated.simpleJSON.width = 1000;
+            stateUpdated.simpleJSON.height = 800;
+            stateUpdated.simpleJSON.imposts = [500];
+            stateUpdated.simpleJSON.fields = [
+                {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill,
+                {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+            stateUpdated.simpleJSON.width_door = 600;
+            stateUpdated.simpleJSON.height_door = 2000;
+            stateUpdated.simpleJSON.imposts_door = [];
+            stateUpdated.simpleJSON.fields_door = [
+                {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill,
+            ];
+        } else if (this.template === 20) {
+            stateUpdated.simpleJSON.width = 0;
+            stateUpdated.simpleJSON.height = 0;
+            stateUpdated.simpleJSON.imposts = [];
+            stateUpdated.simpleJSON.fields = [];
+            stateUpdated.simpleJSON.width_door = 800;
+            stateUpdated.simpleJSON.height_door = 2000;
+            stateUpdated.simpleJSON.imposts_door = [];
+            stateUpdated.simpleJSON.fields_door = [
+                {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+        } else if (this.template === 21) {
+            stateUpdated.simpleJSON.width = 0;
+            stateUpdated.simpleJSON.height = 0;
+            stateUpdated.simpleJSON.imposts = [];
+            stateUpdated.simpleJSON.fields = [];
+            stateUpdated.simpleJSON.width_door = 800;
+            stateUpdated.simpleJSON.height_door = 2000;
+            stateUpdated.simpleJSON.imposts_door = [600];
+            stateUpdated.simpleJSON.fields_door = [
+                {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill
+            ];
+        }
         return stateUpdated;
     }
 }

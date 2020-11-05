@@ -1,7 +1,7 @@
 <div>
-    <input type="radio" id="ps1" name="prof-sys" value="Rehau Euro 60" (change)="setProfile('Rehau Euro 60')" [checked]="isChecked('Rehau Euro 60')">
-    <label for="ps1">Rehau Euro 60</label>
-    <br>
-    <input type="radio" id="ps2" name="prof-sys" value="Rehau Synego" (change)="setProfile('Rehau Synego')" [checked]="isChecked('Rehau Synego')">
-    <label for="ps2">Rehau Synego</label>
+    <ng-container *ngFor="let sys of profileSystems">
+        <input type="radio" id="ps-{{sys.marking}}" name="prof-sys" value="{{sys.marking}}" (change)="setProfile(sys.marking)" [checked]="isChecked(sys.marking)">
+        <label for="ps-{{sys.marking}}">{{sys.marking}}</label>
+        <br>
+    </ng-container>
 </div>

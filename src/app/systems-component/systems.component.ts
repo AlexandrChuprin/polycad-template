@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SetProfile } from '../actions/actions';
+import { SettingsPolycad } from '../classes/settings/setings-polycad';
 import { CommonComponent } from '../common/common.component';
 
 @Component({
@@ -11,6 +12,9 @@ export class SystemsComponent extends CommonComponent {
   title = 'Системы';
   comment = 'выберите профильную систему';
 
+  get profileSystems() {
+    return SettingsPolycad.profileSystems;
+  }
 
   setProfile(option: string) {
     this.stateProvider.process(new SetProfile(option));

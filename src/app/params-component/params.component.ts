@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { SetDoorHeight, SetDoorWidth, SetWindowFills, SetWindowHeight, SetWindowWidth, SetDoorFills } from '../actions/actions';
+import { SetDoorHeight, SetDoorWidth, SetWindowFills, SetWindowHeight, SetWindowWidth, SetDoorFills, SetWindowImpPositions, SetDoorImpPositions } from '../actions/actions';
 import { CommonComponent } from '../common/common.component';
-import { getOpenTypeDescription, OpenType } from '../interfaces/simple-json';
+import { getOpenTypeDescription, getTemplateDescription, OpenType } from '../interfaces/simple-json';
 
 @Component({
   selector: 'app-params-component',
@@ -11,10 +11,26 @@ import { getOpenTypeDescription, OpenType } from '../interfaces/simple-json';
 export class ParamsComponent extends CommonComponent {
   title = 'Параметры';
   comment = 'укажите параметры изделия';
-
+  get modelDescription() {
+    let description = '';
+    description += getTemplateDescription(this.state.simpleJSON.template);
+    return description;
+  }
   openTypeDescription(opentype: OpenType) {
     return getOpenTypeDescription(opentype);
   }
+
+  setWindowImpPos(idx: number, pos: number) {
+    const impPos = [...this.state.simpleJSON.imposts];
+    impPos[+idx] = +pos;
+    this.stateProvider.process(new SetWindowImpPositions(impPos));
+  }
+  setDoorImpPos(idx: number, pos: number) {
+    const impPos = [...this.state.simpleJSON.imposts_door];
+    impPos[+idx] = +pos;
+    this.stateProvider.process(new SetDoorImpPositions(impPos));
+  }
+
   setWindowHeight(value: number) {
     console.log('setWindowHeight');
     console.log(value);

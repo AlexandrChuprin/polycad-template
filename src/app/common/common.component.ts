@@ -17,6 +17,7 @@ export class CommonComponent implements OnInit {
 
   ngOnInit() {
     this.stateProvider.process(new SetTitleAndComment(this.title, this.comment));
+
     this.stateProvider.state.subscribe((state: State) => {
       if (state) {
         this.state = state;

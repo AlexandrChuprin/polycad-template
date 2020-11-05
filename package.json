@@ -5,12 +5,14 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "build-aot": "ng build --aot --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
+    "@a.chuprin/polycad-core": "^1.1.9",
     "@angular/animations": "~8.2.11",
     "@angular/cdk": "~8.2.3",
     "@angular/common": "~8.2.11",
@@ -46,5 +48,11 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.15.0",
     "typescript": "~3.5.3"
+  },
+  "browser": {
+    "fs": false,
+    "path": false,
+    "os": false,
+    "stream": false
   }
 }

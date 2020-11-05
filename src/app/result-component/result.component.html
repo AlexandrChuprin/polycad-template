@@ -1,1 +1,11 @@
-<pre>{{modelDescription}}</pre>
+<div *ngIf="state" style="display: flex; flex-direction: column;">
+
+    <div style="flex: 1;">
+        <div #containerSVG class="drawing"></div>
+        <div #containerSVGTemp class="drawing2" style="display: none;"></div>
+        <img [src]="image" width="400" height="400" />
+    </div>
+    <div style="flex: 1; margin-top: 30px;">
+        <pre>{{modelDescription}}</pre>
+    </div>
+</div>

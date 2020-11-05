@@ -1,4 +1,6 @@
 <div *ngIf="state" style="display: flex;">
+    <h3>{{modelDescription}}</h3>
+    <br>
     <div *ngIf="state.simpleJSON.template < 20" style="flex: 1;">
         <h3>Окно</h3>
         <h4>Размеры:</h4>
@@ -21,6 +23,12 @@
                 <option value="right-down" [selected]="stvorka.open_type === 'right-down'">{{openTypeDescription('right-down')}}</option>
             </select>
         </div>
+        <h4>Импосты:</h4>
+        <ng-container *ngFor="let impPos of state.simpleJSON.imposts; let idx = index;">
+            <label for="height">Импост {{idx + 1}}:</label>
+            <input type="number" id="height" name="params" value="{{impPos}}" (change)="setWindowImpPos(idx, +$event.target.value)">
+            <br>
+        </ng-container>
     </div>
 
     <div *ngIf="state.simpleJSON.template >= 4" style="flex: 1;">
@@ -42,5 +50,11 @@
                 <option value="right-down" [selected]="stvorka.open_type === 'right-down'">{{openTypeDescription('right-down')}}</option>
             </select>
         </div>
+        <h4>Импосты:</h4>
+        <ng-container *ngFor="let impPos of state.simpleJSON.imposts_door; let idx = index;">
+            <label for="height">Импост {{idx + 1}}:</label>
+            <input type="number" id="height" name="params" value="{{impPos}}" (change)="setDoorImpPos(idx, +$event.target.value)">
+            <br>
+        </ng-container>
     </div>
 </div>

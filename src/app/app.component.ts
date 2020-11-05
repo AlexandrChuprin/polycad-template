@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { StateProviderService } from './state-provider.service';
 import { filter } from 'rxjs/operators';
+import { SettingsPolycad } from './classes/settings/setings-polycad';
+import { SelectTemplate } from './actions/actions';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -18,6 +20,8 @@ export class AppComponent {
     .subscribe(_ => {
       this.actualRoute = _.page;
     });
+    SettingsPolycad.prepare();
+    this.stateProvider.process(new SelectTemplate(1));
   }
 
   getStyle(route: string) {

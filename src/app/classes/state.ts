@@ -1,4 +1,6 @@
+import { Polycad } from '@a.chuprin/polycad-core';
 import { SimpleJSONFill, SimpleJSONModel } from '../interfaces/simple-json';
+import { SettingsPolycad } from './settings/setings-polycad';
 
 export class State {
     public title = '';
@@ -16,17 +18,17 @@ export class State {
         idtemplate: '1',
         width: 1000,
         height: 1000,
-        profile: 'Rehau Euro 60',
-        furniture: 'Siegenia',
+        profile: SettingsPolycad.profileSystems[0].marking,
+        furniture: SettingsPolycad.furnitureSystems[0].marking,
         imposts: [500],
         fields: [
             {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill,
             {open_type: 'right', moskit: true, handle: 'rotoline'} as SimpleJSONFill
         ],
-        glass: '4-16-4',
+        glass: SettingsPolycad.fills[0].marking,
         glass_under_impost: '',
-        color_in: 'Белый',
-        color_out: 'Белый',
+        color_in: SettingsPolycad.colors[0].marking,
+        color_out: SettingsPolycad.colors[0].marking,
         width_door: 800,
         height_door: 2000,
         imposts_door: [],
@@ -37,4 +39,6 @@ export class State {
         polycadbasket: 0,
         params: []
     };
+
+    public polycad: Polycad;
 }

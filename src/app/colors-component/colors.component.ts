@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SetColorIn, SetColorOut } from '../actions/actions';
+import { SettingsPolycad } from '../classes/settings/setings-polycad';
 import { CommonComponent } from '../common/common.component';
 
 @Component({
@@ -10,7 +11,9 @@ import { CommonComponent } from '../common/common.component';
 export class ColorsComponent extends CommonComponent {
   title = 'Цвета';
   comment = 'выберите цвет изделия';
-
+  get colors() {
+    return SettingsPolycad.colors;
+  }
   setColorOut(color: string) {
     this.stateProvider.process(new SetColorOut(color));
   }
