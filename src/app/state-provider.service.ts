@@ -23,8 +23,10 @@ export class StateProviderService {
   }
 
   updatePage(page: string) {
-    this.lastState.page = page;
-    this.next(this.lastState);
+    if (page && page.length && this.lastState.pages.indexOf(page) > -1) {
+      this.lastState.page = page;
+      this.next(this.lastState);
+    }
   }
 
   process(action: StoreAction) {
