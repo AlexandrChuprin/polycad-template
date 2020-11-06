@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { StateProviderService } from './state-provider.service';
-import { filter } from 'rxjs/operators';
+import { delay, filter } from 'rxjs/operators';
 import { SettingsPolycad } from './classes/settings/setings-polycad';
 import { SelectTemplate } from './actions/actions';
+import { State } from './classes/state';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +11,7 @@ import { SelectTemplate } from './actions/actions';
 })
 export class AppComponent {
   title = 'prodline-custom';
-
+  state: State = null;
   actualRoute = '';
   constructor(private stateProvider: StateProviderService) {
     stateProvider.state
@@ -19,6 +20,7 @@ export class AppComponent {
     )
     .subscribe(_ => {
       this.actualRoute = _.page;
+      this.state = _;
     });
     SettingsPolycad.prepare();
     this.stateProvider.process(new SelectTemplate(1));
