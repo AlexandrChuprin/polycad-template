@@ -1,4 +1,4 @@
-import { Polycad } from '@a.chuprin/polycad-core';
+// import { Polycad } from '@a.chuprin/polycad-core';
 import { SimpleJSONFill, SimpleJSONModel } from '../interfaces/simple-json';
 import { SettingsPolycad } from './settings/setings-polycad';
 
@@ -40,5 +40,5 @@ export class State {
         params: []
     };
 
-    public polycad: Polycad;
+    // public polycad: Polycad;
 }

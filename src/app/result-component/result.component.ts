@@ -1,4 +1,4 @@
-import { Polycad } from '@a.chuprin/polycad-core';
+// import { Polycad } from '@a.chuprin/polycad-core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { CommonComponent } from '../common/common.component';
@@ -53,14 +53,15 @@ export class ResultComponent extends CommonComponent {
   }
 
   get image() {
-    if (this.state && this.state.polycad && this.state.polycad.model
-      && this.state.polycad.model.template && this.state.polycad.model.template.installOptions) {
-      // console.log(this.state.polycad.model.template);
-      this.state.polycad.controller.last_template = +this.state.simpleJSON.template;
-      const pic = this.state.polycad.getBase64Svg({ show_back: 0, draw_sizes: 1 });
-      return this.sanitizer.bypassSecurityTrustResourceUrl(pic);
-    } else {
-      return '';
-    }
+    return '';
+    // if (this.state && this.state.polycad && this.state.polycad.model
+    //   && this.state.polycad.model.template && this.state.polycad.model.template.installOptions) {
+    //   // console.log(this.state.polycad.model.template);
+    //   this.state.polycad.controller.last_template = +this.state.simpleJSON.template;
+    //   const pic = this.state.polycad.getBase64Svg({ show_back: 0, draw_sizes: 1 });
+    //   return this.sanitizer.bypassSecurityTrustResourceUrl(pic);
+    // } else {
+    //   return '';
+    // }
   }
 }
