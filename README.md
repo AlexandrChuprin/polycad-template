@@ -1,27 +1,80 @@
-# ProdlineCustom
+# ProdlineCustom - версия Polycad для создания индивидуального дизайна
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.12.
 
-## Development server
+## Порядок действий при создании собственного дизайна
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+### 1. Создать учетную запись на github
 
-## Code scaffolding
+[Создаем](https://github.com/join) себе учетную запись на github, если еще нет.
+Подтверждаем почту, авторизуемся в github
+Устанавливаем [github-клиент](https://desktop.github.com/) для Windows или другой ОС, устанавливаем и перезагружаем машину.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+### 2. Делаем форк репозитория
 
-## Build
+Открываем страницу нашего репозитория с шаблоном поликада: [https://github.com/AlexandrChuprin/polycad-template](https://github.com/AlexandrChuprin/polycad-template)
+Чтобы сделать форк репозитория, нужно нажать кнопку «Fork» вверху справа на странице. Таким образом вы создадите экземпляр всего этого репозитория в своем аккаунте.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+### 3. Клонируем репозиторий:
 
-## Running unit tests
+Нужно на рабочей машине открыть консоль и перейти в папку, в которой предполагается сохранить проект.
+Когда репозиторий уже есть в вашем аккаунте (после форка), вы можете клонировать его на свою машину и в дальнейшем работать с ним локально.
+Чтобы клонировать репозиторий, зайдите в форкнутый репозиторий в своем аккаунте, нажмите кнопку "clone" и скопируйте ссылку.
+Ссылка будет иметь вид: `https://github.com/ИМЯ_ВАШЕЙ_УЧЕТКИ/polycad-template.git`
+Затем в консоли введите команду клонирования на рабочую машину: `git clone https://github.com/ИМЯ_ВАШЕЙ_УЧЕТКИ/polycad-template.git`
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+### 4. Переходим в папку проекта и создаем свою ветку:
 
-## Running end-to-end tests
+Переходим в созданную папку с проектом: `cd polycad-template`
+Переключаемся на ветку для разработки: `git pull && git checkout -b f-companyname`, где `companyname` - название вашей компании, например: `f-coca-cola` или `f-snikers`.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+### 5. Устанавливаем зависимости:
 
-## Further help
+Для выполнения этой команды - у вас на рабочей машине должнен быть установлен NodeJs, который можно скачать [здесь](https://nodejs.org/en/), лучше брать версию LTS.
+После установки необходимо перезагрузить машину и выполнить команду: `npm i` и ожидать завершения установки.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+### 6. Запускаем приложение:
+
+В консоли вводим команду `npm run start` и открываем браузер на странице: `http://localhost:4200/`.
+При этом должен отобразиться шаблон приложения, который вы будете впоследствии править.
+
+### 7. Указание по правкам проекта:
+
+#### 1. Нельзя изменять интерфейс результрующего объекта:
+
+Интерфейс `src/app/interfaces/simple-json.ts` необходимо оставить без изменений, как и свойство со ссылкой на этот обект в составе класса состояния: "State.simpleJSON" (`src/app/classes/state.ts`).
+
+#### 2. Все компоненты можно изменять:
+
+Все компоненты приложения можно модифицировать: задавать собственные стили, расположение элементов, порядок и компоновку элементов и компонентов и т.д., но при этом не должен нарушаться процесс формирования результирующего объекта в классе состояния: "State.simpleJSON" (`src/app/classes/state.ts`).
+Подробнее о понятии компонента написано а документации: [https://angular.io/guide/component-overview](https://angular.io/guide/component-overview).
+
+#### 3. Immutable State
+ 
+Объект состояния "State" (`src/app/classes/state.ts`) предполагается неизменяемым.
+Для изменения его свойства необходимо реализовать (или использовать имеющийся) класс действия (наследник "StoreAction" `src/app/actions/store-action.ts`) в файле `src/app/actions/actions.ts`.
+Реализованное действие может быть вызвано из компонента с помощью сервиса работы с состоянием "StateProviderService" (`src/app/state-provider.service.ts`), конструкцией вида: `this.stateProvider.process(new SetSomeProperty(this.someProperty));`, здесь используется конструкция вида `this.stateProvider` т.к. создаваемый вами компонент должен получить ссылку на объект сервиса работы с состоянием через [механизм внедрения зависимостей](https://angular.io/guide/dependency-injection) (т.е. должен быть полем компонента, которое инициализируется в конструкторе компонента).
+
+### 8. Передача изменений в наш репозиторий:
+
+#### 1. Зафиксируйте внесенные изменения в вашем репозитории:
+
+Для этого выполните команду: `git add . && git commit -m "fix" && git push` если делаете коммит в первый раз то соответсвующей ветки еще нет в вашем репозитории и ее нужно добавить, тогда команда будет такой: `git add . && git commit -m "fix" && git push --set-upstream origin f-companyname`, где "companyname" - название компании из пункта 4.
+
+#### 2. Перейдите в созданную ветку на GitHub
+
+Для этого войдите в свою учетную запись на GitHub и откройте форк репозитория "polycad-template", который вы сделали. Слева вверху будет комбобокс, где можно выбрать ветку репозитория - выберите там свою ветку "f-companyname"
+
+При желании можно обновить и синхронизировать свой репозиторий с исходным, для этого выполните команду: `git checkout main && git remote add upstream https://github.com/AlexandrChuprin/polycad-template.git && git fetch upstream && git merge upstream/main && git push origin main`, но это не обязательно.
+
+#### 3. Создайте запрос на внесение изменений в наш репозиторий (pull-request):
+
+Когда вы находитесь в вашей ветке на GitHub - там справа есть зеленая кнопка "Compare & pull request" — кликните ее, при этом откроется окошко создания pull-reqest'а. Введите необходимые детали относительно того, что именно вы сделали. После этого можно нажать кнопку подтверждения внизу.
+
+#### 4. Проверка изменений
+
+После получения запроса на внесение изменений, мы проверим ваши изменения и при отсутствии проблем - создадим версию Polycad с вашим дизайном, а в случае наличия проблем обсудим и доработаем с вами код.
+
+### 9. Подключение Polycad с вашим дизайном
+
+После завершения работ по созданию Polycad в вашем дизайне мы обсудим с вами детали необходимые для запуска работы Polycad и развернем созданный продукт.
