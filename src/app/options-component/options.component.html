@@ -1,16 +1,47 @@
-<div>
-    <input type="checkbox" id="moskit" name="options" value="moskit" (change)="setOption('Москиная сетка', $event.target.value)" [checked]="isChecked('Москиная сетка')">
-    <label for="moskit">Москитная сетка</label>
-    <br>
-    <input type="checkbox" id="sill" name="options" value="sill" (change)="setOption('Подоконник', $event.target.value)" [checked]="isChecked('Подоконник')">
-    <label for="sill">Подоконник</label>
-    <br>
-    <input type="checkbox" id="fillet" name="options" value="fillet" (change)="setOption('Отлив', $event.target.value)" [checked]="isChecked('Отлив')">
-    <label for="fillet">Отлив</label>
-    <br>
-    <input type="checkbox" id="child-lock" name="options" value="child-lock" (change)="setOption('Детский замок', $event.target.value)" [checked]="isChecked('Детский замок')">
-    <label for="child-lock">Детский замок</label>
-    <br>
-    <input type="checkbox" id="microventilation" name="options" value="microventilation" (change)="setOption('Микропроветривание', $event.target.value)" [checked]="isChecked('Микропроветривание')">
-    <label for="microventilation">Микропроветривание</label>
-</div>
+<ng-container *ngIf="state">
+    <div class='flex-row'>
+        <div class="border flex-1 title-prev">
+            <span class="title-text-prev" (click)="goToPage(1)">
+                Конструктив
+            </span>
+        </div>
+        <div class="border flex-1 title-prev">
+            <span class="title-text-prev" (click)="goToPage(2)">
+                Цвета
+            </span>
+        </div>
+        <div class="border flex-1 flex-row-wrap common-card">
+            <div class="border flex-1 title">
+                <span class="title-text">
+                    {{title}}
+                </span>
+            </div>
+            
+            <div class="flex-1 no-mobile" style="min-width: 60px; max-width: 60px;"></div>
+            <div class="border flex-1 options-container">
+                <div class="flex-1 option-container-item"
+                    [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
+                    [ngStyle]="{'max-height': option.suboptions ? '120px' : '40px'}"
+                    *ngFor="let option of options; let idx = index;">
+                    <input type="checkbox" id="{{option.idoption}}" name="options" value="{{option.idoption}}" (change)="setOption(option.idoption, $event.target.checked)" [checked]="isChecked(option.idoption)">
+                    <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label">{{option.name}}</label>
+                    <div *ngIf="option.suboptions" class="flex-col">
+                        <div *ngFor="let suboption of option.suboptions; let idxs = index;"
+                            class="flex-1 options-container-subitem"
+                            [ngClass]="isChecked(suboption.idoption) ? 'option-text-selected' : 'option-text'"
+                        >
+                            <input type="radio" id="{{suboption.idoption}}" name="suboptions-{{option.idoption}}" value="{{suboption.idoption}}" (change)="setOption(suboption.idoption, $event.target.checked)" [checked]="isChecked(suboption.idoption)">
+                            <label for="{{suboption.idoption}}" style="cursor: pointer;" class="option-label">{{suboption.name}}</label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border flex-1 title-next">
+            <span class="title-text-next" (click)="goToPage(4)">
+                Профильная система
+            </span>
+        </div>
+    </div>
+</ng-container>
+<div class="mobile-border"></div>

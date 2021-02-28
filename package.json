@@ -5,13 +5,14 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build-aot": "ng build --aot --prod",
+    "build-aot": "ng build --aot --prod --base-href /darwin/",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
+    "@a.chuprin/polycad-core": "^1.1.9",
     "@angular/animations": "~8.2.11",
     "@angular/cdk": "~8.2.3",
     "@angular/common": "~8.2.11",

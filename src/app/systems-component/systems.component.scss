@@ -1,0 +1,44 @@
+.ps-container {
+    max-height: 450px;
+    padding-top: 50px;
+}
+.ps-container-item {
+    min-width: 250px;
+    max-width: 250px;
+    margin: 25px;
+    min-height: 120px;
+}
+
+.ps-info {
+    margin-top: 20px;
+    margin-left: 7px;
+    font-size: 14px;
+    line-height: 20px;
+    color: #5a5b5d;
+    font-family: "Gilroy";
+}
+
+.ps-text {
+    font-size: 20px;
+    color: #5a5b5d;
+    font-weight: 500;
+    font-family: "Gilroy";
+}
+
+.ps-text-selected {
+    font-size: 20px;
+    color: #8fcc09;
+    font-weight: bold;
+    font-family: "Gilroy";
+}
+
+@media only screen and (max-width: 575px) {
+    .ps-container {
+        max-height: 600px;
+        padding-top: 20px;
+    }
+    
+    .ps-container-item {
+        margin: 0px;
+    }
+}

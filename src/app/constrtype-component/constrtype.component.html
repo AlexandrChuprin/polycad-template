@@ -1,28 +1,80 @@
-<div *ngIf="state">
-    <input type="radio" id="window" name="constrtype" value="window" (change)="changeTemplate(1)" [checked]="state.simpleJSON.template === 1">
-    <label for="window">Окно</label>
-    <br>
-    <input type="radio" id="window-one-imp" name="constrtype" value="window-one-imp" (change)="changeTemplate(2)" [checked]="state.simpleJSON.template === 2">
-    <label for="window-one-imp">Окно с импостом</label>
-    <br>
-    <input type="radio" id="window-two-imp" name="constrtype" value="window-two-imp" (change)="changeTemplate(3)" [checked]="state.simpleJSON.template === 3">
-    <label for="window-two-imp">Окно с импостами</label>
-    <br>
-    <input type="radio" id="door" name="constrtype" value="door" (change)="changeTemplate(20)" [checked]="state.simpleJSON.template === 20">
-    <label for="door">Дверь</label>
-    <br>
-    <input type="radio" id="door-with-impost" name="constrtype" value="door-with-impost" (change)="changeTemplate(21)" [checked]="state.simpleJSON.template === 21">
-    <label for="door-with-impost">Дверь с импостом</label>
-    <br>
-    <input type="radio" id="balkon-left" name="constrtype" value="balkon-left" (change)="changeTemplate(4)" [checked]="state.simpleJSON.template === 4">
-    <label for="balkon-left">Балконный блок левый</label>
-    <br>
-    <input type="radio" id="balkon-right" name="constrtype" value="balkon-right" (change)="changeTemplate(5)" [checked]="state.simpleJSON.template === 5">
-    <label for="balkon-right">Балконный блок левый с импостом</label>
-    <br>
-    <input type="radio" id="balkon-left-imp" name="constrtype" value="balkon-left-imp" (change)="changeTemplate(6)" [checked]="state.simpleJSON.template === 6">
-    <label for="balkon-left-imp">Балконный блок правый</label>
-    <br>
-    <input type="radio" id="balkon-right-imp" name="constrtype" value="balkon-right-imp" (change)="changeTemplate(7)" [checked]="state.simpleJSON.template === 7">
-    <label for="balkon-right-imp">Балконный блок правый с импостом</label>
-</div>
+<!-- <ng-container *ngIf="state"> -->
+    <div class='flex-row'>
+        <div class="border flex-1 flex-row-wrap common-card">
+            <div class="border flex-1 title">
+                <span class="title-text">
+                    {{title}}
+                </span>
+            </div>
+            <div class="flex-1 no-mobile" style="min-width: 30px; max-width: 30px;"></div>
+            <div class="border flex-1 flex-col constrtype">
+                <div *ngFor="let ct of constrtypes; let idx = index;" class="flex-row ct" (click)="changeTemplate(idx)">
+                    <div class="flex-1 ct-image flex-row">
+                        <div class="flex-1"></div>
+                        <div class="flex-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" [attr.viewBox]="ct.viewBox" width="34" height="34">
+                                <style>.shp5 {fill: #8fcc09} .shp11 {fill:#b9b9ba}</style>
+                                <g [innerHTML]="ct.svg"></g>
+                            </svg>
+                        </div>
+                        <div class="flex-1"></div>
+                    </div>
+                    <div class="flex-1 ct-name flex-col">
+                        <div class="flex-1"></div>
+                        <div class="flex-1">{{ct.name}}</div>
+                        <div class="flex-1"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex-1" style="min-width: 20px; max-width: 20px;"></div>
+            <div class="border flex-1 flex-col model-container">
+                <div class="border flex-1 model">
+                    <!-- тут конструкция {{state.simpleJSON.template}} -->
+                    <div #containerSVG class="drawing"></div>
+                    <div #containerSVGTemp class="drawing2" style="display: none;"></div>
+                    <!-- <img [src]="image" width="450" height="450" /> -->
+                    
+                </div>
+                <div class="border flex-1 flex-row opentypes">
+                    <div class="flex-1" style="min-width: 20px; max-width: 20px;"></div>
+                    <div *ngFor="let openType of openTypes; let idx = index;" class="flex-1 cb">
+                        <select class="ot ot-text" name="open-type-{{idx}}" id="open-type-{{idx}}" (change)="setOpenType(idx, $event.target.value)">
+                            <option value="none" [selected]="openType === 'none'">{{openTypeDescription('none')}}</option>
+                            <option value="left" [selected]="openType === 'left'">{{openTypeDescription('left')}}</option>
+                            <option value="right" [selected]="openType === 'right'">{{openTypeDescription('right')}}</option>
+                            <option value="down" [selected]="openType === 'down'">{{openTypeDescription('down')}}</option>
+                            <option value="up" [selected]="openType === 'up'">{{openTypeDescription('up')}}</option>
+                            <option value="left-down" [selected]="openType === 'left-down'">{{openTypeDescription('left-down')}}</option>
+                            <option value="right-down" [selected]="openType === 'right-down'">{{openTypeDescription('right-down')}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="border flex-1 title-next">
+            <span class="title-text-next" (click)="goToPage(2)">
+                Цвета
+            </span>
+        </div>
+        <div class="border flex-1 title-next">
+            <span class="title-text-next" (click)="goToPage(3)">
+                Опции
+            </span>
+        </div>
+        <div class="border flex-1 title-next">
+            <span class="title-text-next" (click)="goToPage(4)">
+                Профильная система
+            </span>
+        </div>
+    </div>
+    <div class="mobile-border"></div>
+
+<!-- </ng-container> -->
+<app-calculator
+    *ngIf="isSizeInputVisible"
+    [initialValue]="selectedSize"
+    (calcAction)="changeSize(+$event)"
+    style="position: absolute; z-index: 1000;"
+    [ngStyle]="{'left': lastCursorX + 'px', 'top': lastCursorY + 'px'}"
+>
+</app-calculator>

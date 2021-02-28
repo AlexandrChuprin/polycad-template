@@ -1,15 +1,126 @@
-<mat-card class="custom-card" *ngIf="state">
-    <mat-card-header>
-        <mat-card-title>{{state.title}}</mat-card-title>
-        <mat-card-subtitle>{{state.comment}}</mat-card-subtitle>
-    </mat-card-header>
-    <mat-card-content>
-        <div style="margin: 30px;">
-            <router-outlet></router-outlet>
+<ng-container *ngIf="state">
+    <div class="custom-card" *ngIf="!state.mobile">
+        <div *ngIf="state && state.error" class="error">{{lang.error}}: {{state.error}}</div>
+        <div *ngIf="state && state.info" class="info">{{state.info}}</div>
+        <app-constrtype *ngIf="isPage('constrtype')">loading, please wait...</app-constrtype>
+        <app-colors-component *ngIf="isPage('colors')">loading, please wait... </app-colors-component>
+        <app-options-component *ngIf="isPage('options')">loading, please wait...</app-options-component>
+        <app-systems-component *ngIf="isPage('systems')">loading, please wait...</app-systems-component>
+        <app-result-component *ngIf="isPage('result')">loading, please wait...</app-result-component>
+        
+        <div class="flex-row summary">
+            <div class="flex-1 summary-pic">
+                <img [src]="image" width="80" height="80" />
+            </div>
+            <div class="flex-1 flex-col summary-description">
+                <div class="flex-1 flex-row" *ngIf="!showPrevCalcButton">
+                    <div class="flex-1 summary-description-title">Конструктив:</div>
+                    <div class="flex-1 summary-description-value">{{constrtypeMarking}}</div>
+                </div>
+                <div class="flex-1 flex-row">
+                    <div class="flex-1 summary-description-title" *ngIf="!showPrevCalcButton">Цвета:</div>
+                    <div class="flex-1 summary-description-value" *ngIf="!showPrevCalcButton">{{state.simpleJSON.color_in}} / {{state.simpleJSON.color_out}}</div>
+                    <div class="flex-1 summary-description-title" *ngIf="showPrevCalcButton"></div>
+                    <div class="flex-1 summary-summ" *ngIf="showPrevCalcButton">
+                        <div *ngIf="!state.isCalculationInProgress">{{summ}}</div>
+                    </div>
+                    <div class="flex-1 flex-row summary-buttons">
+                        <div class="flex-1 summary-button" *ngIf="showPrevCalcButton" (click)="prevCalc()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51 22" width="51" height="22" style="position:absolute; top: 0px; right: 110px;">
+                                <style>.shp1 {fill: #8fcc09}</style>
+                                <g>
+                                    <path class="shp1" transform="translate(-1245, -699)" d="M1258.39 718.94L1250.71 711.44L1296 711.44L1296 708.52L1250.72 708.52L1258.39 701.06L1256.29 699L1247.12 707.93L1247.11 707.93L1245 709.99L1247.1 712.05L1256.28 721L1258.39 718.94Z"></path>
+                                </g>
+                            </svg>
+                            <span style="position: absolute; right: 0px; top: 0px;">к калькулятору</span>
+                        </div>
+                        <div class="flex-1 summary-button" *ngIf="showPrevButton" (click)="prev()">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51 22" width="51" height="22" style="position:absolute; top: 0px; right: 50px;">
+                                <style>.shp1 {fill: #8fcc09}</style>
+                                <g>
+                                    <path class="shp1" transform="translate(-1245, -699)" d="M1258.39 718.94L1250.71 711.44L1296 711.44L1296 708.52L1250.72 708.52L1258.39 701.06L1256.29 699L1247.12 707.93L1247.11 707.93L1245 709.99L1247.1 712.05L1256.28 721L1258.39 718.94Z"></path>
+                                </g>
+                            </svg>
+                            <span style="position: absolute; right: 0px; top: 0px;">назад</span>
+                        </div>
+                        <div class="flex-1 summary-button" *ngIf="showNextButton" (click)="next()">
+                            <span style="position: absolute; right: 63px; top: 0px;">Далее</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51 22" width="51" height="22" style="position:absolute; top: 0px; right: 0px;">
+                                <style>.shp1 {fill: #8fcc09}</style>
+                                <g>
+                                    <path class="shp1" transform="translate(-1425, -699)" d="M1461.87 718.94L1469.4 711.44L1425 711.44L1425 708.52L1469.39 708.52L1461.88 701.06L1463.93 699L1472.92 707.93L1472.93 707.93L1475 709.99L1472.94 712.05L1463.94 721L1461.87 718.94Z"></path>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 flex-row" *ngIf="!showPrevCalcButton">
+                    <div class="flex-1 summary-description-title">Опции:</div>
+                    <div class="flex-1 summary-description-value">{{options}}</div>
+                </div>
+            </div>
         </div>
-    </mat-card-content>
-    <mat-card-actions>
-        <button mat-button (click)="prev()">Назад</button>
-        <button mat-button (click)="next()">Далее</button>
-    </mat-card-actions>
-</mat-card>
+        <div class="flex-row calc-button-row" *ngIf="state.page !== 'result'">
+            <div class="flex-1"></div>
+            <div class="flex-1 calc-button-text"
+                [ngClass]="state && state.page === 'systems' ? 'calc-button' : 'calc-button-disabled'"
+                (click)="calc()"
+            >посчитать</div>
+        </div>
+    </div>
+
+    <div class="custom-card-mobile" *ngIf="state.mobile">
+        <app-constrtype *ngIf="!isPage('result')">loading, please wait...</app-constrtype>
+        <app-colors-component *ngIf="!isPage('result')">loading, please wait... </app-colors-component>
+        <app-options-component *ngIf="!isPage('result')">loading, please wait...</app-options-component>
+        <app-systems-component *ngIf="!isPage('result')">loading, please wait...</app-systems-component>
+        <app-result-component *ngIf="isPage('result')">loading, please wait...</app-result-component>
+        
+        <div class="flex-row summary">
+            <div class="flex-1 summary-pic">
+                <img [src]="image" width="80" height="80" />
+            </div>
+            <div class="flex-1 flex-col summary-description">
+                <div class="flex-1 flex-row-mobile" *ngIf="!showPrevCalcButton">
+                    <div class="flex-1 summary-description-title">Конструктив:</div>
+                    <div class="flex-1 summary-description-value">{{constrtypeMarking}}</div>
+                </div>
+                <div class="flex-1 flex-row-mobile">
+                    <div class="flex-1 summary-description-title" *ngIf="!showPrevCalcButton">Цвета:</div>
+                    <div class="flex-1 summary-description-value" *ngIf="!showPrevCalcButton">{{state.simpleJSON.color_in}} / {{state.simpleJSON.color_out}}</div>
+                    <div class="flex-1 summary-description-title" *ngIf="showPrevCalcButton"></div>
+                    <div class="flex-1 flex-row">
+                        <div class="flex-1 summary-summ" *ngIf="showPrevCalcButton">
+                            <div *ngIf="!state.isCalculationInProgress">{{summ}}</div>
+                        </div>
+                        <div class="flex-1 flex-row-mobile summary-buttons">
+                            <div class="flex-1 summary-button" *ngIf="showPrevCalcButton" (click)="prevCalc()">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 51 22" width="31" height="22" style="position:absolute; top: 0px; right: 170px;">
+                                    <style>.shp1 {fill: #8fcc09}</style>
+                                    <g>
+                                        <path class="shp1" transform="translate(-1245, -699)" d="M1258.39 718.94L1250.71 711.44L1296 711.44L1296 708.52L1250.72 708.52L1258.39 701.06L1256.29 699L1247.12 707.93L1247.11 707.93L1245 709.99L1247.1 712.05L1256.28 721L1258.39 718.94Z"></path>
+                                    </g>
+                                </svg>
+                                <span style="position: absolute; right: 60px; top: 0px;">к калькулятору</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="flex-1 flex-row-mobile" *ngIf="!showPrevCalcButton">
+                    <div class="flex-1 summary-description-title">Опции:</div>
+                    <div class="flex-1 summary-description-value">{{options}}</div>
+                </div>
+            </div>
+        </div>
+        <div class="no-mobile flex-row calc-button-row" *ngIf="state.page !== 'result'">
+            <div class="flex-1"></div>
+            <div class="flex-1 calc-button-text"
+                [ngClass]="state && state.page === 'systems' ? 'calc-button' : 'calc-button-disabled'"
+                (click)="calc()"
+            >посчитать</div>
+        </div>
+        <div class="mobile calc-button-row" *ngIf="!isPage('result')">
+            <div class="calc-button-text calc-button" (click)="calcMobile()">посчитать</div>
+        </div>
+    </div>
+</ng-container>

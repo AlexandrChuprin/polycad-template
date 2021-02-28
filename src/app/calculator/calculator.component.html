@@ -1,0 +1,23 @@
+<!-- (keypress)="numberOnly($event)" -->
+<!-- <div style="background-color: transparent; width: 100%; height: 100vh;"> -->
+    <div class="calculator"
+        (keyup.enter)="buttonPressed('Ok')"
+    >
+        <div class="calculator-grid">
+            <div *ngIf="state.operator" disabled class="calculator-input">
+                {{firstValue + ' ' + operator + ' ' + secondValue}}
+            </div>
+
+            <div *ngIf="!state.operator" disabled class="calculator-input">
+                {{firstValue}}
+            </div>
+
+            <div *ngFor="let button of buttons" class="calculator-button" (click)="buttonPressed(button)">
+                {{button}}
+            </div>
+            <div class="calculator-button calculator-accept-button" (click)="buttonPressed('Ok')">
+                Ok
+            </div>
+        </div>
+    </div>
+<!-- </div> -->

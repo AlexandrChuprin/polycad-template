@@ -9,7 +9,7 @@ import { CommonComponent } from '../common/common.component';
   styleUrls: ['./systems.component.scss']
 })
 export class SystemsComponent extends CommonComponent {
-  title = 'Системы';
+  title = 'Профильная система';
   comment = 'выберите профильную систему';
 
   get profileSystems() {

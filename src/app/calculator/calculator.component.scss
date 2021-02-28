@@ -1,0 +1,47 @@
+.calculator {
+    border: 1px solid #ccc;
+    padding: 5px;
+    background-color: white;
+    display: flex;
+}
+
+.calculator-grid{
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 5px;
+}
+
+.calculator-button{
+    cursor:pointer;
+    border: 1px solid #aaa;
+    background-color: #ccc;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 40px;
+    font-family: sans-serif; 
+    font-size: 16pt;
+}
+
+.calculator-button:hover{
+    background-color: #eee;
+}
+.calculator-accept-button{
+    background-color: #cde;
+}
+
+.calculator-input{
+    grid-column: 1/5;
+    grid-row: 1;
+    border: 1px solid #aaa;
+    background-color: #eee;
+    text-align: right;
+    vertical-align: middle;
+    line-height: 30px;
+    font-family: sans-serif; 
+    font-size: 16pt;
+    padding-right: 3px;
+    overflow: hidden;
+    width: 200px;
+}

@@ -1,4 +1,4 @@
-<div *ngIf="state" style="display: flex; flex-direction: column;">
+<!-- <div *ngIf="state" style="display: flex; flex-direction: column;">
 
     <div style="flex: 1;">
         <div #containerSVG class="drawing"></div>
@@ -8,4 +8,78 @@
     <div style="flex: 1; margin-top: 30px;">
         <pre>{{modelDescription}}</pre>
     </div>
-</div>
+</div> -->
+
+
+<ng-container *ngIf="state">
+    <div class='flex-row'>
+        <div class="border flex-1 flex-row-wrap common-card">
+            <div class="border flex-1 title-aligned">
+                <span class="title-text">
+                    {{title}}
+                </span>
+            </div>
+
+            <div class="flex-1 no-mobile" style="min-width: 100px; max-width: 100px;"></div>
+            <div class="border flex-1" *ngIf="state.isCalculationInProgress">
+                <div class="flex-col">
+                    <div class="flex-1"></div>
+                    <div class="flex-1">
+                        <div class="spinner">
+                            <div class='container'>
+                                <div class='loader-container'>
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                  <div></div>
+                                </div>
+                              </div>
+                              
+                              
+                              <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+                                <defs>
+                                  <filter id="gooey">
+                                    <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+                                    <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 21 -7" result="goo" />
+                                    <feBlend in="SourceGraphic" in2="goo" />
+                                    </filter>
+                                </defs>
+                              </svg>
+                        </div>
+                        <div class="wait-text">
+                            Идет расчет, это может занять несолько минут, подождите, пожалуйста
+                        </div>
+                    </div>
+                    <div class="flex-1"></div>
+                </div>
+            </div>
+            <div class="border flex-1" *ngIf="!state.isCalculationInProgress">
+                <div class="flex-row-wrap result-row">
+                    <div class="flex-1">
+                        <div class="result-item-caption">Конструктив:</div>
+                        <div class="result-item-info">
+                            {{constypeInfo}}
+                        </div>
+                    </div>
+                    <div class="flex-1"></div>
+                    <div class="flex-1">
+                        <div class="result-item-caption">Опции:</div>
+                        <div class="result-item-info">{{optionsInfo}}</div>
+                    </div>
+                </div>
+                <div class="flex-row-wrap result-row">
+                    <div class="flex-1">
+                        <div class="result-item-caption">Профильная система:</div>
+                        <div class="result-item-info">{{psInfo}}</div>
+                    </div>
+                    <div class="flex-1"></div>
+                    <div class="flex-1">
+                        <div class="result-item-caption">Цвета:</div>
+                        <div class="result-item-info">{{colorsInfo}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

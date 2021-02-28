@@ -1,0 +1,60 @@
+
+.options-container {
+    max-height: 420px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.option-container-item {
+    line-height: 60px;
+}
+
+.options-container-subitem {
+    line-height: 30px;
+    margin-left: 30px;
+}
+
+.option-text {
+    font-size: 14px;
+    color: #5a5b5d;
+    font-weight: 500;
+    font-family: "Gilroy";
+}
+.option-text-selected {
+    font-size: 14px;
+    color: #5a5b5d;
+    font-weight: bold;
+    font-family: "Gilroy";
+}
+.option-label {}
+
+@media only screen and (max-width: 575px) {
+    .options-container {
+        min-height: 700px;
+        max-height: 700px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+    .option-text {
+        line-height: 30px;
+    }
+    .option-text-selected {
+        line-height: 30px;
+    }
+    .option-container-item {
+        max-width: 200px;
+        margin-right: 10px;
+        word-break: break-word;
+    }
+    .options-container-subitem {
+        min-width: 150px;
+    }
+    .option-label {
+        hyphens: auto;
+        -moz-hyphens: auto;
+        -webkit-hyphens: auto;
+        -ms-hyphens: auto;
+    }
+}

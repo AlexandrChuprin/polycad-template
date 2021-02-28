@@ -38,13 +38,13 @@ export function getTemplateDescription(id: Template) {
 export type OpenType = 'none' | 'left' | 'right' | 'down' | 'up' | 'left-down' | 'right-down';
 export function getOpenTypeDescription(opentype: OpenType) {
     switch (opentype) {
-        case 'none': return 'глухое';
-        case 'left': return 'влево';
-        case 'right': return 'вправо';
-        case 'down': return 'откидное';
-        case 'up': return 'подвесное';
-        case 'left-down': return 'поворотно-откидное влево';
-        case 'right-down': return 'поворотно-откидное влево';
+        case 'none': return 'Глухое';
+        case 'left': return 'Влево';
+        case 'right': return 'Вправо';
+        case 'down': return 'Откидное';
+        case 'up': return 'Подвесное';
+        case 'left-down': return 'Пов.-откид. влево';
+        case 'right-down': return 'Пов.-откид. вправо';
         default: return 'Неизвестное открывание';
     }
 }

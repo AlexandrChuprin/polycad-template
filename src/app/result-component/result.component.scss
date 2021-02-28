@@ -1,0 +1,145 @@
+.result-row {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+.result-item-caption {
+    font-size: 20px;
+    color: #5a5b5d;
+    font-weight: bold;
+    font-family: "Gilroy";
+}
+.result-item-info {
+    margin-top: 20px;
+    min-width: 250px;
+    font-size: 16px;
+    line-height: 24px;
+    color: #5a5b5d;
+    font-family: "Gilroy";
+}
+
+.spinner {
+    text-align: center;
+    min-height: 150px;
+    max-height: 150px;
+    margin-bottom: 15px;
+    margin: 0 auto;
+}
+
+.wait-text {
+    margin: 0 auto;
+    max-width: 310px;
+    text-align: center;
+    font-size: 20px;
+    color: #8fcc09;
+    font-weight: bold;
+    font-family: "Gilroy";
+    text-anchor: middle;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+svg {
+    display: none;
+}
+
+.loader-container,
+.spinner-container {
+    width:  30%;
+    height: 30%;
+    position: relative;
+    filter: url(#gooey);
+}
+
+.loader-container > * {
+    position: absolute;
+    display: inline-block;
+    left: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #8fcc09;
+    top: 0px;
+    border-radius: 50%;
+    animation: loading 4s infinite;
+    transform: scale(0.1);
+    opacity: 0;
+
+    &:nth-child(1) {
+        animation-delay: 0.5s;
+    }
+    &:nth-child(2) {
+        animation-delay: 1s;
+    }
+    &:nth-child(3) {
+        animation-delay: 1.5s;
+    }
+    &:nth-child(4) {
+        animation-delay: 2s;
+    }
+}
+
+@keyframes loading {
+    50% {
+        transform: scale(1.25);
+        left: 50%;
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0.1);
+        left: 100%;
+        opacity: 0;
+    }
+}
+
+@keyframes spinner {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.credit {
+    position: fixed;
+    bottom: 2%;
+    right: 2%;
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    font-size: 1.125em;
+    color: black;
+
+    .credit--link {
+        color: #6f9e09;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+            text-decoration: underline;
+        }
+    }
+}
+
+@media only screen and (max-width: 575px) {
+    .result-item-caption {
+        margin-top: 20px;
+    }
+    .result-row {
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+    .result-item-info {
+        margin-top: 10px;
+    }
+    .loader-container,
+    .spinner-container {
+        width:  80%!important;
+        height:  80%!important;
+    }
+}

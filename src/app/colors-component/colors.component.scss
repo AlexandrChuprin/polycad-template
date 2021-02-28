@@ -1,0 +1,43 @@
+.color-container {
+
+}
+.color-container-row {
+
+}
+
+@media only screen and (max-width: 575px) {
+    .color-container-row {
+        max-width: 100%;
+    }
+    .color-container-row-caption {
+        margin-top: 20px;
+    }
+}
+
+.color-container-row-caption {
+    font-size: 20px;
+    color: #5a5b5d;
+    font-weight: bold;
+    font-family: "Gilroy";
+    margin-bottom: 30px;
+}
+.color-container-item {
+    min-width: 50px;
+    max-width: 50px;
+    min-height: 50px;
+    max-height: 50px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.color-container-item-selected {
+    min-width:  44px;
+    max-width:  44px;
+    min-height: 44px;
+    max-height: 44px;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    border: 3px solid #8fcc09;
+}
+.color-container-row-hover {
+    cursor: pointer;
+}

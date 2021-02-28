@@ -1,0 +1,174 @@
+
+
+.constrtype {
+    min-width: 170px;
+    max-width: 170px;
+}
+.cb {
+    max-width: 140px;
+    margin-right: 10px;
+}
+
+.model-container {
+    max-width: 450px;
+    min-width: 450px;
+}
+
+.model {
+    width: 450px;
+    height: 400px;
+}
+
+.opentypes {
+    max-height: 30px;
+    min-height: 30px;
+}
+
+.ct-name {
+    height: 34px;
+    font-size: 14px;
+    color: #5a5b5d;
+    font-weight: 500;
+    font-family: "Gilroy";
+}
+
+.ct-image {
+    min-width:  50px;
+    max-width:  50px;
+    min-height: 50px;
+    max-height: 50px;
+}
+
+.ct {
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.ot {
+    border: none;
+    border-bottom: 1px solid #5a5b5d;
+    outline: none;
+    background-color: #f8f8f8;
+    height: 30px;
+    line-height: 30px;
+    max-width: 140px;
+}
+
+.ot-text {
+    font-size: 16px;
+    line-height: 30px;
+    color: #5a5b5d;
+    font-weight: 500;
+    font-family: "Gilroy";
+}
+
+.construction-wrapper {
+    margin-top: 5px;
+}
+
+.construction-pic {
+    // min-width: 400px;
+    // max-width: 400px;
+    // min-height: 400px;
+    // max-height: 400px;
+}
+
+.polycad {
+    min-height: 300px;
+    max-height: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+.construction-pic-vertical {
+    min-width:  300px;
+    max-width:  300px;
+    min-height: 300px;
+    max-height: 300px;
+}
+
+.polycad-vertical {
+    min-height: 200px;
+    max-height: 200px;
+    min-width:  200px;
+    max-width:  200px;
+    margin-left: 0px;
+    padding-left: 0px;
+}
+
+.size-input-div {
+    position: absolute;
+    z-index: 1000;
+    border: 1px solid #ccc;
+    padding: 5px;
+    width: 115px;
+    height: 25px;
+    line-height: 25px;
+    background-color: white;
+    display: flex;
+}
+
+.size-input {
+    flex: 1;
+    min-width: 70px;
+    max-width: 70px;
+    line-height: 25px;
+    border: none;
+}
+
+.size-button {
+    flex: 1;
+    font-weight: bold;
+    font-size: 15px;
+    line-height: 30px;
+    background-color: rgba(24, 216, 209, 0.1);
+    border-radius: 3px;
+    text-align: center;
+    min-width: 30px;
+    max-width: 30px;
+    cursor: pointer;
+    margin-left: 5px;
+    height: 30px;
+    margin-top: -2px;
+}
+.size-button:hover {
+    background-color:rgba(250,235,215,0.5);
+}
+.construction-wrapper-vertical {
+    margin-top: 30px;
+    margin-left: -15px;
+}
+
+
+@media only screen and (max-width: 575px) {
+    .cb {
+        max-width: 80px!important;
+    }
+    .ot {
+        max-width: 80px!important;
+        margin-top: 10px;
+    }
+
+    .constrtype {
+        flex-wrap: wrap;
+        max-height: 270px;
+        margin-bottom: 30px;
+    }
+
+    .ct-name {
+        max-width: 77px;
+    }
+
+    .model-container {
+        max-width: 450px;
+        min-width: 250px;
+    }
+    
+    .model {
+        width: 100%;
+        max-height: 400px;
+        min-height: 200px;
+    }
+    
+}

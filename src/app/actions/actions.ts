@@ -1,3 +1,4 @@
+import { PolycadValut } from '../classes/settings/settings';
 import { State } from '../classes/state';
 import { SimpleJSONFill, Template } from '../interfaces/simple-json';
 import { StoreAction } from './store-action';
@@ -36,7 +37,7 @@ export class SelectTemplate extends StoreAction {
         } else if (this.template === 3) {
             stateUpdated.simpleJSON.width = 1500;
             stateUpdated.simpleJSON.height = 800;
-            stateUpdated.simpleJSON.imposts = [500, 500];
+            stateUpdated.simpleJSON.imposts = [500, 1000];
             stateUpdated.simpleJSON.fields = [
                 {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
                 {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill,
@@ -139,6 +140,16 @@ export class SetTitleAndComment extends StoreAction {
     }
 }
 
+export class SetCalculationStatus extends StoreAction {
+    constructor(private isCalcInProgress: boolean) {
+        super();
+    }
+    perform(state: State) {
+        const stateUpdated = super.perform(state);
+        stateUpdated.isCalculationInProgress= this.isCalcInProgress;
+        return stateUpdated;
+    }
+}
 
 export class SetWindowWidth extends StoreAction {
     constructor(private width: number) {
@@ -160,6 +171,7 @@ export class SetWindowHeight extends StoreAction {
         return stateUpdated;
     }
 }
+
 export class SetWindowImpPositions extends StoreAction {
     constructor(private impPositions: number[]) {
         super();
@@ -170,6 +182,7 @@ export class SetWindowImpPositions extends StoreAction {
         return stateUpdated;
     }
 }
+
 export class SetWindowFills extends StoreAction {
     constructor(private fills: SimpleJSONFill[]) {
         super();
@@ -181,7 +194,6 @@ export class SetWindowFills extends StoreAction {
     }
 }
 
-
 export class SetDoorWidth extends StoreAction {
     constructor(private width: number) {
         super();
@@ -192,6 +204,7 @@ export class SetDoorWidth extends StoreAction {
         return stateUpdated;
     }
 }
+
 export class SetDoorHeight extends StoreAction {
     constructor(private height: number) {
         super();
@@ -202,6 +215,7 @@ export class SetDoorHeight extends StoreAction {
         return stateUpdated;
     }
 }
+
 export class SetDoorImpPositions extends StoreAction {
     constructor(private impPositions: number[]) {
         super();
@@ -212,6 +226,7 @@ export class SetDoorImpPositions extends StoreAction {
         return stateUpdated;
     }
 }
+
 export class SetDoorFills extends StoreAction {
     constructor(private fills: SimpleJSONFill[]) {
         super();
@@ -223,7 +238,6 @@ export class SetDoorFills extends StoreAction {
     }
 }
 
-
 export class SetProfile extends StoreAction {
     constructor(private profile: string) {
         super();
@@ -234,6 +248,7 @@ export class SetProfile extends StoreAction {
         return stateUpdated;
     }
 }
+
 export class SetFurniture extends StoreAction {
     constructor(private furniture: string) {
         super();
@@ -244,6 +259,7 @@ export class SetFurniture extends StoreAction {
         return stateUpdated;
     }
 }
+
 export class SetGlass extends StoreAction {
     constructor(private glass: string) {
         super();
@@ -265,6 +281,7 @@ export class SetColorIn extends StoreAction {
         return stateUpdated;
     }
 }
+
 export class SetColorOut extends StoreAction {
     constructor(private colorOut: string) {
         super();
@@ -275,7 +292,6 @@ export class SetColorOut extends StoreAction {
         return stateUpdated;
     }
 }
-
 
 export class SetOption extends StoreAction {
     constructor(private option: string, private checked: boolean) {
@@ -293,6 +309,60 @@ export class SetOption extends StoreAction {
                 stateUpdated.simpleJSON.idoptions.push(this.option);
             }
         }
+        return stateUpdated;
+    }
+}
+
+export class SetIdorderdoc extends StoreAction {
+    constructor(private idorderdoc: number) {
+        super();
+    }
+    perform(state: State) {
+        const stateUpdated = super.perform(state);
+        stateUpdated.idorderdoc = this.idorderdoc;
+        return stateUpdated;
+    }
+}
+
+export class SetIdorderdocitem extends StoreAction {
+    constructor(private idorderdocitem: number) {
+        super();
+    }
+    perform(state: State) {
+        const stateUpdated = super.perform(state);
+        stateUpdated.idorderdocitem = this.idorderdocitem;
+        return stateUpdated;
+    }
+}
+
+export class SetError extends StoreAction {
+    constructor(private error: string) {
+        super();
+    }
+    perform(state: State) {
+        const stateUpdated = super.perform(state);
+        stateUpdated.error = this.error;
+        return stateUpdated;
+    }
+}
+
+export class SetMobile extends StoreAction {
+    constructor(private mobile: boolean) {
+        super();
+    }
+    perform(state: State) {
+        const stateUpdated = super.perform(state);
+        stateUpdated.mobile = this.mobile;
+        return stateUpdated;
+    }
+}
+export class SetPolycadValut extends StoreAction {
+    constructor(private valut: PolycadValut) {
+        super();
+    }
+    perform(state: State) {
+        const stateUpdated = super.perform(state);
+        stateUpdated.settings.polycadValut = this.valut;
         return stateUpdated;
     }
 }

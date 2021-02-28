@@ -1,6 +1,8 @@
-// import { Polycad } from '@a.chuprin/polycad-core';
+import { Polycad } from '@a.chuprin/polycad-core';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
+import { SetCalculationStatus } from '../actions/actions';
+import { SettingsPolycad } from '../classes/settings/setings-polycad';
 import { CommonComponent } from '../common/common.component';
 import { getTemplateDescription } from '../interfaces/simple-json';
 import { StateProviderService } from '../state-provider.service';
@@ -10,12 +12,12 @@ import { StateProviderService } from '../state-provider.service';
   templateUrl: './result.component.html',
   styleUrls: ['./result.component.scss']
 })
-export class ResultComponent extends CommonComponent {
-  title = 'Результат';
+export class ResultComponent extends CommonComponent implements OnInit {
+  title = 'Итог';
   comment = 'сформированное изделие';
 
-  @ViewChild('containerSVG', { static: true }) containerSVG;
-  @ViewChild('containerSVGTemp', { static: true }) containerSVGTemp;
+  // @ViewChild('containerSVG', { static: true }) containerSVG;
+  // @ViewChild('containerSVGTemp', { static: true }) containerSVGTemp;
 
   get modelDescription() {
     let description = '';
@@ -48,20 +50,59 @@ export class ResultComponent extends CommonComponent {
     return description;
   }
 
+  get constypeInfo() {
+    let description = '';
+    description += this.constrtypeMarking;
+    if (this.state.simpleJSON.template > 3 && this.state.simpleJSON.template < 20) {
+      description += `\nВысота: ${+this.state.simpleJSON.height_door > +this.state.simpleJSON.height
+        ? +this.state.simpleJSON.height_door
+        : +this.state.simpleJSON.height
+        }`;
+    } else if (this.state.simpleJSON.template < 3) {
+      description += `\nВысота: ${+this.state.simpleJSON.height}`;
+    } else if (this.state.simpleJSON.template >= 20) {
+      description += `\nВысота: ${+this.state.simpleJSON.height_door}`;
+    }
+    if (this.state.simpleJSON.template > 3 && this.state.simpleJSON.template < 20) {
+      description += `\nШирина: ${+this.state.simpleJSON.width + +this.state.simpleJSON.width_door}`;
+    } else if (this.state.simpleJSON.template < 3) {
+      description += `\nШирина: ${+this.state.simpleJSON.width}`;
+    } else if (this.state.simpleJSON.template >= 20) {
+      description += `\nШирина: ${+this.state.simpleJSON.width_door}`;
+    }
+    return description;
+  }
+  get optionsInfo() {
+    const res = this.state.simpleJSON.idoptions
+      .map(idoption => this.optionsStatic.find(_ => _.idoption === idoption).name)
+      .join(' \/ ');
+    return res;
+  }
+  get psInfo() {
+    let s = '';
+    s += this.state.simpleJSON.profile;
+    const ps = SettingsPolycad.profileSystems.find(_ => _.marking === this.state.simpleJSON.profile);
+    if (ps) {
+      s += ' ' + ps.description;
+    }
+    return s;
+  }
+  get colorsInfo() {
+    let s = '';
+    s += `${this.state.simpleJSON.color_in} / ${this.state.simpleJSON.color_out}`;
+    return s;
+  }
+
   constructor(public stateProvider: StateProviderService, private sanitizer: DomSanitizer) {
     super(stateProvider);
   }
 
-  get image() {
-    return '';
-    // if (this.state && this.state.polycad && this.state.polycad.model
-    //   && this.state.polycad.model.template && this.state.polycad.model.template.installOptions) {
-    //   // console.log(this.state.polycad.model.template);
-    //   this.state.polycad.controller.last_template = +this.state.simpleJSON.template;
-    //   const pic = this.state.polycad.getBase64Svg({ show_back: 0, draw_sizes: 1 });
-    //   return this.sanitizer.bypassSecurityTrustResourceUrl(pic);
-    // } else {
-    //   return '';
-    // }
+  ngOnInit() {
+    super.ngOnInit();
+    this.stateProvider.process(new SetCalculationStatus(true));
+    setTimeout(() => {
+      this.stateProvider.process(new SetCalculationStatus(false));
+    }, 5000);
   }
+
 }

@@ -1,3 +1,131 @@
 .custom-card {
     margin: 0 auto;
+    max-width: 970px;
+    background-color: #f8f8f8;
+    padding: 50px;
 }
+.custom-card-mobile {
+    display: none;
+}
+
+.summary {
+    padding-top: 30px;
+    padding-bottom: 30px;
+    background-color: #f8f8f8;
+    border-bottom: 1px solid rgba($color: #5a5b5d, $alpha: 0.302);
+    display: flex;
+    flex-direction: column;
+}
+.summary-pic {
+    max-width: 80px;
+    min-width: 80px;
+}
+.summary-summ {
+    font-size: 30px;
+    line-height: 20px;
+    margin-left: -20px;
+    color: #8fcc09;
+    font-weight: bold;
+    font-family: "Gilroy";
+}
+.summary-description {
+    margin-left: 20px;
+}
+.summary-description-title {
+    opacity: 0.6;
+    max-width: 120px;
+    min-width: 120px;
+    line-height: 22px;
+    font-size: 14px;
+    color: #5a5b5d;
+    font-weight: 500;
+    font-family: "Gilroy";
+}
+.summary-description-value {
+    line-height: 22px;
+    font-size: 14px;
+    color: #5a5b5d;
+    font-weight: 500;
+    font-family: "Gilroy";
+}
+.summary-buttons {
+    max-width: 250px;
+    min-width: 250px;
+}
+.summary-button {
+    line-height: 22px;
+    font-size: 14px;
+    color: #8fcc09;
+    font-weight: bold;
+    font-family: "Gilroy";
+    position: relative;
+    cursor: pointer;
+}
+
+.calc-button-row {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.calc-button {
+    min-width: 250px;
+    max-width: 250px;
+    background-color: #8fcc09;
+    cursor: pointer;
+}
+
+.calc-button-disabled {
+    min-width: 250px;
+    max-width: 250px;
+    background-color: #cccccc;
+}
+
+.calc-button-text {
+    font-size: 16px;
+    line-height: 50px;
+    color: #ffffff;
+    font-weight: bold;
+    font-family: "Gilroy";
+    text-anchor: middle;
+    text-align: center;
+}
+
+
+@media only screen and (max-width: 575px) {
+    .custom-card {
+        display: none;
+    }
+    .custom-card-mobile {
+        display: block;
+        margin: 0 auto;
+        background-color: #f8f8f8;
+        padding: 15px;
+    }
+
+    .summary {
+        display: flex;
+        flex-direction: column;
+    }
+    .summary-description {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .calc-button {
+        min-width: none;
+        max-width: none;
+        background-color: #8fcc09;
+        cursor: pointer;
+    }
+    
+    .calc-button-disabled {
+        min-width: none;
+        max-width: none;
+        background-color: #cccccc;
+    }
+
+    .summary-description-title {
+        margin-top: 15px;
+    }
+}
+

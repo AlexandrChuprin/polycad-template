@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConstrtypeComponent } from './constrtype-component/constrtype.component';
@@ -16,17 +16,18 @@ import { NotFoundComponent } from './not-found-component/not-found.component';
 import { RouterModule } from '@angular/router';
 import { CommonCardComponent } from './common-card/common-card.component';
 import { CommonComponent } from './common/common.component';
+import { CalculatorComponent } from './calculator/calculator.component';
 
 const routes = RouterModule.forRoot([
-  {path: 'constrtype', component: ConstrtypeComponent},
-  {path: 'colors', component: ColorsComponent},
-  {path: 'options', component: OptionsComponent},
-  {path: 'systems', component: SystemsComponent},
-  {path: 'params', component: ParamsComponent},
-  {path: 'result', component: ResultComponent},
-  {path: 'basket', component: BasketComponent},
-  {path: '', redirectTo: '/constrtype', pathMatch: 'full'},
-  {path: '**', component: NotFoundComponent}
+  // {path: 'constrtype', component: ConstrtypeComponent},
+  // {path: 'colors', component: ColorsComponent},
+  // {path: 'options', component: OptionsComponent},
+  // {path: 'systems', component: SystemsComponent},
+  // {path: 'params', component: ParamsComponent},
+  // {path: 'result', component: ResultComponent},
+  // {path: 'basket', component: BasketComponent},
+  // {path: '', redirectTo: '/constrtype', pathMatch: 'full'},
+  // {path: '**', component: NotFoundComponent}
 ]);
 
 @NgModule({
@@ -41,11 +42,13 @@ const routes = RouterModule.forRoot([
     ResultComponent,
     NotFoundComponent,
     CommonCardComponent,
-    CommonComponent
+    CommonComponent,
+    CalculatorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,

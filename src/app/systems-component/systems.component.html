@@ -1,7 +1,37 @@
-<div>
-    <ng-container *ngFor="let sys of profileSystems">
-        <input type="radio" id="ps-{{sys.marking}}" name="prof-sys" value="{{sys.marking}}" (change)="setProfile(sys.marking)" [checked]="isChecked(sys.marking)">
-        <label for="ps-{{sys.marking}}">{{sys.marking}}</label>
-        <br>
-    </ng-container>
-</div>
+<ng-container *ngIf="state">
+    <div class='flex-row'>
+        <div class="border flex-1 title-prev">
+            <span class="title-text-prev" (click)="goToPage(1)">
+                Конструктив
+            </span>
+        </div>
+        <div class="border flex-1 title-prev">
+            <span class="title-text-prev" (click)="goToPage(2)">
+                Цвета
+            </span>
+        </div>
+        <div class="border flex-1 title-prev">
+            <span class="title-text-prev" (click)="goToPage(3)">
+                Профильная система
+            </span>
+        </div>
+        <div class="border flex-1 flex-row-wrap common-card">
+            <div class="border flex-1 title">
+                <span class="title-text">
+                    {{title}}
+                </span>
+            </div>
+
+            <div class="flex-1" style="min-width: 100px; max-width: 100px;"></div>
+            <div class="border flex-1 flex-row-wrap ps-container">
+                <div class="flex-1 ps-container-item"
+                    *ngFor="let ps of profileSystems; let idx = index;">
+                    <input type="radio" id="ps-{{ps.marking}}" name="prof-sys" value="{{ps.marking}}" (change)="setProfile(ps.marking)" [checked]="isChecked(ps.marking)">
+                    <label style="cursor: pointer;" [ngClass]="isChecked(ps.marking) ? 'ps-text-selected' : 'ps-text'" for="ps-{{ps.marking}}">{{ps.marking}}</label>
+                    <div class="ps-info">{{ps.description}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>
+<div class="mobile-border"></div>

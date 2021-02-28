@@ -1,13 +1,14 @@
 import { State } from '../classes/state';
 
 export class StoreAction {
-    perform(state: State): State {
-        const updatedState = new State();
-        updatedState.comment = state.comment;
-        updatedState.page = state.page;
-        updatedState.pages = state.pages;
-        updatedState.simpleJSON = state.simpleJSON;
-        updatedState.title = state.title;
-        return updatedState;
+    perform(stateNew: State): State {
+        const state = new State();
+        state.comment = stateNew.comment;
+        state.page = stateNew.page;
+        state.pages = stateNew.pages;
+        state.simpleJSON = stateNew.simpleJSON;
+        state.title = stateNew.title;
+        state.isCalculationInProgress = stateNew.isCalculationInProgress;
+        return state;
     }
 }
