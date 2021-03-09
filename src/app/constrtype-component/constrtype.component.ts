@@ -1,4 +1,5 @@
-import { ViewGraphics, DrawOptions, Drawer, PolycadFill } from '@a.chuprin/polycad-core';
+// import { ViewGraphics, DrawOptions, Drawer, PolycadFill } from '@a.chuprin/polycad-core';
+import { ViewGraphics, DrawOptions, Drawer, PolycadFill } from './../classes/polycad-core-stub';
 import { AfterContentInit, Component, OnDestroy, OnInit, ViewChild } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Subscription, of, Observable } from 'rxjs';
@@ -461,6 +462,7 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
   }
 
   drawPolycadModel() {
+    return;
     if (!this.state || this.skeepDrawing) {
       return;
     }

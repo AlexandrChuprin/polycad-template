@@ -2,7 +2,8 @@ import { Injectable } from '@angular/core';
 import { Observable, of, throwError, BehaviorSubject, from } from 'rxjs';
 import { switchMap, map, catchError, mergeMap, reduce } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Base64 } from '@a.chuprin/polycad-core';
+// import { Base64 } from '@a.chuprin/polycad-core';
+import { Base64 } from './classes/polycad-core-stub';
 import { Router } from '@angular/router';
 import { SimpleJSONModel } from './interfaces/simple-json';
 @Injectable({

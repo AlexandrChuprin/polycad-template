@@ -1,4 +1,5 @@
-import { PolycadTemplateGenerator, Settings, WindowTemplates } from '@a.chuprin/polycad-core';
+// import { PolycadTemplateGenerator, Settings, WindowTemplates } from '@a.chuprin/polycad-core';
+import { PolycadTemplateGenerator, Settings, WindowTemplates } from './../polycad-core-stub';
 import { ProfileSystem, Profile, FurnitureSystem, ColorGroup, Color, Fill } from './classes';
 
 /** Настройки поликада */

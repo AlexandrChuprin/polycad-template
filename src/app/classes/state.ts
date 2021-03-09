@@ -1,4 +1,5 @@
-import { Polycad, PolycadTemplateGenerator, SimpleXMLExporter, ViewModel, WindowTemplates } from '@a.chuprin/polycad-core';
+// import { Polycad, PolycadTemplateGenerator, SimpleXMLExporter, ViewModel, WindowTemplates } from '@a.chuprin/polycad-core';
+import { Polycad, PolycadTemplateGenerator, SimpleXMLExporter, ViewModel, WindowTemplates } from './polycad-core-stub';
 import { SimpleJSONFill, SimpleJSONModel } from '../interfaces/simple-json';
 import { IOption, SettingsPolycad } from './settings/setings-polycad';
 import { Settings } from './settings/settings';

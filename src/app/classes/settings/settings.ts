@@ -3,7 +3,8 @@ import { Option } from './option';
 import { ProductionType } from './production-type';
 import { Addition } from './addition';
 import { BehaviorSubject } from 'rxjs';
-import { Settings as PolycadSettings } from '@a.chuprin/polycad-core/source/app/model/settings/settings';
+// import { Settings as PolycadSettings } from '@a.chuprin/polycad-core/source/app/model/settings/settings';
+import { Settings as PolycadSettings } from './../polycad-core-stub';
 import { OptionDependence } from './option-dependence';
 
 export type PolycadValut =

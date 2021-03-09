@@ -1,4 +1,5 @@
-import { Polycad, PolycadConstruction, SimpleXMLExporter, ViewModel } from '@a.chuprin/polycad-core';
+// import { Polycad, PolycadConstruction, SimpleXMLExporter, ViewModel } from '@a.chuprin/polycad-core';
+import { Polycad, PolycadConstruction, SimpleXMLExporter, ViewModel } from './classes/polycad-core-stub';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, interval, Observable, of } from 'rxjs';
 import { first, map, mergeMap, switchMap } from 'rxjs/operators';

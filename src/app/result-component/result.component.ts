@@ -1,5 +1,4 @@
-import { Polycad } from '@a.chuprin/polycad-core';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { SetCalculationStatus } from '../actions/actions';
 import { SettingsPolycad } from '../classes/settings/setings-polycad';

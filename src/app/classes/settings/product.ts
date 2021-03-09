@@ -1,5 +1,6 @@
 import { Option } from './option';
-import { ViewModel } from '@a.chuprin/polycad-core';
+// import { ViewModel } from '@a.chuprin/polycad-core';
+import { ViewModel } from './../polycad-core-stub';
 
 export type ProductState = 'process' | 'no' | 'yes';
 
