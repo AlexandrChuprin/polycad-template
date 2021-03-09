@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ConstrtypeComponent } from './constrtype-component/constrtype.component';
 import { ColorsComponent } from './colors-component/colors.component';
@@ -13,22 +12,24 @@ import { ResultComponent } from './result-component/result.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatToolbarModule, MatIconModule, MatSidenavModule, MatListModule, MatButtonModule, MatCardModule } from '@angular/material';
 import { NotFoundComponent } from './not-found-component/not-found.component';
-import { RouterModule } from '@angular/router';
+
 import { CommonCardComponent } from './common-card/common-card.component';
 import { CommonComponent } from './common/common.component';
 import { CalculatorComponent } from './calculator/calculator.component';
+import { RouterModule } from '@angular/router';
+import { AppRoutingModule } from './app-routing.module';
 
-const routes = RouterModule.forRoot([
-  // {path: 'constrtype', component: ConstrtypeComponent},
-  // {path: 'colors', component: ColorsComponent},
-  // {path: 'options', component: OptionsComponent},
-  // {path: 'systems', component: SystemsComponent},
-  // {path: 'params', component: ParamsComponent},
-  // {path: 'result', component: ResultComponent},
-  // {path: 'basket', component: BasketComponent},
-  // {path: '', redirectTo: '/constrtype', pathMatch: 'full'},
-  // {path: '**', component: NotFoundComponent}
-]);
+// const routes = RouterModule.forRoot([
+//   // {path: 'constrtype', component: ConstrtypeComponent},
+//   // {path: 'colors', component: ColorsComponent},
+//   // {path: 'options', component: OptionsComponent},
+//   // {path: 'systems', component: SystemsComponent},
+//   // {path: 'params', component: ParamsComponent},
+//   // {path: 'result', component: ResultComponent},
+//   // {path: 'basket', component: BasketComponent},
+//   // {path: '', redirectTo: '/constrtype', pathMatch: 'full'},
+//   // {path: '**', component: NotFoundComponent}
+// ]);
 
 @NgModule({
   declarations: [
@@ -47,7 +48,6 @@ const routes = RouterModule.forRoot([
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     HttpClientModule,
     BrowserAnimationsModule,
     MatToolbarModule,
@@ -56,7 +56,7 @@ const routes = RouterModule.forRoot([
     MatButtonModule,
     MatIconModule,
     MatCardModule,
-    routes
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

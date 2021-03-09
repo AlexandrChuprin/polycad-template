@@ -1,6 +1,11 @@
 <ng-container *ngIf="state">
+    <div class="title-2">
+        <span class="title-text-2">
+            {{title}}
+        </span>
+    </div>
     <div class='flex-row'>
-        <div class="border flex-1 title-prev">
+        <!-- <div class="border flex-1 title-prev">
             <span class="title-text-prev" (click)="goToPage(1)">
                 Конструктив
             </span>
@@ -14,16 +19,16 @@
             <span class="title-text-prev" (click)="goToPage(3)">
                 Профильная система
             </span>
-        </div>
+        </div> -->
         <div class="border flex-1 flex-row-wrap common-card">
-            <div class="border flex-1 title">
+            <!-- <div class="border flex-1 title">
                 <span class="title-text">
                     {{title}}
                 </span>
             </div>
 
-            <div class="flex-1" style="min-width: 100px; max-width: 100px;"></div>
-            <div class="border flex-1 flex-row-wrap ps-container">
+            <div class="flex-1" style="min-width: 100px; max-width: 100px;"></div> -->
+            <div class="border flex-1 flex-col ps-container">
                 <div class="flex-1 ps-container-item"
                     *ngFor="let ps of profileSystems; let idx = index;">
                     <input type="radio" id="ps-{{ps.marking}}" name="prof-sys" value="{{ps.marking}}" (change)="setProfile(ps.marking)" [checked]="isChecked(ps.marking)">

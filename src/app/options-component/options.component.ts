@@ -11,7 +11,9 @@ import { CommonComponent } from '../common/common.component';
 export class OptionsComponent extends CommonComponent {
   title = 'Опции';
   comment = 'выберите необходимые опции';
-  options = SettingsPolycad.options;
+  get options() {
+    return SettingsPolycad.options;
+  }
 
   setOption(idoption: string, checked: boolean) {
     console.log(`option: ${idoption}, checked: ${checked}`);

@@ -24,12 +24,13 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   constructor(
-    private route: ActivatedRoute,
+
     private stateProvider: StateProviderService,
     public keyUpService: KeyUpService,
     private ref: ChangeDetectorRef,
     private oknaspaceExchangeService: OknaspaceExchangeService
   ) {
+
     stateProvider.state
     .pipe(
       filter(_ => _ != null)
@@ -48,20 +49,6 @@ export class AppComponent implements OnInit, OnDestroy {
       this.keyUpService.lastKey.next(e.key);
       this.update();
     });
-    this.route.params.pipe(map((params: Params) => params))
-      .subscribe((params: Params) => {
-        // console.log(params);
-        if (params && params.token) {
-          this.stateProvider.loadPolycadSettings(params.token);
-        } else {
-          if (this.state) {
-            console.log('Не передан токен!');
-            this.state.error = 'Не передан токен!';
-            // this.stateProvider.setState(this.state);
-          }
-        }
-        this.update();
-      });
 
     this.oknaspaceExchangeService.bindEvent(window, 'message', (e) => {
       console.log(`msg: ${e.data} from ${e.origin}`);

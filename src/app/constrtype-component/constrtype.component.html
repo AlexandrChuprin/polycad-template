@@ -1,13 +1,13 @@
 <!-- <ng-container *ngIf="state"> -->
     <div class='flex-row'>
         <div class="border flex-1 flex-row-wrap common-card">
-            <div class="border flex-1 title">
+            <div class="border flex-1 title mobile">
                 <span class="title-text">
                     {{title}}
                 </span>
             </div>
-            <div class="flex-1 no-mobile" style="min-width: 30px; max-width: 30px;"></div>
-            <div class="border flex-1 flex-col constrtype">
+            <!-- <div class="flex-1 no-mobile" style="min-width: 30px; max-width: 30px;"></div> -->
+            <div class="border flex-1 constrtype">
                 <div *ngFor="let ct of constrtypes; let idx = index;" class="flex-row ct" (click)="changeTemplate(idx)">
                     <div class="flex-1 ct-image flex-row">
                         <div class="flex-1"></div>
@@ -19,7 +19,7 @@
                         </div>
                         <div class="flex-1"></div>
                     </div>
-                    <div class="flex-1 ct-name flex-col">
+                    <div class="flex-1 ct-name flex-col mobile">
                         <div class="flex-1"></div>
                         <div class="flex-1">{{ct.name}}</div>
                         <div class="flex-1"></div>
@@ -51,7 +51,7 @@
                 </div>
             </div>
         </div>
-        <div class="border flex-1 title-next">
+        <!-- <div class="border flex-1 title-next">
             <span class="title-text-next" (click)="goToPage(2)">
                 Цвета
             </span>
@@ -65,7 +65,7 @@
             <span class="title-text-next" (click)="goToPage(4)">
                 Профильная система
             </span>
-        </div>
+        </div> -->
     </div>
     <div class="mobile-border"></div>
 

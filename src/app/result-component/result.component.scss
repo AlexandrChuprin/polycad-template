@@ -6,15 +6,16 @@
     font-size: 20px;
     color: #5a5b5d;
     font-weight: bold;
-    font-family: "Gilroy";
+    font-family: Montserrat,sans-serif;
 }
 .result-item-info {
     margin-top: 20px;
     min-width: 250px;
+    max-width: 400px;
     font-size: 16px;
     line-height: 24px;
     color: #5a5b5d;
-    font-family: "Gilroy";
+    font-family: Montserrat,sans-serif;
 }
 
 .spinner {
@@ -32,7 +33,7 @@
     font-size: 20px;
     color: #8fcc09;
     font-weight: bold;
-    font-family: "Gilroy";
+    font-family: Montserrat,sans-serif;
     text-anchor: middle;
 }
 
@@ -40,7 +41,6 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 100vh;
     flex-direction: row;
     flex-wrap: wrap;
 }
@@ -126,6 +126,10 @@ svg {
     }
 }
 
+.result-container {
+    min-height: 400px;
+}
+
 @media only screen and (max-width: 575px) {
     .result-item-caption {
         margin-top: 20px;
@@ -141,5 +145,9 @@ svg {
     .spinner-container {
         width:  80%!important;
         height:  80%!important;
+    }
+
+    .result-title {
+        opacity: 0.145;
     }
 }

@@ -192,7 +192,6 @@ export class Settings {
     }
     /***/
     constructor() {
-        this.settingsReady.next(true);
     }
 
     tryCreateOptionFromSettings(option: Option, settingsDynamic: PolycadSettings) {

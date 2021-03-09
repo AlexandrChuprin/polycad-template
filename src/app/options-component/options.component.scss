@@ -1,9 +1,10 @@
 
 .options-container {
-    max-height: 420px;
+    max-height: 510px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    margin-top: 10px;
 }
 
 .option-container-item {
@@ -19,13 +20,13 @@
     font-size: 14px;
     color: #5a5b5d;
     font-weight: 500;
-    font-family: "Gilroy";
+    font-family: Montserrat,sans-serif;
 }
 .option-text-selected {
     font-size: 14px;
     color: #5a5b5d;
     font-weight: bold;
-    font-family: "Gilroy";
+    font-family: Montserrat,sans-serif;
 }
 .option-label {}
 

@@ -1,13 +1,13 @@
-import { Polycad, PolycadConstruction, PolycadFill, PolycadTemplateGenerator, Settings, SimpleXMLExporter, ViewModel, WindowTemplates } from '@a.chuprin/polycad-core';
+import { Polycad, PolycadConstruction, SimpleXMLExporter, ViewModel } from '@a.chuprin/polycad-core';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, interval, Observable, of } from 'rxjs';
 import { first, map, mergeMap, switchMap } from 'rxjs/operators';
-import { SetError, SetIdorderdoc, SetIdorderdocitem, SetPolycadValut } from './actions/actions';
+import { SetCalced, SetChanged, SetError, SetIdorderdoc, SetIdorderdocitem, SetOrderdocitemPrice, SetPolycadValut, SetSettingsLoaded } from './actions/actions';
 import { StoreAction } from './actions/store-action';
 import { SettingsPolycad } from './classes/settings/setings-polycad';
-import { PolycadValut } from './classes/settings/settings';
+import { PolycadValut, Settings } from './classes/settings/settings';
 import { State } from './classes/state';
-import { OpenType, SimpleJSONFill, SimpleJSONModel } from './interfaces/simple-json';
+import { SimpleJSONModel } from './interfaces/simple-json';
 import { OknaspaceExchangeService, OSOrderdoc, OSOrderdocitem } from './oknaspace-exchange.service';
 
 @Injectable({
@@ -184,7 +184,7 @@ export class StateProviderService {
   public isReadOnly = false;
   public isSettingsLoadedFromOS = false;
   public isSettingsLoadedFromOSWithError = false;
-  public settingsLoadedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+
   state: BehaviorSubject<State> = new BehaviorSubject(null);
   lastState: State = new State();
   polycad: Polycad = null;
@@ -206,7 +206,8 @@ export class StateProviderService {
   next(state: State) {
 
     state.polycad = null;
-    this.lastState = JSON.parse(JSON.stringify(state));
+    this.lastState = Object.assign(new State(), JSON.parse(JSON.stringify(state)));
+    this.lastState.settings = Object.assign(new Settings(), JSON.parse(JSON.stringify(state.settings)));
     state = this.createPolycad(state);
     this.polycad = state.polycad;
     state.simpleJSON.pic = this.getImage(state);
@@ -223,7 +224,6 @@ export class StateProviderService {
   }
 
   process(action: StoreAction) {
-    // this.next(action.perform(this.lastState));
     this.next(action.perform(this.lastState));
   }
 
@@ -296,6 +296,8 @@ export class StateProviderService {
   }
 
   loadPolycadSettings(token: string) {
+    // this.process(new SetSettingsLoaded(true));
+    // return;
     this.oknaspaceExchangeService.use(token)
       .subscribe(
         (cadData) => {
@@ -375,7 +377,7 @@ export class StateProviderService {
                 this.lastState.error = message;
                 this.process(new SetError(message));
               }
-              this.settingsLoadedSubject.next(false);
+              this.process(new SetSettingsLoaded(false));
             });
         }
 
@@ -414,7 +416,10 @@ export class StateProviderService {
     if (this.lastState) {
       settingsPolycad['lang'] = lang;
       this.lastState.applySettings(settingsPolycad);
-      this.process(new SetError(''));
+      // const opts = SettingsPolycad.options.slice();
+      // this.optionsStatic.push(...opts);
+      // opts.forEach(_ => {if (_.suboptions) {this.optionsStatic.push(..._.suboptions)}});
+      this.process(new SetSettingsLoaded(true));
     }
     if (idorderdoc) {
       this.idorderdoc = idorderdoc;
@@ -422,7 +427,6 @@ export class StateProviderService {
       // Загрузим все позиции заказа с idgood === polycad
       // this.loadOrderdocFromToken();
     }
-    this.settingsLoadedSubject.next(true);
   }
 
   createOrderdoc() {
@@ -449,6 +453,7 @@ export class StateProviderService {
               );
           }),
           switchMap((idorderdoc: number) => {
+            
             this.idorderdoc = idorderdoc;
             console.log('Создан расчет №' + idorderdoc);
             return this.addOrUpdateOrderdocitemsBySimpleJSON();
@@ -480,20 +485,27 @@ export class StateProviderService {
 
   getSimpleJSONS(state: State): SimpleJSONModel[] {
     const models: SimpleJSONModel[] = [];
-    state.settings.products.filter(_ => _.isAvailable)
-      .forEach(product => {
-        product.idoptions.forEach(o => {
-          const option = product.options.find(_ => _.id === o.idoption);
-          if (option) {
-            o.checked = option.checked;
-          }
-        });
-        const simpleJSON: SimpleJSONModel = state.simpleJSON;
-        if (simpleJSON) {
-          simpleJSON.idorderdocitem = +product.idorderdocitemFake;
-          models.push(simpleJSON);
-        }
-      });
+    const simpleJSON = JSON.parse(JSON.stringify(state.simpleJSON));
+    simpleJSON.idorderdoc = this.idorderdoc;
+    const color_in  = SettingsPolycad.colors.find(_ => _.id === simpleJSON.color_in);
+    const color_out = SettingsPolycad.colors.find(_ => _.id === simpleJSON.color_out);
+    simpleJSON.color_in  = color_in.marking;
+    simpleJSON.color_out = color_out.marking;
+    models.push(simpleJSON);
+    // state.settings.products.filter(_ => _.isAvailable)
+    //   .forEach(product => {
+    //     product.idoptions.forEach(o => {
+    //       const option = product.options.find(_ => _.id === o.idoption);
+    //       if (option) {
+    //         o.checked = option.checked;
+    //       }
+    //     });
+    //     const simpleJSON: SimpleJSONModel = state.simpleJSON;
+    //     if (simpleJSON) {
+    //       simpleJSON.idorderdocitem = +product.idorderdocitemFake;
+    //       models.push(simpleJSON);
+    //     }
+    //   });
     return models;
   }
 
@@ -504,7 +516,9 @@ export class StateProviderService {
   loadCalcedOrderdocitems(state: State) {
     return this.getOrderdocitem(state.idorderdocitem)
       .subscribe((orderdocitem: OSOrderdocitem) => {
-        this.process(new SetIdorderdocitem(orderdocitem.idorderdocitem));
+        this.process(new SetOrderdocitemPrice(orderdocitem.price));
+        this.process(new SetChanged(false));
+        this.process(new SetCalced(true));
       })
   }
 

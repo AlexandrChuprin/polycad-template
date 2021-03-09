@@ -1,16 +1,22 @@
 import { Polycad, PolycadTemplateGenerator, SimpleXMLExporter, ViewModel, WindowTemplates } from '@a.chuprin/polycad-core';
 import { SimpleJSONFill, SimpleJSONModel } from '../interfaces/simple-json';
-import { SettingsPolycad } from './settings/setings-polycad';
+import { IOption, SettingsPolycad } from './settings/setings-polycad';
 import { Settings } from './settings/settings';
-import { Settings as PolycadSettings } from '@a.chuprin/polycad-core/source/app/model/settings/settings';
+import { Profile, ProfileType } from './settings/classes';
 
 export class State {
+    
     public isCalculationInProgress = false;
     public mobile = false;
+    public calced = false;
+    public changed = false;
+    public price = 0;
+    public qu = 0;
     public idorderdocitem = 0;
     public idorderdoc = 0;
-    public error: string;
-    public info: string;
+    public settingsLoaded = false;
+    public error = '';
+    public info = '';
     public title = '';
     public comment = '';
     public settings: Settings = new Settings();
@@ -27,7 +33,7 @@ export class State {
         idtemplate: '1',
         width: 1000,
         height: 1000,
-        profile: SettingsPolycad.profileSystems[0].marking,
+        profile: null, // SettingsPolycad.profileSystems[0].marking,
         furniture: SettingsPolycad.furnitureSystems[0].marking,
         imposts: [500],
         fields: [
@@ -36,8 +42,8 @@ export class State {
         ],
         glass: SettingsPolycad.fills[0].marking,
         glass_under_impost: '',
-        color_in: SettingsPolycad.colors[0].marking,
-        color_out: SettingsPolycad.colors[0].marking,
+        color_in: null, // SettingsPolycad.colors[0].marking,
+        color_out: null, // SettingsPolycad.colors[0].marking,
         width_door: 800,
         height_door: 2000,
         imposts_door: [],
@@ -56,26 +62,47 @@ export class State {
             && this.settings.polycadValut;
         return valut ? valut : 'RUB';
     }
+
+    get canCalc() {
+        const isAllFilled = this.simpleJSON != null
+            && this.simpleJSON.color_in != null
+            && this.simpleJSON.color_out != null
+            && this.simpleJSON.profile != null
+            && !this.changed
+        ;
+        return isAllFilled;
+    }
+
     applySettings(settingsPolycad: any) {
-        const settings = new PolycadSettings();
+        const settings = SettingsPolycad.settings;
 
         if (settingsPolycad.profile_systems && settingsPolycad.profile_systems instanceof Array) {
             settings.profile_systems = [...settingsPolycad.profile_systems];
+            SettingsPolycad.profileSystems = [...settings.profile_systems];
         }
         if (settingsPolycad.profiles && settingsPolycad.profiles instanceof Array) {
             settings.profiles = [...settingsPolycad.profiles];
+            SettingsPolycad.profiles = [];
+            settings.profiles.forEach(p => {
+                const profile = new Profile(p.id, p.marking, 1, p.thick, p.type as ProfileType, p.system);
+                SettingsPolycad.profiles.push(profile);
+            });
         }
         if (settingsPolycad.furniture_systems && settingsPolycad.furniture_systems instanceof Array) {
             settings.furniture_systems = [...settingsPolycad.furniture_systems];
+            SettingsPolycad.furnitureSystems = [...settings.furniture_systems];
         }
         if (settingsPolycad.color_groups && settingsPolycad.color_groups instanceof Array) {
             settings.color_groups = [...settingsPolycad.color_groups];
+            SettingsPolycad.colorGroups = [...settings.color_groups];
         }
         if (settingsPolycad.colors && settingsPolycad.colors instanceof Array) {
             settings.colors = [...settingsPolycad.colors];
+            SettingsPolycad.colors = [...settings.colors];
         }
         if (settingsPolycad.fills && settingsPolycad.fills instanceof Array) {
             settings.fills = [...settingsPolycad.fills];
+            SettingsPolycad.fills = [...settings.fills];
         }
         if (settingsPolycad.idgoods && settingsPolycad.idgoods instanceof Array) {
             this.settings.idgoods = [...settingsPolycad.idgoods];
@@ -85,6 +112,17 @@ export class State {
         }
         if (settingsPolycad.options && settingsPolycad.options instanceof Array) {
             this.settings.options = [...settingsPolycad.options];
+            SettingsPolycad.options = [];
+            this.settings.options.forEach(o => {
+                if (o.name) {
+                    const ioption = <IOption>{
+                        idoption: o.id,
+                        suboptions: [],
+                        name: o.name
+                    };
+                    SettingsPolycad.options.push(ioption);
+                }
+            })
         }
         if (settingsPolycad.dependencies && settingsPolycad.dependencies instanceof Array) {
             this.settings.dependencies = [...settingsPolycad.dependencies];

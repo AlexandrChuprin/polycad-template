@@ -1,8 +1,11 @@
 
 
 .constrtype {
-    min-width: 170px;
-    max-width: 170px;
+    // min-width: 170px;
+    max-width: 80px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 .cb {
     max-width: 140px;
@@ -29,7 +32,7 @@
     font-size: 14px;
     color: #5a5b5d;
     font-weight: 500;
-    font-family: "Gilroy";
+    font-family: Montserrat,sans-serif;
 }
 
 .ct-image {
@@ -59,7 +62,7 @@
     line-height: 30px;
     color: #5a5b5d;
     font-weight: 500;
-    font-family: "Gilroy";
+    font-family: Montserrat,sans-serif;
 }
 
 .construction-wrapper {
@@ -151,6 +154,9 @@
     }
 
     .constrtype {
+        max-width: inherit;
+        display: flex;
+        // flex-direction: row;
         flex-wrap: wrap;
         max-height: 270px;
         margin-bottom: 30px;
@@ -161,14 +167,16 @@
     }
 
     .model-container {
+        margin: 0 auto;
         max-width: 450px;
-        min-width: 250px;
+        min-width: 320px;
     }
     
     .model {
-        width: 100%;
+        margin: 0 auto;
         max-height: 400px;
         min-height: 200px;
+        width: inherit;
     }
     
 }

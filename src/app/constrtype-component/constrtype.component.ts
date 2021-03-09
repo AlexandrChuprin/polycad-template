@@ -180,7 +180,7 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
       if (window && window.screen && window.screen.width) {
         const screenWidth = window.screen.width;
         if (screenWidth < 600) {
-          this.drawerWidth = 270;
+          this.drawerWidth = 300;
         }
       }
 
@@ -217,10 +217,6 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
 
   updateModel() {
     
-    this.process(new SetCalculationStatus(true));
-    setTimeout(() => {
-      this.process(new SetCalculationStatus(false));
-    }, 50);
   }
 
   setCurrentModelIdx(idx: number) {

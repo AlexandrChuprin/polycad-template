@@ -1,26 +1,18 @@
-<!-- <div *ngIf="state" style="display: flex; flex-direction: column;">
-
-    <div style="flex: 1;">
-        <div #containerSVG class="drawing"></div>
-        <div #containerSVGTemp class="drawing2" style="display: none;"></div>
-        <img [src]="image" width="400" height="400" />
-    </div>
-    <div style="flex: 1; margin-top: 30px;">
-        <pre>{{modelDescription}}</pre>
-    </div>
-</div> -->
-
-
 <ng-container *ngIf="state">
+    <div class="border result-title mobile">
+        <span class="title-text">
+            {{title}}
+        </span>
+    </div>
     <div class='flex-row'>
-        <div class="border flex-1 flex-row-wrap common-card">
-            <div class="border flex-1 title-aligned">
+        <div class="border flex-1 flex-row-wrap result-container">
+            <div class="border flex-1 title-aligned no-mobile" style="padding-bottom: 50px;">
                 <span class="title-text">
                     {{title}}
                 </span>
             </div>
 
-            <div class="flex-1 no-mobile" style="min-width: 100px; max-width: 100px;"></div>
+            <div class="flex-1 no-mobile" style="min-width: 50px; max-width: 50px;"></div>
             <div class="border flex-1" *ngIf="state.isCalculationInProgress">
                 <div class="flex-col">
                     <div class="flex-1"></div>
@@ -56,28 +48,29 @@
             </div>
             <div class="border flex-1" *ngIf="!state.isCalculationInProgress">
                 <div class="flex-row-wrap result-row">
-                    <div class="flex-1">
+                    <div class="flex-1" style="max-width: 440px;">
                         <div class="result-item-caption">Конструктив:</div>
                         <div class="result-item-info">
                             {{constypeInfo}}
                         </div>
                     </div>
-                    <div class="flex-1"></div>
-                    <div class="flex-1">
+                    <div class="flex-1" style="max-width: 440px;">
                         <div class="result-item-caption">Опции:</div>
                         <div class="result-item-info">{{optionsInfo}}</div>
                     </div>
                 </div>
                 <div class="flex-row-wrap result-row">
-                    <div class="flex-1">
+                    <div class="flex-1" style="max-width: 440px;">
                         <div class="result-item-caption">Профильная система:</div>
                         <div class="result-item-info">{{psInfo}}</div>
                     </div>
-                    <div class="flex-1"></div>
-                    <div class="flex-1">
+                    <div class="flex-1" style="max-width: 440px;">
                         <div class="result-item-caption">Цвета:</div>
                         <div class="result-item-info">{{colorsInfo}}</div>
                     </div>
+                </div>
+                <div class="flex-row-wrap result-row no-mobile">
+                    <div class="flex-1 summary-summ">{{summ}}</div>
                 </div>
             </div>
         </div>

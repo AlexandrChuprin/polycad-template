@@ -16,8 +16,11 @@ export class ResultComponent extends CommonComponent implements OnInit {
   title = 'Итог';
   comment = 'сформированное изделие';
 
-  // @ViewChild('containerSVG', { static: true }) containerSVG;
-  // @ViewChild('containerSVGTemp', { static: true }) containerSVGTemp;
+  get summ() {
+    let s = '';
+    s += this.state.price;
+    return s + ' грн';
+  }
 
   get modelDescription() {
     let description = '';
@@ -74,22 +77,26 @@ export class ResultComponent extends CommonComponent implements OnInit {
   }
   get optionsInfo() {
     const res = this.state.simpleJSON.idoptions
-      .map(idoption => this.optionsStatic.find(_ => _.idoption === idoption).name)
+      .map(idoption => this.state.settings.options.find(_ => _.id === idoption).name)
       .join(' \/ ');
     return res;
   }
   get psInfo() {
     let s = '';
-    s += this.state.simpleJSON.profile;
+    if (this.state.simpleJSON.profile) {
+      s += this.state.simpleJSON.profile;
+    }
     const ps = SettingsPolycad.profileSystems.find(_ => _.marking === this.state.simpleJSON.profile);
     if (ps) {
       s += ' ' + ps.description;
     }
-    return s;
+    return s == null ? '' : s;
   }
   get colorsInfo() {
     let s = '';
-    s += `${this.state.simpleJSON.color_in} / ${this.state.simpleJSON.color_out}`;
+    const color_in = SettingsPolycad.colors.find(_ => _.id === this.state.simpleJSON.color_in);
+    const color_out = SettingsPolycad.colors.find(_ => _.id === this.state.simpleJSON.color_out);
+    s += `${color_in ? color_in.marking : ''} / ${color_out ? color_out.marking : ''}`;
     return s;
   }
 
@@ -99,10 +106,18 @@ export class ResultComponent extends CommonComponent implements OnInit {
 
   ngOnInit() {
     super.ngOnInit();
-    this.stateProvider.process(new SetCalculationStatus(true));
-    setTimeout(() => {
-      this.stateProvider.process(new SetCalculationStatus(false));
-    }, 5000);
+    
+    const timer = setInterval(() => {
+      if (this.state.calced) {
+        clearInterval(timer);
+        this.stateProvider.process(new SetCalculationStatus(false));
+        setTimeout(() => {
+          window.scrollTo(0,document.body.scrollHeight);
+        }, 1000);
+      } else {
+        this.stateProvider.process(new SetCalculationStatus(true));
+      }
+    }, 500);
   }
 
 }

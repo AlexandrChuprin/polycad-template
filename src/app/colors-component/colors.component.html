@@ -1,40 +1,18 @@
-<!-- <ng-container *ngIf="state">
-    <h3>Цвет изнутри</h3>
-    <div>
-        <ng-container *ngFor="let color of colors">
-            <input type="radio" id="color-in-{{color.marking}}" name="color-in" value="{{color.marking}}" (change)="setColorIn(color.marking)"
-                [checked]="isColorInChecked(color.marking)">
-            <label for="color-in-{{color.marking}}">{{color.marking}}</label>
-            <br>
-        </ng-container>
-    </div>
-    <h3>Цвет снаружи</h3>
-    <div>
-        <ng-container *ngFor="let color of colors">
-            <input type="radio" id="color-out-{{color.marking}}" name="color-out" value="{{color.marking}}" (change)="setColorOut(color.marking)"
-                [checked]="isColorOutChecked(color.marking)">
-            <label for="color-out-{{color.marking}}">{{color.marking}}</label>
-            <br>
-        </ng-container>
-    </div>
-</ng-container> -->
-
-
 <ng-container *ngIf="state">
+    <div class="title-2">
+        <span class="title-text-2">
+            {{title}}
+        </span>
+    </div>
     <div class='flex-row'>
-        <div class="border flex-1 title-prev">
+        <!-- <div class="border flex-1 title-prev">
             <span class="title-text-prev" (click)="goToPage(1)">
                 Конструктив
             </span>
-        </div>
+        </div> -->
         <div class="border flex-1 flex-row-wrap common-card">
-            <div class="border flex-1 title">
-                <span class="title-text">
-                    {{title}}
-                </span>
-            </div>
             
-            <div class="flex-1 no-mobile" style="min-width: 60px; max-width: 60px;"></div>
+            <!-- <div class="flex-1 no-mobile" style="min-width: 60px; max-width: 60px;"></div> -->
             <div class="border flex-1 flex-col color-container">
                 <div class="flex-1 color-container-row">
                     <div class="color-container-row-caption">Цвет снаружи:</div>
@@ -42,8 +20,8 @@
                         <div class="flex-1"
                             *ngFor="let color of colors; let idx = index;"
                             [ngStyle]="{'background-color': color.color}"
-                            [ngClass]="isColorOutChecked(color.marking) ? 'color-container-item-selected' : 'color-container-item'"
-                            (click)="setColorOut(color.marking)"
+                            [ngClass]="isColorOutChecked(color.id) ? 'color-container-item-selected' : 'color-container-item'"
+                            (click)="setColorOut(color.id)"
                         >
                         </div>
                     </div>
@@ -54,15 +32,15 @@
                         <div class="flex-1 color-container-row-hover"
                             *ngFor="let color of colors; let idx = index;"
                             [ngStyle]="{'background-color': color.color}"
-                            [ngClass]="isColorInChecked(color.marking) ? 'color-container-item-selected' : 'color-container-item'"
-                            (click)="setColorIn(color.marking)"
+                            [ngClass]="isColorInChecked(color.id) ? 'color-container-item-selected' : 'color-container-item'"
+                            (click)="setColorIn(color.id)"
                         >
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="border flex-1 title-next">
+        <!-- <div class="border flex-1 title-next">
             <span class="title-text-next" (click)="goToPage(3)">
                 Опции
             </span>
@@ -71,7 +49,8 @@
             <span class="title-text-next" (click)="goToPage(4)">
                 Профильная система
             </span>
-        </div>
+        </div> -->
     </div>
 </ng-container>
 <div class="mobile-border"></div>
+<div class="no-mobile-border"></div>

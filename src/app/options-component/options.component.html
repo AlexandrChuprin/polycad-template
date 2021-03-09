@@ -1,6 +1,11 @@
 <ng-container *ngIf="state">
+    <div class="title-2">
+        <span class="title-text-2">
+            {{title}}
+        </span>
+    </div>
     <div class='flex-row'>
-        <div class="border flex-1 title-prev">
+        <!-- <div class="border flex-1 title-prev">
             <span class="title-text-prev" (click)="goToPage(1)">
                 Конструктив
             </span>
@@ -9,15 +14,15 @@
             <span class="title-text-prev" (click)="goToPage(2)">
                 Цвета
             </span>
-        </div>
+        </div> -->
         <div class="border flex-1 flex-row-wrap common-card">
-            <div class="border flex-1 title">
+            <!-- <div class="border flex-1 title">
                 <span class="title-text">
                     {{title}}
                 </span>
             </div>
             
-            <div class="flex-1 no-mobile" style="min-width: 60px; max-width: 60px;"></div>
+            <div class="flex-1 no-mobile" style="min-width: 60px; max-width: 60px;"></div> -->
             <div class="border flex-1 options-container">
                 <div class="flex-1 option-container-item"
                     [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
@@ -37,11 +42,12 @@
                 </div>
             </div>
         </div>
-        <div class="border flex-1 title-next">
+        <!-- <div class="border flex-1 title-next">
             <span class="title-text-next" (click)="goToPage(4)">
                 Профильная система
             </span>
-        </div>
+        </div> -->
     </div>
 </ng-container>
 <div class="mobile-border"></div>
+<div class="no-mobile-border"></div>

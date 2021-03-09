@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
 import { SetTitleAndComment } from '../actions/actions';
 import { SettingsPolycad } from '../classes/settings/setings-polycad';
 import { State } from '../classes/state';
@@ -11,7 +10,6 @@ import { StateProviderService } from '../state-provider.service';
   styleUrls: ['./common.component.scss']
 })
 export class CommonComponent implements OnInit {
-  optionsStatic = [];
   title = '';
   comment = '';
   state: State;
@@ -19,12 +17,11 @@ export class CommonComponent implements OnInit {
   
     
   constructor(public stateProvider: StateProviderService) {
-    const opts = SettingsPolycad.options.slice();
-    this.optionsStatic.push(...opts);
-    opts.forEach(_ => {if (_.suboptions) {this.optionsStatic.push(..._.suboptions)}});
+
   }
 
   ngOnInit() {
+    
     this.stateProvider.process(new SetTitleAndComment(this.title, this.comment));
     
     this.stateProvider.state.subscribe((state: State) => {

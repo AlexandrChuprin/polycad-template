@@ -1,14 +1,28 @@
 import { State } from '../classes/state';
 
 export class StoreAction {
-    perform(stateNew: State): State {
+    perform(lastState: State): State {
         const state = new State();
-        state.comment = stateNew.comment;
-        state.page = stateNew.page;
-        state.pages = stateNew.pages;
-        state.simpleJSON = stateNew.simpleJSON;
-        state.title = stateNew.title;
-        state.isCalculationInProgress = stateNew.isCalculationInProgress;
+        state.title = lastState.title;
+        state.comment = lastState.comment;
+        state.page = lastState.page;
+        state.pages = lastState.pages;
+        state.simpleJSON = lastState.simpleJSON;
+        state.title = lastState.title;
+        state.isCalculationInProgress = lastState.isCalculationInProgress;
+        state.mobile = lastState.mobile;
+        state.calced = lastState.calced;
+        state.changed = lastState.changed;
+        state.price = lastState.price;
+        state.qu = lastState.qu;
+
+        state.idorderdocitem = lastState.idorderdocitem;
+        state.idorderdoc = lastState.idorderdoc;
+        state.settingsLoaded = lastState.settingsLoaded;
+        state.error = lastState.error;
+        state.info = lastState.info;
+        state.settings = lastState.settings;
+        state.isCalculationInProgress = lastState.isCalculationInProgress;
         return state;
     }
 }
