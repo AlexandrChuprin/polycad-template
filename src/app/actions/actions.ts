@@ -11,6 +11,7 @@ export class SelectTemplate extends StoreAction {
         const newStateObject = super.perform(lastState);
         newStateObject.simpleJSON.template = this.template;
         newStateObject.simpleJSON.idtemplate = this.template.toString();
+        newStateObject.simpleJSON.idproduct = 'window';
         if (this.template === 1) {
             newStateObject.simpleJSON.width = 600;
             newStateObject.simpleJSON.height = 800;
@@ -48,6 +49,7 @@ export class SelectTemplate extends StoreAction {
             newStateObject.simpleJSON.imposts_door = [];
             newStateObject.simpleJSON.fields_door = [];
         } else if (this.template === 4) {
+            newStateObject.simpleJSON.idproduct = 'balkon';
             newStateObject.simpleJSON.width = 700;
             newStateObject.simpleJSON.height = 1200;
             newStateObject.simpleJSON.imposts = [];
@@ -56,24 +58,26 @@ export class SelectTemplate extends StoreAction {
             ];
             newStateObject.simpleJSON.width_door = 600;
             newStateObject.simpleJSON.height_door = 2000;
-            newStateObject.simpleJSON.imposts_door = [];
+            newStateObject.simpleJSON.imposts_door = [600];
             newStateObject.simpleJSON.fields_door = [
                 {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
             ];
         } else if (this.template === 6) {
+            newStateObject.simpleJSON.idproduct = 'balkon';
             newStateObject.simpleJSON.width = 700;
             newStateObject.simpleJSON.height = 1200;
-            newStateObject.simpleJSON.imposts = [];
+            newStateObject.simpleJSON.imposts_door = [600];
             newStateObject.simpleJSON.fields = [
                 {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill
             ];
             newStateObject.simpleJSON.width_door = 600;
             newStateObject.simpleJSON.height_door = 2000;
-            newStateObject.simpleJSON.imposts_door = [];
+            newStateObject.simpleJSON.imposts_door = [600];
             newStateObject.simpleJSON.fields_door = [
                 {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill,
             ];
         } else if (this.template === 5) {
+            newStateObject.simpleJSON.idproduct = 'balkon';
             newStateObject.simpleJSON.width = 1000;
             newStateObject.simpleJSON.height = 1200;
             newStateObject.simpleJSON.imposts = [500];
@@ -83,11 +87,12 @@ export class SelectTemplate extends StoreAction {
             ];
             newStateObject.simpleJSON.width_door = 600;
             newStateObject.simpleJSON.height_door = 2000;
-            newStateObject.simpleJSON.imposts_door = [];
+            newStateObject.simpleJSON.imposts_door = [600];
             newStateObject.simpleJSON.fields_door = [
                 {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill,
             ];
         } else if (this.template === 7) {
+            newStateObject.simpleJSON.idproduct = 'balkon';
             newStateObject.simpleJSON.width = 1000;
             newStateObject.simpleJSON.height = 1200;
             newStateObject.simpleJSON.imposts = [500];
@@ -97,11 +102,12 @@ export class SelectTemplate extends StoreAction {
             ];
             newStateObject.simpleJSON.width_door = 600;
             newStateObject.simpleJSON.height_door = 2000;
-            newStateObject.simpleJSON.imposts_door = [];
+            newStateObject.simpleJSON.imposts_door = [600];
             newStateObject.simpleJSON.fields_door = [
                 {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill,
             ];
         } else if (this.template === 20) {
+            newStateObject.simpleJSON.idproduct = 'door';
             newStateObject.simpleJSON.width = 0;
             newStateObject.simpleJSON.height = 0;
             newStateObject.simpleJSON.imposts = [];
@@ -113,6 +119,7 @@ export class SelectTemplate extends StoreAction {
                 {open_type: 'left', moskit: false, handle: ''} as SimpleJSONFill
             ];
         } else if (this.template === 21) {
+            newStateObject.simpleJSON.idproduct = 'door';
             newStateObject.simpleJSON.width = 0;
             newStateObject.simpleJSON.height = 0;
             newStateObject.simpleJSON.imposts = [];
