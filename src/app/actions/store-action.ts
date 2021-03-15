@@ -7,9 +7,10 @@ export class StoreAction {
         state.comment = lastState.comment;
         state.page = lastState.page;
         state.pages = lastState.pages;
+
         state.simpleJSON = lastState.simpleJSON;
-        state.title = lastState.title;
-        state.isCalculationInProgress = lastState.isCalculationInProgress;
+        state.calcedSimpleJSON = lastState.calcedSimpleJSON;
+
         state.mobile = lastState.mobile;
         state.calced = lastState.calced;
         state.changed = lastState.changed;
@@ -23,6 +24,7 @@ export class StoreAction {
         state.info = lastState.info;
         state.settings = lastState.settings;
         state.isCalculationInProgress = lastState.isCalculationInProgress;
+        
         return state;
     }
 }

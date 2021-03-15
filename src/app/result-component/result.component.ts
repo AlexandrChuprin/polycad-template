@@ -24,79 +24,93 @@ export class ResultComponent extends CommonComponent implements OnInit {
 
   get modelDescription() {
     let description = '';
-    description += getTemplateDescription(this.state.calcedSimpleJSON.template);
-    if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
-      description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door > +this.state.calcedSimpleJSON.height
-        ? +this.state.calcedSimpleJSON.height_door
-        : +this.state.calcedSimpleJSON.height
-        }`;
-    } else if (this.state.calcedSimpleJSON.template < 3) {
-      description += `\nВысота: ${+this.state.calcedSimpleJSON.height}`;
-    } else if (this.state.calcedSimpleJSON.template >= 20) {
-      description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door}`;
-    }
-    if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
-      description += `\nШирина: ${+this.state.calcedSimpleJSON.width + +this.state.calcedSimpleJSON.width_door}`;
-    } else if (this.state.calcedSimpleJSON.template < 3) {
-      description += `\nШирина: ${+this.state.calcedSimpleJSON.width}`;
-    } else if (this.state.calcedSimpleJSON.template >= 20) {
-      description += `\nШирина: ${+this.state.calcedSimpleJSON.width_door}`;
-    }
-    description += `\nЦвет внутренний: ${this.state.calcedSimpleJSON.color_in}`;
-    description += `\nЦвет внешний: ${this.state.calcedSimpleJSON.color_out}`;
-    description += `\nПрофильная система: ${this.state.calcedSimpleJSON.profile}`;
-    description += `\nФурнитурная система: ${this.state.calcedSimpleJSON.furniture}`;
-    description += `\nПакеты: ${this.state.calcedSimpleJSON.glass}`;
-    if (this.state.calcedSimpleJSON.idoptions.length) {
-      description += `\nОпции: ${this.state.calcedSimpleJSON.idoptions}`;
+      if (this.state && this.state.calcedSimpleJSON) {
+      description += getTemplateDescription(this.state.calcedSimpleJSON.template);
+      if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
+        description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door > +this.state.calcedSimpleJSON.height
+          ? +this.state.calcedSimpleJSON.height_door
+          : +this.state.calcedSimpleJSON.height
+          }`;
+      } else if (this.state.calcedSimpleJSON.template < 3) {
+        description += `\nВысота: ${+this.state.calcedSimpleJSON.height}`;
+      } else if (this.state.calcedSimpleJSON.template >= 20) {
+        description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door}`;
+      }
+      if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
+        description += `\nШирина: ${+this.state.calcedSimpleJSON.width + +this.state.calcedSimpleJSON.width_door}`;
+      } else if (this.state.calcedSimpleJSON.template < 3) {
+        description += `\nШирина: ${+this.state.calcedSimpleJSON.width}`;
+      } else if (this.state.calcedSimpleJSON.template >= 20) {
+        description += `\nШирина: ${+this.state.calcedSimpleJSON.width_door}`;
+      }
+      description += `\nЦвет внутренний: ${this.state.calcedSimpleJSON.color_in}`;
+      description += `\nЦвет внешний: ${this.state.calcedSimpleJSON.color_out}`;
+      description += `\nПрофильная система: ${this.state.calcedSimpleJSON.profile}`;
+      description += `\nФурнитурная система: ${this.state.calcedSimpleJSON.furniture}`;
+      description += `\nПакеты: ${this.state.calcedSimpleJSON.glass}`;
+      if (this.state.calcedSimpleJSON.idoptions.length) {
+        description += `\nОпции: ${this.state.calcedSimpleJSON.idoptions}`;
+      }
     }
     return description;
   }
 
   get constypeInfo() {
     let description = '';
-    description += this.constrtypeMarking;
-    if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
-      description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door > +this.state.calcedSimpleJSON.height
-        ? +this.state.calcedSimpleJSON.height_door
-        : +this.state.calcedSimpleJSON.height
-        }`;
-    } else if (this.state.calcedSimpleJSON.template < 3) {
-      description += `\nВысота: ${+this.state.calcedSimpleJSON.height}`;
-    } else if (this.state.calcedSimpleJSON.template >= 20) {
-      description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door}`;
-    }
-    if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
-      description += `\nШирина: ${+this.state.calcedSimpleJSON.width + +this.state.calcedSimpleJSON.width_door}`;
-    } else if (this.state.calcedSimpleJSON.template < 3) {
-      description += `\nШирина: ${+this.state.calcedSimpleJSON.width}`;
-    } else if (this.state.calcedSimpleJSON.template >= 20) {
-      description += `\nШирина: ${+this.state.calcedSimpleJSON.width_door}`;
+    if (this.state && this.state.calcedSimpleJSON) {
+      description += this.constrtypeMarking;
+      if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
+        description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door > +this.state.calcedSimpleJSON.height
+          ? +this.state.calcedSimpleJSON.height_door
+          : +this.state.calcedSimpleJSON.height
+          }`;
+      } else if (this.state.calcedSimpleJSON.template < 3) {
+        description += `\nВысота: ${+this.state.calcedSimpleJSON.height}`;
+      } else if (this.state.calcedSimpleJSON.template >= 20) {
+        description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door}`;
+      }
+      if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
+        description += `\nШирина: ${+this.state.calcedSimpleJSON.width + +this.state.calcedSimpleJSON.width_door}`;
+      } else if (this.state.calcedSimpleJSON.template < 3) {
+        description += `\nШирина: ${+this.state.calcedSimpleJSON.width}`;
+      } else if (this.state.calcedSimpleJSON.template >= 20) {
+        description += `\nШирина: ${+this.state.calcedSimpleJSON.width_door}`;
+      }
     }
     return description;
   }
+  
   get optionsInfo() {
-    const res = this.state.calcedSimpleJSON.idoptions
-      .map(idoption => this.state.settings.options.find(_ => _.id === idoption).name)
-      .join(' \/ ');
+    let res = '';
+    if (this.state && this.state.calcedSimpleJSON) {
+      res = this.state.calcedSimpleJSON.idoptions
+        .map(idoption => this.state.settings.options.find(_ => _.id === idoption).name)
+        .join(' \/ ');
+    }
     return res;
   }
+
   get psInfo() {
     let s = '';
-    if (this.state.calcedSimpleJSON.profile) {
-      s += this.state.calcedSimpleJSON.profile;
-    }
-    const ps = SettingsPolycad.profileSystems.find(_ => _.marking === this.state.calcedSimpleJSON.profile);
-    if (ps) {
-      s += ' ' + ps.description;
+    if (this.state && this.state.calcedSimpleJSON) {
+      if (this.state.calcedSimpleJSON.profile) {
+        s += this.state.calcedSimpleJSON.profile;
+      }
+      const ps = SettingsPolycad.profileSystems.find(_ => _.marking === this.state.calcedSimpleJSON.profile);
+      if (ps) {
+        s += ' ' + ps.description;
+      }
     }
     return s == null ? '' : s;
   }
+
   get colorsInfo() {
     let s = '';
-    const color_in = SettingsPolycad.colors.find(_ => _.id === this.state.calcedSimpleJSON.color_in);
-    const color_out = SettingsPolycad.colors.find(_ => _.id === this.state.calcedSimpleJSON.color_out);
-    s += `${color_in ? color_in.marking : ''} / ${color_out ? color_out.marking : ''}`;
+    if (this.state && this.state.calcedSimpleJSON) {
+      const color_in = SettingsPolycad.colors.find(_ => _.id === this.state.calcedSimpleJSON.color_in);
+      const color_out = SettingsPolycad.colors.find(_ => _.id === this.state.calcedSimpleJSON.color_out);
+      s += `${color_in ? color_in.marking : ''} / ${color_out ? color_out.marking : ''}`;
+    }
     return s;
   }
 

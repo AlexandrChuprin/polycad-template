@@ -193,9 +193,12 @@ export class StateProviderService {
   }
 
   getImage(state: State) {
+
     if (this.polycad && this.polycad.model
       && this.polycad.model.template && this.polycad.model.template.installOptions) {
       this.polycad.controller.last_template = +state.simpleJSON.template;
+      this.polycad.model.template.models.forEach(m => m.back_color = state.simpleJSON.color_in);
+      this.polycad.model.template.models.forEach(m => m.front_color = state.simpleJSON.color_out);
       const pic = this.polycad.getBase64Svg({ show_back: 0, draw_sizes: 1 });
       return pic;
     } else {
