@@ -3,7 +3,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
-import { SetCalced, SetIdorderdocitem } from '../actions/actions';
+import { SetCalced, SetCalcedSimpleJSON, SetIdorderdocitem } from '../actions/actions';
 import { SettingsPolycad } from '../classes/settings/setings-polycad';
 import { State } from '../classes/state';
 import { CommonComponent } from '../common/common.component';
@@ -27,10 +27,17 @@ export class CommonCardComponent extends CommonComponent {
   }
 
   get image() {
+    
     let pic = '';
-    if (this.state && this.state.simpleJSON && this.state.simpleJSON.pic) {
+
+    if (this.state && this.state.calcedSimpleJSON && this.state.calcedSimpleJSON.pic) {
+      pic = this.state.calcedSimpleJSON.pic;
+    }
+
+    if (!pic && this.state && this.state.simpleJSON && this.state.simpleJSON.pic) {
       pic = this.state.simpleJSON.pic;
     }
+
     return this.sanitizer.bypassSecurityTrustUrl(pic);
   }
 
@@ -129,21 +136,25 @@ export class CommonCardComponent extends CommonComponent {
   }
 
   calcMobile() {
+    if (this.state && this.state.canCalc) {
       console.log('считаем');
       const next = this.state.pages[this.state.pages.length - 1];
       if (next) {
         this.stateProvider.updatePage(next);
       }
+      // this.stateProvider.process(new SetIdorderdocitem(0));
       this.stateProvider.addOrderdocitemsObservable()
       .pipe(switchMap((idorderitems: number[]) => {
         console.log(`idorderitems: `);
         console.log(idorderitems);
         this.stateProvider.process(new SetCalced(false));
+        this.stateProvider.process(new SetCalcedSimpleJSON(JSON.parse(JSON.stringify(this.state.simpleJSON))));
         this.stateProvider.process(new SetIdorderdocitem(idorderitems[0]));
         this.stateProvider.checkOrderCalced();
         return of(true);
       })
       ).subscribe();
+    }
   }
 
 }

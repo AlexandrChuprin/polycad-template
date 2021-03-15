@@ -1,6 +1,6 @@
 import { PolycadValut } from '../classes/settings/settings';
 import { State } from '../classes/state';
-import { SimpleJSONFill, Template } from '../interfaces/simple-json';
+import { SimpleJSONFill, SimpleJSONModel, Template } from '../interfaces/simple-json';
 import { StoreAction } from './store-action';
 
 export class SelectTemplate extends StoreAction {
@@ -422,6 +422,18 @@ export class SetChanged extends StoreAction {
     perform(lastState: State) {
         const newStateObject = super.perform(lastState);
         newStateObject.changed = this.changed;
+        return newStateObject;
+    }
+}
+
+
+export class SetCalcedSimpleJSON extends StoreAction {
+    constructor(private simpleJSON: SimpleJSONModel) {
+        super();
+    }
+    perform(lastState: State) {
+        const newStateObject = super.perform(lastState);
+        newStateObject.calcedSimpleJSON = this.simpleJSON;
         return newStateObject;
     }
 }

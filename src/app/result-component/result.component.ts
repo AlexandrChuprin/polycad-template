@@ -24,31 +24,31 @@ export class ResultComponent extends CommonComponent implements OnInit {
 
   get modelDescription() {
     let description = '';
-    description += getTemplateDescription(this.state.simpleJSON.template);
-    if (this.state.simpleJSON.template > 3 && this.state.simpleJSON.template < 20) {
-      description += `\nВысота: ${+this.state.simpleJSON.height_door > +this.state.simpleJSON.height
-        ? +this.state.simpleJSON.height_door
-        : +this.state.simpleJSON.height
+    description += getTemplateDescription(this.state.calcedSimpleJSON.template);
+    if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
+      description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door > +this.state.calcedSimpleJSON.height
+        ? +this.state.calcedSimpleJSON.height_door
+        : +this.state.calcedSimpleJSON.height
         }`;
-    } else if (this.state.simpleJSON.template < 3) {
-      description += `\nВысота: ${+this.state.simpleJSON.height}`;
-    } else if (this.state.simpleJSON.template >= 20) {
-      description += `\nВысота: ${+this.state.simpleJSON.height_door}`;
+    } else if (this.state.calcedSimpleJSON.template < 3) {
+      description += `\nВысота: ${+this.state.calcedSimpleJSON.height}`;
+    } else if (this.state.calcedSimpleJSON.template >= 20) {
+      description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door}`;
     }
-    if (this.state.simpleJSON.template > 3 && this.state.simpleJSON.template < 20) {
-      description += `\nШирина: ${+this.state.simpleJSON.width + +this.state.simpleJSON.width_door}`;
-    } else if (this.state.simpleJSON.template < 3) {
-      description += `\nШирина: ${+this.state.simpleJSON.width}`;
-    } else if (this.state.simpleJSON.template >= 20) {
-      description += `\nШирина: ${+this.state.simpleJSON.width_door}`;
+    if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
+      description += `\nШирина: ${+this.state.calcedSimpleJSON.width + +this.state.calcedSimpleJSON.width_door}`;
+    } else if (this.state.calcedSimpleJSON.template < 3) {
+      description += `\nШирина: ${+this.state.calcedSimpleJSON.width}`;
+    } else if (this.state.calcedSimpleJSON.template >= 20) {
+      description += `\nШирина: ${+this.state.calcedSimpleJSON.width_door}`;
     }
-    description += `\nЦвет внутренний: ${this.state.simpleJSON.color_in}`;
-    description += `\nЦвет внешний: ${this.state.simpleJSON.color_out}`;
-    description += `\nПрофильная система: ${this.state.simpleJSON.profile}`;
-    description += `\nФурнитурная система: ${this.state.simpleJSON.furniture}`;
-    description += `\nПакеты: ${this.state.simpleJSON.glass}`;
-    if (this.state.simpleJSON.idoptions.length) {
-      description += `\nОпции: ${this.state.simpleJSON.idoptions}`;
+    description += `\nЦвет внутренний: ${this.state.calcedSimpleJSON.color_in}`;
+    description += `\nЦвет внешний: ${this.state.calcedSimpleJSON.color_out}`;
+    description += `\nПрофильная система: ${this.state.calcedSimpleJSON.profile}`;
+    description += `\nФурнитурная система: ${this.state.calcedSimpleJSON.furniture}`;
+    description += `\nПакеты: ${this.state.calcedSimpleJSON.glass}`;
+    if (this.state.calcedSimpleJSON.idoptions.length) {
+      description += `\nОпции: ${this.state.calcedSimpleJSON.idoptions}`;
     }
     return description;
   }
@@ -56,37 +56,37 @@ export class ResultComponent extends CommonComponent implements OnInit {
   get constypeInfo() {
     let description = '';
     description += this.constrtypeMarking;
-    if (this.state.simpleJSON.template > 3 && this.state.simpleJSON.template < 20) {
-      description += `\nВысота: ${+this.state.simpleJSON.height_door > +this.state.simpleJSON.height
-        ? +this.state.simpleJSON.height_door
-        : +this.state.simpleJSON.height
+    if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
+      description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door > +this.state.calcedSimpleJSON.height
+        ? +this.state.calcedSimpleJSON.height_door
+        : +this.state.calcedSimpleJSON.height
         }`;
-    } else if (this.state.simpleJSON.template < 3) {
-      description += `\nВысота: ${+this.state.simpleJSON.height}`;
-    } else if (this.state.simpleJSON.template >= 20) {
-      description += `\nВысота: ${+this.state.simpleJSON.height_door}`;
+    } else if (this.state.calcedSimpleJSON.template < 3) {
+      description += `\nВысота: ${+this.state.calcedSimpleJSON.height}`;
+    } else if (this.state.calcedSimpleJSON.template >= 20) {
+      description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door}`;
     }
-    if (this.state.simpleJSON.template > 3 && this.state.simpleJSON.template < 20) {
-      description += `\nШирина: ${+this.state.simpleJSON.width + +this.state.simpleJSON.width_door}`;
-    } else if (this.state.simpleJSON.template < 3) {
-      description += `\nШирина: ${+this.state.simpleJSON.width}`;
-    } else if (this.state.simpleJSON.template >= 20) {
-      description += `\nШирина: ${+this.state.simpleJSON.width_door}`;
+    if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
+      description += `\nШирина: ${+this.state.calcedSimpleJSON.width + +this.state.calcedSimpleJSON.width_door}`;
+    } else if (this.state.calcedSimpleJSON.template < 3) {
+      description += `\nШирина: ${+this.state.calcedSimpleJSON.width}`;
+    } else if (this.state.calcedSimpleJSON.template >= 20) {
+      description += `\nШирина: ${+this.state.calcedSimpleJSON.width_door}`;
     }
     return description;
   }
   get optionsInfo() {
-    const res = this.state.simpleJSON.idoptions
+    const res = this.state.calcedSimpleJSON.idoptions
       .map(idoption => this.state.settings.options.find(_ => _.id === idoption).name)
       .join(' \/ ');
     return res;
   }
   get psInfo() {
     let s = '';
-    if (this.state.simpleJSON.profile) {
-      s += this.state.simpleJSON.profile;
+    if (this.state.calcedSimpleJSON.profile) {
+      s += this.state.calcedSimpleJSON.profile;
     }
-    const ps = SettingsPolycad.profileSystems.find(_ => _.marking === this.state.simpleJSON.profile);
+    const ps = SettingsPolycad.profileSystems.find(_ => _.marking === this.state.calcedSimpleJSON.profile);
     if (ps) {
       s += ' ' + ps.description;
     }
@@ -94,8 +94,8 @@ export class ResultComponent extends CommonComponent implements OnInit {
   }
   get colorsInfo() {
     let s = '';
-    const color_in = SettingsPolycad.colors.find(_ => _.id === this.state.simpleJSON.color_in);
-    const color_out = SettingsPolycad.colors.find(_ => _.id === this.state.simpleJSON.color_out);
+    const color_in = SettingsPolycad.colors.find(_ => _.id === this.state.calcedSimpleJSON.color_in);
+    const color_out = SettingsPolycad.colors.find(_ => _.id === this.state.calcedSimpleJSON.color_out);
     s += `${color_in ? color_in.marking : ''} / ${color_out ? color_out.marking : ''}`;
     return s;
   }

@@ -6,6 +6,7 @@ import { Profile, ProfileType } from './settings/classes';
 
 export class State {
     
+    public calcedSimpleJSON: SimpleJSONModel;
     public isCalculationInProgress = false;
     public mobile = false;
     public calced = false;
