@@ -55,10 +55,21 @@ export class ResultComponent extends CommonComponent implements OnInit {
     return description;
   }
 
+  get constrtypeMarkingLocal() {
+    let constrtypeMarking = '';
+    if (this.state && this.state.calcedSimpleJSON) {
+      const templateDefault = SettingsPolycad.templates.find(_ => _.id.replace('template-', '') === this.state.calcedSimpleJSON.idtemplate);
+      if (templateDefault) {
+        return templateDefault.marking;
+      }
+    }
+    return constrtypeMarking;
+  }
+
   get constypeInfo() {
     let description = '';
     if (this.state && this.state.calcedSimpleJSON) {
-      description += this.constrtypeMarking;
+      description += this.constrtypeMarkingLocal;
       if (this.state.calcedSimpleJSON.template > 3 && this.state.calcedSimpleJSON.template < 20) {
         description += `\nВысота: ${+this.state.calcedSimpleJSON.height_door > +this.state.calcedSimpleJSON.height
           ? +this.state.calcedSimpleJSON.height_door

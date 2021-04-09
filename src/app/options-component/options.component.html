@@ -37,6 +37,7 @@
                         >
                             <input type="radio" id="{{suboption.idoption}}" name="suboptions-{{option.idoption}}" value="{{suboption.idoption}}" (change)="setOption(suboption.idoption, $event.target.checked)" [checked]="isChecked(suboption.idoption)">
                             <label for="{{suboption.idoption}}" style="cursor: pointer;" class="option-label">{{suboption.name}}</label>
+                            <span style="cursor: pointer;" class="option-label">{{suboption.description}}</span>
                         </div>
                     </div>
                 </div>

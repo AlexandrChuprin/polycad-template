@@ -10,26 +10,7 @@
                 </div>
                 <div class="flex-1" style="min-height: 750px;"></div>
                 <div class="flex-1" style="max-height: 300px;">
-                    <div class="flex-row summary">
-                        <div class="flex-1 summary-pic">
-                            <img [src]="image" width="120" height="120" />
-                        </div>
-                        <div class="flex-1 flex-col summary-description">
-                            <div class="flex-1 flex-row" *ngIf="!showPrevCalcButton">
-                                <div class="flex-1 summary-description-title">Конструктив:</div>
-                                <div class="flex-1 summary-description-value">{{constrtypeMarking}}</div>
-                            </div>
-                            <div class="flex-1 flex-row">
-                                <div class="flex-1 summary-description-title" *ngIf="!showPrevCalcButton">Цвета:</div>
-                                <div class="flex-1 summary-description-value" *ngIf="!showPrevCalcButton">{{colorsInfo}}</div>
-                                <div class="flex-1 summary-description-title" *ngIf="showPrevCalcButton"></div>
-                            </div>
-                            <div class="flex-1 flex-row" *ngIf="!showPrevCalcButton">
-                                <div class="flex-1 summary-description-title">Опции:</div>
-                                <div class="flex-1 summary-description-value">{{options}}</div>
-                            </div>
-                        </div>
-                    </div>
+                    
 
                     <div class="calc-button-text"
                         [ngClass]="state && state.canCalc ? 'calc-button' : 'calc-button-disabled'"
@@ -40,6 +21,26 @@
             </div>
 
             <div class="flex-col">
+                <div class="flex-row summary">
+                    <div class="flex-1 summary-pic">
+                        <img [src]="image" width="120" height="120" />
+                    </div>
+                    <div class="flex-1 flex-col summary-description">
+                        <div class="flex-1 flex-row" *ngIf="!showPrevCalcButton">
+                            <div class="flex-1 summary-description-title">Конструктив:</div>
+                            <div class="flex-1 summary-description-value">{{constrtypeMarking}}</div>
+                        </div>
+                        <div class="flex-1 flex-row">
+                            <div class="flex-1 summary-description-title" *ngIf="!showPrevCalcButton">Цвета:</div>
+                            <div class="flex-1 summary-description-value" *ngIf="!showPrevCalcButton">{{colorsInfo}}</div>
+                            <div class="flex-1 summary-description-title" *ngIf="showPrevCalcButton"></div>
+                        </div>
+                        <div class="flex-1 flex-row" *ngIf="!showPrevCalcButton">
+                            <div class="flex-1 summary-description-title">Опции:</div>
+                            <div class="flex-1 summary-description-value">{{options}}</div>
+                        </div>
+                    </div>
+                </div>
                 <div class="flex-1"><app-colors-component>loading, please wait... </app-colors-component></div>
                 <div class="flex-1"><app-options-component>loading, please wait...</app-options-component></div>
                 <div class="flex-1"><app-systems-component>loading, please wait...</app-systems-component></div>

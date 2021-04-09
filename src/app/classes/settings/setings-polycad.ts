@@ -257,5 +257,6 @@ export class SettingsPolycad {
 export interface IOption {
     name: string;
     idoption: string;
+    description: string;
     suboptions: IOption[];
 }

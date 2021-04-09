@@ -13,8 +13,9 @@ export class Option {
         public isCommon: boolean,
         public isOnlyOneFromGroup: boolean,
         public visibility: string,
-        public dependsOn: string[]
-    ) {
+        public dependsOn: string[],
+        public isActive: boolean,
+        public isSuboption: boolean) {
 
     }
 }

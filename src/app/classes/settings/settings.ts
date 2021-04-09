@@ -213,7 +213,9 @@ export class Settings {
                         option.isCommon,
                         option.isOnlyOneFromGroup,
                         option.visibility,
-                        option.dependsOn
+                        option.dependsOn,
+                        option.isActive,
+                        option.isSuboption
                     );
                 }
             }
@@ -233,7 +235,9 @@ export class Settings {
                         option.isCommon,
                         option.isOnlyOneFromGroup,
                         option.visibility,
-                        option.dependsOn
+                        option.dependsOn,
+                        option.isActive,
+                        option.isSuboption
                     );
                 }
             }
@@ -253,7 +257,9 @@ export class Settings {
                         option.isCommon,
                         option.isOnlyOneFromGroup,
                         option.visibility,
-                        option.dependsOn
+                        option.dependsOn,
+                        option.isActive,
+                        option.isSuboption
                     );
                 }
             }
@@ -365,14 +371,14 @@ export class Settings {
 
             const options = [
                 this.getEmptyOption(1),
-                new Option('option-ps-cheap', profiles[0].id, 'profile', '', 1, '', '', '', true, false, false, 'showed', []),
-                new Option('option-ps-expensive', profiles[1].id, 'profile', '', 1, '', '', '', false, false, false, 'showed', []),
-                new Option('option-fill-cheap', fills[0].id, 'fill', '', 2, '', '', '', true, false, false, 'showed', []),
-                new Option('option-fill-expensive', fills[1].id, 'fill', '', 2, '', '', '', true, false, false, 'showed', []),
+                new Option('option-ps-cheap', profiles[0].id, 'profile', '', 1, '', '', '', true, false, false, 'showed', [], true, false),
+                new Option('option-ps-expensive', profiles[1].id, 'profile', '', 1, '', '', '', false, false, false, 'showed', [], true, false),
+                new Option('option-fill-cheap', fills[0].id, 'fill', '', 2, '', '', '', true, false, false, 'showed', [], true, false),
+                new Option('option-fill-expensive', fills[1].id, 'fill', '', 2, '', '', '', true, false, false, 'showed', [], true, false),
 
-                new Option('antiburglary-common', '', '', '', 2, ' assets/images/options/antiburglary.jpg', 'Противо - взломность', '', true, true, false, 'showed', []),
-                new Option('energyefficient-common', '', '', '', 2, 'assets/images/options/energyefficient.jpg', 'Энерго - эффективность', '', true, true, false, 'showed', []),
-                new Option('noiseprotection-common', '', '', '' ,2, 'assets/images/options/noiseprotection.jpg', 'Шумозащита', '', true, true, false, 'showed', []),
+                new Option('antiburglary-common', '', '', '', 2, ' assets/images/options/antiburglary.jpg', 'Противо - взломность', '', true, true, false, 'showed', [], true, false),
+                new Option('energyefficient-common', '', '', '', 2, 'assets/images/options/energyefficient.jpg', 'Энерго - эффективность', '', true, true, false, 'showed', [], true, false),
+                new Option('noiseprotection-common', '', '', '' ,2, 'assets/images/options/noiseprotection.jpg', 'Шумозащита', '', true, true, false, 'showed', [], true, false),
             ];
             this.options = options;
 
@@ -588,7 +594,9 @@ export class Settings {
                             option.isCommon,
                             option.isOnlyOneFromGroup,
                             option.visibility,
-                            option.dependsOn),
+                            option.dependsOn,
+                            option.isActive,
+                            option.isSuboption),
                             settingsDynamic
                     )
                 );
@@ -597,7 +605,7 @@ export class Settings {
     }
 
     public getEmptyOption(numpos: number): Option {
-        const res = new Option('option-empty', '', '', '', numpos, 'assets/images/options/empty.jpg', '', '', false, false, false, '', []);
+        const res = new Option('option-empty', '', '', '', numpos, 'assets/images/options/empty.jpg', '', '', false, false, false, '', [], true, false);
         return res;
     }
 

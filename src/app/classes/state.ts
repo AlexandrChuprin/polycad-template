@@ -115,11 +115,13 @@ export class State {
             this.settings.options = [...settingsPolycad.options];
             SettingsPolycad.options = [];
             this.settings.options.forEach(o => {
-                if (o.name) {
+                if (o.name && !o.group) {
+                    const suboptions = this.settings.options.filter(_ => _.isSuboption && _.dependsOn.includes(o.id))
                     const ioption = <IOption>{
                         idoption: o.id,
-                        suboptions: [],
-                        name: o.name
+                        suboptions: suboptions.map(_ => <IOption>{idoption: _.id, name: _.name, description: _.description}),
+                        name: o.name,
+                        description: o.description
                     };
                     SettingsPolycad.options.push(ioption);
                 }
