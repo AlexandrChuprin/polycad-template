@@ -1,6 +1,6 @@
 
 .options-container {
-    max-height: 510px;
+    max-height: 610px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -8,7 +8,9 @@
 }
 
 .option-container-item {
-    line-height: 60px;
+    // line-height: 60px;
+    min-width: 190px;
+    max-width: 190px;
 }
 
 .options-container-subitem {
@@ -48,6 +50,7 @@
         max-width: 200px;
         margin-right: 10px;
         word-break: break-word;
+        min-width: 95px;
     }
     .options-container-subitem {
         min-width: 150px;

@@ -24,20 +24,25 @@
             
             <div class="flex-1 no-mobile" style="min-width: 60px; max-width: 60px;"></div> -->
             <div class="border flex-1 options-container">
-                <div class="flex-1 option-container-item"
-                    [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
-                    [ngStyle]="{'max-height': option.suboptions ? '120px' : '40px'}"
-                    *ngFor="let option of options; let idx = index;">
-                    <input type="checkbox" id="{{option.idoption}}" name="options" value="{{option.idoption}}" (change)="setOption(option.idoption, $event.target.checked)" [checked]="isChecked(option.idoption)">
-                    <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label">{{option.name}}</label>
-                    <div *ngIf="option.suboptions" class="flex-col">
-                        <div *ngFor="let suboption of option.suboptions; let idxs = index;"
-                            class="flex-1 options-container-subitem"
-                            [ngClass]="isChecked(suboption.idoption) ? 'option-text-selected' : 'option-text'"
-                        >
-                            <input type="radio" id="{{suboption.idoption}}" name="suboptions-{{option.idoption}}" value="{{suboption.idoption}}" (change)="setOption(suboption.idoption, $event.target.checked)" [checked]="isChecked(suboption.idoption)">
-                            <label for="{{suboption.idoption}}" style="cursor: pointer;" class="option-label">{{suboption.name}}</label>
-                            <span style="cursor: pointer;" class="option-label">{{suboption.description}}</span>
+                <div class="flex-1" *ngFor="let optionsGroupKey of optionsGroupen.keys()">
+                    <div style="margin-top: 20px;">{{optionsGroupKey}}:</div>
+                    <div class="flex-1 flex-row" style="flex-wrap: wrap; max-width: 580px; margin-top: 10px;">
+                        <div class="flex-1 option-container-item"
+                            [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
+                            [ngStyle]="{'max-height': option.suboptions ? '120px' : '40px'}"
+                            *ngFor="let option of optionsGroupen.get(optionsGroupKey); let idx = index;">
+                            <input type="checkbox" id="{{option.idoption}}" name="options" value="{{option.idoption}}" (change)="setOption(option.idoption, $event.target.checked)" [checked]="isChecked(option.idoption)">
+                            <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label">{{option.name}}</label>
+                            <div *ngIf="option.suboptions" class="flex-col">
+                                <div *ngFor="let suboption of option.suboptions; let idxs = index;"
+                                    class="flex-1 options-container-subitem"
+                                    [ngClass]="isChecked(suboption.idoption) ? 'option-text-selected' : 'option-text'"
+                                >
+                                    <input type="radio" id="{{suboption.idoption}}" name="suboptions-{{option.idoption}}" value="{{suboption.idoption}}" (change)="setOption(suboption.idoption, $event.target.checked)" [checked]="isChecked(suboption.idoption)">
+                                    <label for="{{suboption.idoption}}" style="cursor: pointer;" class="option-label">{{suboption.name}}</label>
+                                    <span style="cursor: pointer;" class="option-label">{{suboption.description}}</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

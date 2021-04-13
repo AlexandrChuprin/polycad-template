@@ -15,6 +15,31 @@ export class OptionsComponent extends CommonComponent {
     return SettingsPolycad.options;
   }
 
+  get optionsGroupen() {
+    const groups = [];
+
+    SettingsPolycad.options
+    .forEach(_ => {
+      if (!groups.includes(_.description)) {
+        groups.push(_.description);
+      }
+    });
+
+    const map = new Map();
+    for (let group of groups) {
+      map.set(group, SettingsPolycad.options.filter(_ => _.description === group))
+    }
+    // return map
+
+    // const map = [];
+    // for (let group of groups) {
+    //   map.push(SettingsPolycad.options.filter(_ => _.description === group));
+    // }
+
+    console.log(map.get(groups[0]));
+    return map;
+  }
+
   setOption(idoption: string, checked: boolean) {
     console.log(`option: ${idoption}, checked: ${checked}`);
     if (!checked) {
