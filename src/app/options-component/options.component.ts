@@ -36,7 +36,7 @@ export class OptionsComponent extends CommonComponent {
     //   map.push(SettingsPolycad.options.filter(_ => _.description === group));
     // }
 
-    console.log(map.get(groups[0]));
+    // console.log(map.get(groups[0]));
     return map;
   }
 
