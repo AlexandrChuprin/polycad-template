@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterViewChecked, Component, OnInit } from '@angular/core';
 import { SetOption } from '../actions/actions';
 import { SettingsPolycad } from '../classes/settings/setings-polycad';
 import { CommonComponent } from '../common/common.component';
@@ -8,36 +8,55 @@ import { CommonComponent } from '../common/common.component';
   templateUrl: './options.component.html',
   styleUrls: ['./options.component.scss']
 })
-export class OptionsComponent extends CommonComponent {
+export class OptionsComponent extends CommonComponent implements AfterViewChecked {
+
   title = 'Опции';
   comment = 'выберите необходимые опции';
+
+  groupenMap = null;
+
   get options() {
     return SettingsPolycad.options;
   }
 
-  get optionsGroupen() {
-    const groups = [];
-
-    SettingsPolycad.options
-    .forEach(_ => {
-      if (!groups.includes(_.description)) {
-        groups.push(_.description);
-      }
-    });
-
-    const map = new Map();
-    for (let group of groups) {
-      map.set(group, SettingsPolycad.options.filter(_ => _.description === group))
+  get optionsGroupenKeys() {
+    // console.log(`optionsGroupen`);
+    if (this.groupenMap) {
+      return Array.from(this.groupenMap.keys());
+    } else {
+      return [];
     }
-    // return map
+  }
+  getOptionsGroupenValue(key) {
+    // console.log(`optionsGroupen`);
+    return this.groupenMap.get(key);
+  }
 
-    // const map = [];
-    // for (let group of groups) {
-    //   map.push(SettingsPolycad.options.filter(_ => _.description === group));
-    // }
+  ngOnInit() {
+    super.ngOnInit();
+    setTimeout(() => {
+      const groups = [];
 
-    // console.log(map.get(groups[0]));
-    return map;
+      SettingsPolycad.options
+      .forEach(_ => {
+        if (!groups.includes(_.description)) {
+          groups.push(_.description);
+        }
+      });
+  
+      const groupenMap = new Map();
+      for (let group of groups) {
+        groupenMap.set(group, SettingsPolycad.options.filter(_ => _.description === group))
+      }
+  
+      this.groupenMap = groupenMap;
+    }, 100);
+    
+  }
+
+  ngAfterViewChecked(): void {
+
+    // console.log('ngAfterViewChecked');
   }
 
   setOption(idoption: string, checked: boolean) {

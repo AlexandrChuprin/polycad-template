@@ -1,3 +1,4 @@
+
 <ng-container *ngIf="state">
     <div class="title-2">
         <span class="title-text-2">
@@ -5,32 +6,15 @@
         </span>
     </div>
     <div class='flex-row'>
-        <!-- <div class="border flex-1 title-prev">
-            <span class="title-text-prev" (click)="goToPage(1)">
-                Конструктив
-            </span>
-        </div>
-        <div class="border flex-1 title-prev">
-            <span class="title-text-prev" (click)="goToPage(2)">
-                Цвета
-            </span>
-        </div> -->
         <div class="border flex-1 flex-row-wrap common-card">
-            <!-- <div class="border flex-1 title">
-                <span class="title-text">
-                    {{title}}
-                </span>
-            </div>
-            
-            <div class="flex-1 no-mobile" style="min-width: 60px; max-width: 60px;"></div> -->
-            <div class="border flex-1 options-container">
-                <div class="flex-1" *ngFor="let optionsGroupKey of optionsGroupen.keys()">
+            <div class="border flex-1 options-container" *ngIf="groupenMap">
+                <div class="flex-1" *ngFor="let optionsGroupKey of optionsGroupenKeys">
                     <div style="margin-top: 20px;">{{optionsGroupKey}}:</div>
                     <div class="flex-1 flex-row" style="flex-wrap: wrap; max-width: 580px; margin-top: 10px;">
                         <div class="flex-1 option-container-item"
                             [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
                             [ngStyle]="{'max-height': option.suboptions ? '120px' : '40px'}"
-                            *ngFor="let option of optionsGroupen.get(optionsGroupKey); let idx = index;">
+                            *ngFor="let option of getOptionsGroupenValue(optionsGroupKey); let idx = index;">
                             <input type="checkbox" id="{{option.idoption}}" name="options" value="{{option.idoption}}" (change)="setOption(option.idoption, $event.target.checked)" [checked]="isChecked(option.idoption)">
                             <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label">{{option.name}}</label>
                             <div *ngIf="option.suboptions" class="flex-col">
@@ -48,11 +32,6 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="border flex-1 title-next">
-            <span class="title-text-next" (click)="goToPage(4)">
-                Профильная система
-            </span>
-        </div> -->
     </div>
 </ng-container>
 <div class="mobile-border"></div>
