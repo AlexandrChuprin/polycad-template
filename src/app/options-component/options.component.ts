@@ -85,4 +85,17 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
     return this.state.simpleJSON.idoptions.indexOf(idoption) > -1;
   }
 
+  getOptionNameStyle(idoption: string) {
+    const option = this.options.find(_ => _.idoption === idoption);
+    if (option && option.disabledOpenTypes) {
+      const openTypes = this.state.simpleJSON.fields.map(_ => _.open_type);
+      openTypes.push(...this.state.simpleJSON.fields_door.map(_ => _.open_type));
+      const isOptionAvalibleWithThisOpenTypes = openTypes.filter(_ => !option.disabledOpenTypes.includes(_)).length > 0;
+      if (!isOptionAvalibleWithThisOpenTypes) {
+        return {'text-decoration': 'line-through'}
+      }
+    }
+    return {};
+  }
+
 }

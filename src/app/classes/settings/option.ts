@@ -15,7 +15,8 @@ export class Option {
         public visibility: string,
         public dependsOn: string[],
         public isActive: boolean,
-        public isSuboption: boolean) {
+        public isSuboption: boolean,
+        public disabledOpenTypes: string[]) {
 
     }
 }

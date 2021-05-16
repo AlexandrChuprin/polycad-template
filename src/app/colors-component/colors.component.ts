@@ -14,6 +14,16 @@ export class ColorsComponent extends CommonComponent {
   get colors() {
     return SettingsPolycad.colors;
   }
+
+  ngOnInit() {
+    super.ngOnInit();
+    if (this.colors.length) {
+      const color = this.colors[0].id;
+      this.stateProvider.process(new SetColorIn(color));
+      this.stateProvider.process(new SetColorOut(color));
+    }
+  }
+
   setColorOut(color: string) {
     this.stateProvider.process(new SetColorOut(color));
   }

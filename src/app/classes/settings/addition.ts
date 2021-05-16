@@ -7,7 +7,8 @@ export class Addition {
         public id: string,
         public type: string,
         public name: string,
-        public image: string
+        public image: string,
+        public disabledOpenTypes: string[]
     ) {
 
     }

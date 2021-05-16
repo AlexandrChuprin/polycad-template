@@ -121,7 +121,8 @@ export class State {
                         idoption: o.id,
                         suboptions: suboptions.map(_ => <IOption>{idoption: _.id, name: _.name, description: _.description}),
                         name: o.name,
-                        description: o.description
+                        description: o.description,
+                        disabledOpenTypes: o.disabledOpenTypes
                     };
                     SettingsPolycad.options.push(ioption);
                 }

@@ -16,7 +16,7 @@
                             [ngStyle]="{'max-height': option.suboptions ? '120px' : '40px'}"
                             *ngFor="let option of getOptionsGroupenValue(optionsGroupKey); let idx = index;">
                             <input type="checkbox" id="{{option.idoption}}" name="options" value="{{option.idoption}}" (change)="setOption(option.idoption, $event.target.checked)" [checked]="isChecked(option.idoption)">
-                            <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label">{{option.name}}</label>
+                            <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label" [ngStyle]="getOptionNameStyle(option.idoption)">{{option.name}}</label>
                             <div *ngIf="option.suboptions" class="flex-col">
                                 <div *ngFor="let suboption of option.suboptions; let idxs = index;"
                                     class="flex-1 options-container-subitem"

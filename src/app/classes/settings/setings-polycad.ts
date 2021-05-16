@@ -258,5 +258,6 @@ export interface IOption {
     name: string;
     idoption: string;
     description: string;
+    disabledOpenTypes: string[];
     suboptions: IOption[];
 }
