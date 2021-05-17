@@ -115,14 +115,19 @@ export class State {
             this.settings.options = [...settingsPolycad.options];
             SettingsPolycad.options = [];
             this.settings.options.forEach(o => {
-                if (o.name && !o.isSuboption) { // && !o.group) {
+                if (o.name && !o.isSuboption && !o.id.includes('empty') && o.group !== 'fill') { // && !o.group) {
                     const suboptions = this.settings.options.filter(_ => _.isSuboption && _.dependsOn && _.dependsOn.includes(o.id))
                     const ioption = <IOption>{
                         idoption: o.id,
                         suboptions: suboptions.map(_ => <IOption>{idoption: _.id, name: _.name, description: _.description}),
                         name: o.name,
                         description: o.description,
-                        disabledOpenTypes: o.disabledOpenTypes
+                        disabledOpenTypes: o.disabledOpenTypes,
+                        image: o.image,
+                        checked: o.checked,
+                        isActive: o.isActive,
+                        visibility: o.visibility,
+                        isOnlyOneFromGroup: o.isOnlyOneFromGroup
                     };
                     SettingsPolycad.options.push(ioption);
                 }

@@ -1,4 +1,5 @@
 import { AfterViewChecked, Component, OnInit } from '@angular/core';
+import { isUndefined } from 'util';
 import { SetOption } from '../actions/actions';
 import { SettingsPolycad } from '../classes/settings/setings-polycad';
 import { CommonComponent } from '../common/common.component';
@@ -16,7 +17,7 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
   groupenMap = null;
 
   get options() {
-    return SettingsPolycad.options;
+    return SettingsPolycad.options.filter(_ => (_.isActive || isUndefined(_.isActive)));
   }
 
   get optionsGroupenKeys() {
@@ -37,7 +38,7 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
     setTimeout(() => {
       const groups = [];
 
-      SettingsPolycad.options
+      this.options
       .forEach(_ => {
         if (!groups.includes(_.description)) {
           groups.push(_.description);
@@ -50,6 +51,8 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
       }
   
       this.groupenMap = groupenMap;
+
+      this.options.forEach(_ => this.setOption(_.idoption, _.checked));
     }, 100);
     
   }

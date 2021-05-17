@@ -260,4 +260,9 @@ export interface IOption {
     description: string;
     disabledOpenTypes: string[];
     suboptions: IOption[];
+    image: string;
+    checked: boolean;
+    isActive: boolean;
+    visibility: string;
+    isOnlyOneFromGroup: boolean;
 }
