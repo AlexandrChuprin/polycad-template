@@ -265,4 +265,5 @@ export interface IOption {
     isActive: boolean;
     visibility: string;
     isOnlyOneFromGroup: boolean;
+    isCommon: boolean;
 }

@@ -16,6 +16,10 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
 
   groupenMap = null;
 
+  optionsToCheck = [];
+  optionsCommon = [];
+  optionsWithSuboptions = [];
+
   get options() {
     return SettingsPolycad.options.filter(_ => (_.isActive || isUndefined(_.isActive)));
   }
@@ -35,25 +39,35 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
 
   ngOnInit() {
     super.ngOnInit();
-    setTimeout(() => {
-      const groups = [];
+    // setTimeout(() => {
+    //   const groups = [];
 
-      this.options
-      .forEach(_ => {
-        if (!groups.includes(_.description)) {
-          groups.push(_.description);
-        }
-      });
+    //   this.options
+    //   .forEach(_ => {
+    //     if (!groups.includes(_.description)) {
+    //       groups.push(_.description);
+    //     }
+    //   });
   
-      const groupenMap = new Map();
-      for (let group of groups) {
-        groupenMap.set(group, SettingsPolycad.options.filter(_ => _.description === group))
+    //   const groupenMap = new Map();
+    //   for (let group of groups) {
+    //     groupenMap.set(group, SettingsPolycad.options.filter(_ => _.description === group))
+    //   }
+  
+    //   this.groupenMap = groupenMap;
+
+    //   this.options.forEach(_ => this.setOption(_.idoption, _.checked));
+    // }, 100);
+
+    this.options.forEach(o => {
+      if (o.suboptions.length) {
+        this.optionsWithSuboptions.push(o);
+      } else if (o.isCommon) {
+        this.optionsCommon.push(o);
+      } else {
+        this.optionsToCheck.push(o);
       }
-  
-      this.groupenMap = groupenMap;
-
-      this.options.forEach(_ => this.setOption(_.idoption, _.checked));
-    }, 100);
+    });
     
   }
 
