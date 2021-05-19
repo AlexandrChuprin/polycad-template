@@ -5,11 +5,11 @@
             {{title}}
         </span>
     </div>
-    <div class='flex-col'>
-        <div class='flex-1 flex-row'>
+    <div class='flex-row'>
+        <div class='flex-1 flex-col'>
             <div class='flex-1 flex-col'>
-                <!--options with suboptions-->
                 <div class="border flex-1 options-container" *ngIf="optionsWithSuboptions">
+                
             
                     <div class="flex-1 option-container-item"
                         [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
@@ -33,8 +33,9 @@
 
             </div>
             <div class='flex-1 flex-col'>
-                <!--options checked by default-->
                 <div class="border flex-1 options-container" *ngIf="optionsCommon">
+                
+                
             
                     <div class="flex-1 option-container-item"
                         [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
@@ -59,8 +60,8 @@
             </div>
         </div>
         <div class='flex-1 flex-col common-card'>
-            <!--options for check-->
             <div class="border flex-1 options-container" *ngIf="optionsToCheck">
+            
         
                 <div class="flex-1 option-container-item"
                     [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
