@@ -14,6 +14,7 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
   title = 'Опции';
   comment = 'выберите необходимые опции';
 
+  isInited = false;
   groupenMap = null;
 
   optionsToCheck = [];
@@ -64,12 +65,17 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
         this.optionsWithSuboptions.push(o);
       } else if (o.isCommon) {
         this.optionsCommon.push(o);
-        this.optionsCommon.forEach(_ => this.setOption(_.idoption, _.checked));
       } else {
         this.optionsToCheck.push(o);
       }
     });
-    
+    this.optionsCommon.forEach(_ => this.setOption(_.idoption, _.checked));
+    this.optionsWithSuboptions.forEach(_ => {
+      this.setOption(_.idoption, _.checked);
+      _.suboptions.forEach(so => this.setOption(so.idoption, so.checked));
+    });
+
+    this.isInited = true;
   }
 
   ngAfterViewChecked(): void {
@@ -79,6 +85,12 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
 
   setOption(idoption: string, checked: boolean) {
     // console.log(`option: ${idoption}, checked: ${checked}`);
+    // if (this.isInited) {
+    //   const option = this.options.find(_ => _.idoption === idoption);
+    //   if (option && option.isCommon) {
+    //     return;
+    //   }
+    // }
     if (!checked) {
       let o = this.options.find(_ => _.idoption === idoption);
       if (o && o.suboptions) {
