@@ -67,9 +67,20 @@ export class CommonCardComponent extends CommonComponent {
 
   get options() { 
     const res = this.state.simpleJSON.idoptions
-      .map(idoption => this.state.settings.options.find(_ => _.id === idoption).name)
+      .map(idoption => this.getOptions(idoption) ?  this.getOptions(idoption).name : null)
+        .filter(_ => _ != null)
       .join(' \/ ');
     return res;
+  }
+
+  getOptions(idoption: string) {
+    return this.state.settings.options
+        .find(_ => _.id === idoption && (_.isSuboption || !this.isRootOption(idoption)))
+  }
+
+  isRootOption(idoption: string) {
+    const root = this.state.settings.options.find(x=>x.dependsOn && x.dependsOn.includes(idoption));
+    return root != null;
   }
 
   get colorsInfo() {

@@ -11,13 +11,14 @@
                 <div class="border flex-1 options-container" *ngIf="optionsWithSuboptions">
                 
             
-                    <div class="flex-1 option-container-item"
+                    <div class="flex-1"
                         *ngFor="let option of optionsWithSuboptions; let idx = index;"
-                        [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
-                        [ngStyle]="{'max-height': option.suboptions && option.suboptions.length ? '120px' : '30px'}"
+                        class="option-text-selected"
+                        [ngStyle]="{'max-height': '120px'}"
+                        style="min-height: 30px;"
                     >
-                        <input type="checkbox" id="{{option.idoption}}" name="options" value="{{option.idoption}}" (change)="setOption(option.idoption, $event.target.checked)" [checked]="isChecked(option.idoption)">
-                        <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label" [ngStyle]="getOptionNameStyle(option.idoption)">{{option.name}}</label>
+                        <input type="checkbox" id="{{option.idoption}}" name="options" disabled="true" value="{{option.idoption}}" [checked]="true">
+                        <label for="{{option.idoption}}" style="cursor: pointer; line-height: 30px;" class="option-label" [ngStyle]="getOptionNameStyle(option.idoption)">{{option.name}}</label>
                         <div *ngIf="option.suboptions" class="flex-col">
                             <div *ngFor="let suboption of option.suboptions; let idxs = index;"
                                 class="flex-1 options-container-subitem"
@@ -38,10 +39,11 @@
                 
                 
             
-                    <div class="flex-1 option-container-item"
+                    <div class="flex-1"
                         *ngFor="let option of optionsCommon; let idx = index;"
                         [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
                         [ngStyle]="{'max-height': option.suboptions && option.suboptions.length ? '120px' : '30px'}"
+                        style="min-height: 30px;"
                     >
                         <input type="checkbox" id="{{option.idoption}}" disabled="true" name="options" value="{{option.idoption}}" [checked]="true">
                         <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label" [ngStyle]="getOptionNameStyle(option.idoption)">{{option.name}}</label>
@@ -65,13 +67,14 @@
             <div class="border flex-1 options-container" *ngIf="optionsToCheck">
             
         
-                <div class="flex-1 option-container-item"
+                <div class="flex-1"
                     *ngFor="let option of optionsToCheck; let idx = index;"
                     [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
                     [ngStyle]="{'max-height': option.suboptions && option.suboptions.length ? '120px' : '30px'}"
+                    style="min-height: 30px;"
                 >
                     <input type="checkbox" id="{{option.idoption}}" name="options" value="{{option.idoption}}" (change)="setOption(option.idoption, $event.target.checked)" [checked]="isChecked(option.idoption)">
-                    <label for="{{option.idoption}}" style="cursor: pointer;" class="option-label" [ngStyle]="getOptionNameStyle(option.idoption)">{{option.name}}</label>
+                    <label for="{{option.idoption}}" style="cursor: pointer; line-height: 30px;" class="option-label" [ngStyle]="getOptionNameStyle(option.idoption)">{{option.name}}</label>
                     <div *ngIf="option.suboptions" class="flex-col">
                         <div *ngFor="let suboption of option.suboptions; let idxs = index;"
                             class="flex-1 options-container-subitem"

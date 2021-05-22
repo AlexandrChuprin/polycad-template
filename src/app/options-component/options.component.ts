@@ -61,7 +61,7 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
     // }, 100);
 
     this.options.forEach(o => {
-      if (o.suboptions.length) {
+      if (o.suboptions.length && o.isCommon) {
         this.optionsWithSuboptions.push(o);
       } else if (o.isCommon) {
         this.optionsCommon.push(o);
@@ -72,7 +72,11 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
     this.optionsCommon.forEach(_ => this.setOption(_.idoption, _.checked));
     this.optionsWithSuboptions.forEach(_ => {
       this.setOption(_.idoption, _.checked);
-      _.suboptions.forEach(so => this.setOption(so.idoption, so.checked));
+      if (_.suboptions && _.suboptions.length && _.suboptions.find(so => so.checked) != null) {
+        _.suboptions.forEach(so => this.setOption(so.idoption, so.checked));
+      } else if (_.suboptions && _.suboptions.length) {
+        this.setOption(_.suboptions[0].idoption, true);
+      }
     });
 
     this.isInited = true;
@@ -85,12 +89,7 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
 
   setOption(idoption: string, checked: boolean) {
     // console.log(`option: ${idoption}, checked: ${checked}`);
-    // if (this.isInited) {
-    //   const option = this.options.find(_ => _.idoption === idoption);
-    //   if (option && option.isCommon) {
-    //     return;
-    //   }
-    // }
+
     if (!checked) {
       let o = this.options.find(_ => _.idoption === idoption);
       if (o && o.suboptions) {
