@@ -266,4 +266,5 @@ export interface IOption {
     visibility: string;
     isOnlyOneFromGroup: boolean;
     isCommon: boolean;
+    numpos: number;
 }

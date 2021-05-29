@@ -22,7 +22,9 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
   optionsWithSuboptions = [];
 
   get options() {
-    return SettingsPolycad.options.filter(_ => (_.isActive || isUndefined(_.isActive)));
+    const filtered = SettingsPolycad.options.filter(_ => (_.isActive || isUndefined(_.isActive)));
+    const sorted = filtered.sort((a, b) => a.numpos - b.numpos);
+    return sorted.slice();
   }
 
   get optionsGroupenKeys() {
@@ -76,6 +78,27 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
         _.suboptions.forEach(so => this.setOption(so.idoption, so.checked));
       } else if (_.suboptions && _.suboptions.length) {
         this.setOption(_.suboptions[0].idoption, true);
+      }
+    });
+
+    this.optionsWithSuboptions.sort((a, b) => a.numpos - b.numpos);
+    this.optionsWithSuboptions.forEach(o => {
+      if (o.suboptions) {
+        o.suboptions.sort((a, b) => a.numpos - b.numpos);
+      }
+    });
+
+    this.optionsCommon.sort((a, b) => a.numpos - b.numpos);
+    this.optionsCommon.forEach(o => {
+      if (o.suboptions) {
+        o.suboptions.sort((a, b) => a.numpos - b.numpos);
+      }
+    });
+
+    this.optionsToCheck.sort((a, b) => a.numpos - b.numpos);
+    this.optionsToCheck.forEach(o => {
+      if (o.suboptions) {
+        o.suboptions.sort((a, b) => a.numpos - b.numpos);
       }
     });
 

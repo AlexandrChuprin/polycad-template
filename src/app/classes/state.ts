@@ -129,7 +129,8 @@ export class State {
                         isActive: o.isActive,
                         visibility: o.visibility,
                         isOnlyOneFromGroup: o.isOnlyOneFromGroup,
-                        isCommon: o.isCommon
+                        isCommon: o.isCommon,
+                        numpos: isNaN(+o.numpos) ? 0 : +o.numpos,
                     };
                     SettingsPolycad.options.push(ioption);
                 }
