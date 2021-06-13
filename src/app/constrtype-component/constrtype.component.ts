@@ -19,6 +19,7 @@ import { StateProviderService } from '../state-provider.service';
 export class ConstrtypeComponent extends CommonComponent implements OnInit, AfterContentInit, OnDestroy {
   @ViewChild('containerSVG', { static: true }) containerSVG;
   @ViewChild('containerSVGTemp', { static: true }) containerSVGTemp;
+  templates = [1, 2, 3, 21, 4, 6, 5, 7];
   modelIdxLast = 0;
   selectedSize = 0;
   cursorX = 0;
@@ -49,7 +50,8 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
         viewBox: ct.viewBox,
         width: ct.width,
         name: ct.name,
-        svg: this.sanitizer.bypassSecurityTrustHtml(ct.svg)
+        svg: this.sanitizer.bypassSecurityTrustHtml(ct.svg),
+        idtemplate: ct.idtemplate
       })
     });
     return data;
@@ -80,25 +82,26 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
 
   constructor(public stateProvider: StateProviderService, private sanitizer: DomSanitizer) {
     super(stateProvider);
+          
     this.constrtypes_ = [
-      {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-580, -200)" d="M580 230L580 200L604 200L604 230L580 230ZM582.06 228L601.94 228L601.94 202L582.06 202L582.06 228Z"></path>', name: 'Окно'},
-      {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-580, -254)" d="M580 284L580 255L604 255L604 284L580 284ZM593.03 282.07L601.94 282.07L601.94 256.93L593.03 256.93L593.03 282.07ZM582.06 282.07L590.97 282.07L590.97 256.93L582.06 256.93L582.06 282.07Z"></path>', name: 'Окно с импостом'},
-      {viewBox: '0 0 34 34', width: 34, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-575, -309)" d="M575 339L575 309L609 309L609 339L575 339ZM598.33 337L607 337L607 311L598.33 311L598.33 337ZM596.33 337L596.33 311L587.67 311L587.67 337L596.33 337ZM577 337L585.67 337L585.67 311L577 311L577 337Z"></path>', name: 'Окно с импостами'},
-      {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-584, -364)" d="M584 394L584 364L600 364L600 394L584 394ZM585.92 392L598.08 392L598.08 386.33L585.92 386.33L585.92 392ZM598.08 385L598.08 366L585.92 366L585.92 385L598.08 385Z"></path>', name: 'Дверь с импостом'},
-      {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -419)" d="M578 449L578 419L606 419L606 437L590.81 437L590.81 449L578 449ZM580.03 447L588.78 447L588.78 441.33L580.03 441.33L580.03 447ZM588.78 440L588.78 421L580.03 421L580.03 440L588.78 440ZM604.62 435.67L604.62 420.33L590.81 420.33L590.81 435.67L604.62 435.67Z"></path>', name: 'Балконный блок левый'},
-      {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -474)" d="M593.18 504L593.18 492L578 492L578 474L606 474L606 504L593.18 504ZM603.98 496.33L595.2 496.33L595.2 502L603.98 502L603.98 496.33ZM603.98 495L603.98 476L595.2 476L595.2 495L603.98 495ZM593.18 490.67L593.18 475.33L579.35 475.33L579.35 490.67L593.18 490.67Z"></path>', name: 'Балконный блок правый'},
-      {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -529)" d="M578 559L578 529L606 529L606 530.33L606 530.33L606 545.67L606 545.67L606 547L590.82 547L590.82 559L578 559ZM580.02 557L588.79 557L588.79 551.33L580.02 551.33L580.02 557ZM588.79 550L588.79 531L580.02 531L580.02 550L588.79 550ZM604.65 545.67L604.65 530.33L598.91 530.33L598.91 545.67L604.65 545.67ZM597.56 545.67L597.56 530.33L590.82 530.33L590.82 545.67L597.56 545.67Z"></path>', name: 'Балконный блок левый с импостом'},
-      {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -584)" d="M593.18 614L593.18 602L578 602L578 600.67L578 600.67L578 585.33L578 585.33L578 584L606 584L606 614L593.18 614ZM603.98 606.33L595.2 606.33L595.2 612L603.98 612L603.98 606.33ZM603.98 605L603.98 586L595.2 586L595.2 605L603.98 605ZM585.09 600.67L585.09 585.33L579.35 585.33L579.35 600.67L585.09 600.67ZM593.18 600.67L593.18 585.33L586.43 585.33L586.43 600.67L593.18 600.67Z"></path>', name: 'Балконный блок правый с импостом'}
+      {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-580, -200)" d="M580 230L580 200L604 200L604 230L580 230ZM582.06 228L601.94 228L601.94 202L582.06 202L582.06 228Z"></path>', name: 'Окно', idtemplate: '1'},
+      {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-580, -254)" d="M580 284L580 255L604 255L604 284L580 284ZM593.03 282.07L601.94 282.07L601.94 256.93L593.03 256.93L593.03 282.07ZM582.06 282.07L590.97 282.07L590.97 256.93L582.06 256.93L582.06 282.07Z"></path>', name: 'Окно с импостом', idtemplate: '2'},
+      {viewBox: '0 0 34 34', width: 34, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-575, -309)" d="M575 339L575 309L609 309L609 339L575 339ZM598.33 337L607 337L607 311L598.33 311L598.33 337ZM596.33 337L596.33 311L587.67 311L587.67 337L596.33 337ZM577 337L585.67 337L585.67 311L577 311L577 337Z"></path>', name: 'Окно с импостами', idtemplate: '3'},
+      {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-584, -364)" d="M584 394L584 364L600 364L600 394L584 394ZM585.92 392L598.08 392L598.08 386.33L585.92 386.33L585.92 392ZM598.08 385L598.08 366L585.92 366L585.92 385L598.08 385Z"></path>', name: 'Дверь с импостом', idtemplate: '21'},
+      {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -419)" d="M578 449L578 419L606 419L606 437L590.81 437L590.81 449L578 449ZM580.03 447L588.78 447L588.78 441.33L580.03 441.33L580.03 447ZM588.78 440L588.78 421L580.03 421L580.03 440L588.78 440ZM604.62 435.67L604.62 420.33L590.81 420.33L590.81 435.67L604.62 435.67Z"></path>', name: 'Балконный блок левый', idtemplate: '4'},
+      {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -474)" d="M593.18 504L593.18 492L578 492L578 474L606 474L606 504L593.18 504ZM603.98 496.33L595.2 496.33L595.2 502L603.98 502L603.98 496.33ZM603.98 495L603.98 476L595.2 476L595.2 495L603.98 495ZM593.18 490.67L593.18 475.33L579.35 475.33L579.35 490.67L593.18 490.67Z"></path>', name: 'Балконный блок правый', idtemplate: '6'},
+      {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -529)" d="M578 559L578 529L606 529L606 530.33L606 530.33L606 545.67L606 545.67L606 547L590.82 547L590.82 559L578 559ZM580.02 557L588.79 557L588.79 551.33L580.02 551.33L580.02 557ZM588.79 550L588.79 531L580.02 531L580.02 550L588.79 550ZM604.65 545.67L604.65 530.33L598.91 530.33L598.91 545.67L604.65 545.67ZM597.56 545.67L597.56 530.33L590.82 530.33L590.82 545.67L597.56 545.67Z"></path>', name: 'Балконный блок левый с импостом', idtemplate: '5'},
+      {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -584)" d="M593.18 614L593.18 602L578 602L578 600.67L578 600.67L578 585.33L578 585.33L578 584L606 584L606 614L593.18 614ZM603.98 606.33L595.2 606.33L595.2 612L603.98 612L603.98 606.33ZM603.98 605L603.98 586L595.2 586L595.2 605L603.98 605ZM585.09 600.67L585.09 585.33L579.35 585.33L579.35 600.67L585.09 600.67ZM593.18 600.67L593.18 585.33L586.43 585.33L586.43 600.67L593.18 600.67Z"></path>', name: 'Балконный блок правый с импостом', idtemplate: '7'}
     ];
-    this.changeTemplate(0);
+
+    this.changeTemplate(0, 1);
   }
 
-  changeTemplate(idx: number) {
+  changeTemplate(idx: number, idtemplate: number) {
     console.log('changeTemplate, idx = ', idx);
     this.constrtypes_.forEach(_ => _.svg = _.svg.replace('shp5', 'shp11'));
     this.constrtypes_[idx].svg = this.constrtypes_[idx].svg.replace('shp11', 'shp5');
-    const templates = [1, 2, 3, 21, 4, 6, 5, 7];
-    const template = templates[idx] as Template;
+    const template = this.templates[idx] as Template;
     this.process(new SelectTemplate(template));
   }
 
@@ -150,6 +153,27 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
 
 
         try {
+          
+          this.constrtypes_ = [
+            {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-580, -200)" d="M580 230L580 200L604 200L604 230L580 230ZM582.06 228L601.94 228L601.94 202L582.06 202L582.06 228Z"></path>', name: 'Окно', idtemplate: '1'},
+            {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-580, -254)" d="M580 284L580 255L604 255L604 284L580 284ZM593.03 282.07L601.94 282.07L601.94 256.93L593.03 256.93L593.03 282.07ZM582.06 282.07L590.97 282.07L590.97 256.93L582.06 256.93L582.06 282.07Z"></path>', name: 'Окно с импостом', idtemplate: '2'},
+            {viewBox: '0 0 34 34', width: 34, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-575, -309)" d="M575 339L575 309L609 309L609 339L575 339ZM598.33 337L607 337L607 311L598.33 311L598.33 337ZM596.33 337L596.33 311L587.67 311L587.67 337L596.33 337ZM577 337L585.67 337L585.67 311L577 311L577 337Z"></path>', name: 'Окно с импостами', idtemplate: '3'},
+            {viewBox: '0 0 24 34', width: 20, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-584, -364)" d="M584 394L584 364L600 364L600 394L584 394ZM585.92 392L598.08 392L598.08 386.33L585.92 386.33L585.92 392ZM598.08 385L598.08 366L585.92 366L585.92 385L598.08 385Z"></path>', name: 'Дверь с импостом', idtemplate: '21'},
+            {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -419)" d="M578 449L578 419L606 419L606 437L590.81 437L590.81 449L578 449ZM580.03 447L588.78 447L588.78 441.33L580.03 441.33L580.03 447ZM588.78 440L588.78 421L580.03 421L580.03 440L588.78 440ZM604.62 435.67L604.62 420.33L590.81 420.33L590.81 435.67L604.62 435.67Z"></path>', name: 'Балконный блок левый', idtemplate: '4'},
+            {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -474)" d="M593.18 504L593.18 492L578 492L578 474L606 474L606 504L593.18 504ZM603.98 496.33L595.2 496.33L595.2 502L603.98 502L603.98 496.33ZM603.98 495L603.98 476L595.2 476L595.2 495L603.98 495ZM593.18 490.67L593.18 475.33L579.35 475.33L579.35 490.67L593.18 490.67Z"></path>', name: 'Балконный блок правый', idtemplate: '6'},
+            {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -529)" d="M578 559L578 529L606 529L606 530.33L606 530.33L606 545.67L606 545.67L606 547L590.82 547L590.82 559L578 559ZM580.02 557L588.79 557L588.79 551.33L580.02 551.33L580.02 557ZM588.79 550L588.79 531L580.02 531L580.02 550L588.79 550ZM604.65 545.67L604.65 530.33L598.91 530.33L598.91 545.67L604.65 545.67ZM597.56 545.67L597.56 530.33L590.82 530.33L590.82 545.67L597.56 545.67Z"></path>', name: 'Балконный блок левый с импостом', idtemplate: '5'},
+            {viewBox: '0 0 32 34', width: 30, svg: '<path fill-rule="evenodd" class="shp11" transform="translate(-578, -584)" d="M593.18 614L593.18 602L578 602L578 600.67L578 600.67L578 585.33L578 585.33L578 584L606 584L606 614L593.18 614ZM603.98 606.33L595.2 606.33L595.2 612L603.98 612L603.98 606.33ZM603.98 605L603.98 586L595.2 586L595.2 605L603.98 605ZM585.09 600.67L585.09 585.33L579.35 585.33L579.35 600.67L585.09 600.67ZM593.18 600.67L593.18 585.33L586.43 585.33L586.43 600.67L593.18 600.67Z"></path>', name: 'Балконный блок правый с импостом', idtemplate: '7'}
+          ];
+
+          this.constrtypes_ = this.constrtypes_.filter(ct => {
+            const prodtype = this.state.settings.prodtypes.find(pt => pt.idtemplate == ct.idtemplate);
+            return prodtype !== undefined;
+          });
+
+          this.templates = this.templates.filter(t => {
+            const prodtype = this.state.settings.prodtypes.find(pt => pt.idtemplate == t+'');
+            return prodtype !== undefined;
+          });
 
           this.drawOptions = new DrawOptions(false, true);
           this.viewGraphics = new ViewGraphics('',
@@ -484,8 +508,9 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
 
 }
 interface ICT {
-  viewBox: string,
-  width: number,
-  svg: string,
-  name: string
+  viewBox: string;
+  width: number;
+  svg: string;
+  name: string;
+  idtemplate: string;
 }

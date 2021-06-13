@@ -16,7 +16,8 @@ export class Option {
         public dependsOn: string[],
         public isActive: boolean,
         public isSuboption: boolean,
-        public disabledOpenTypes: string[]) {
+        public disabledOpenTypes: string[],
+        public disabledProducts: string[]) {
 
     }
 }

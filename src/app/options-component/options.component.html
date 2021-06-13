@@ -8,11 +8,11 @@
     <div class='flex-row common-card'>
         <div class='flex-1 flex-col'>
             <div class='flex-1 flex-col'>
-                <div class="border flex-1 options-container" *ngIf="optionsWithSuboptions">
+                <div class="border flex-1 options-container" *ngIf="optionsWithSuboptions_">
                 
             
                     <div class="flex-1"
-                        *ngFor="let option of optionsWithSuboptions; let idx = index;"
+                        *ngFor="let option of optionsWithSuboptions_; let idx = index;"
                         class="option-text-selected"
                         [ngStyle]="{'max-height': '120px'}"
                         style="min-height: 30px;"
@@ -35,12 +35,12 @@
 
             </div>
             <div class='flex-1 flex-col'>
-                <div class="border flex-1 options-container" *ngIf="optionsCommon">
+                <div class="border flex-1 options-container" *ngIf="optionsCommon_">
                 
                 
             
                     <div class="flex-1"
-                        *ngFor="let option of optionsCommon; let idx = index;"
+                        *ngFor="let option of optionsCommon_; let idx = index;"
                         [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
                         [ngStyle]="{'max-height': option.suboptions && option.suboptions.length ? '120px' : '30px'}"
                         style="min-height: 30px;"
@@ -64,11 +64,11 @@
             </div>
         </div>
         <div class='flex-1 flex-col' style="margin-left: 30px;">
-            <div class="border flex-1 options-container" *ngIf="optionsToCheck">
+            <div class="border flex-1 options-container" *ngIf="optionsToCheck_">
             
         
                 <div class="flex-1"
-                    *ngFor="let option of optionsToCheck; let idx = index;"
+                    *ngFor="let option of optionsToCheck_; let idx = index;"
                     [ngClass]="isChecked(option.idoption) ? 'option-text-selected' : 'option-text'"
                     [ngStyle]="{'max-height': option.suboptions && option.suboptions.length ? '120px' : '30px'}"
                     style="min-height: 30px;"

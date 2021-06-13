@@ -111,6 +111,18 @@ export class State {
         if (settingsPolycad.additions && settingsPolycad.additions instanceof Array) {
             this.settings.additions = [...settingsPolycad.additions];
         }
+
+        if (settingsPolycad.visibleWindowTypes && settingsPolycad.visibleWindowTypes instanceof Array) {
+            this.settings.visibleWindowTypes = [...settingsPolycad.visibleWindowTypes];
+        } else {
+            this.settings.visibleWindowTypes = [];
+        }
+        if (settingsPolycad.windowTypesOpenTypes && settingsPolycad.windowTypesOpenTypes instanceof Array) {
+            this.settings.windowTypesOpenTypes = [...settingsPolycad.windowTypesOpenTypes];
+        } else {
+            this.settings.windowTypesOpenTypes = [];
+        }
+
         if (settingsPolycad.options && settingsPolycad.options instanceof Array) {
             this.settings.options = [...settingsPolycad.options];
             SettingsPolycad.options = [];
@@ -124,6 +136,7 @@ export class State {
                         name: o.name,
                         description: o.description,
                         disabledOpenTypes: o.disabledOpenTypes,
+                        disabledProducts: o.disabledProducts,
                         image: o.image,
                         checked: o.checked,
                         isActive: o.isActive,
@@ -299,6 +312,81 @@ export class State {
                 .forEach(m => m.fills
                     .forEach(f =>
                         f.available_open_types = [0, 1, 2, 4, 3, 5]));
+
+
+            const tmp = polycadConstruction;
+            // Ставим всем проемам доступные типы открывания
+            if (this.settings.windowTypesOpenTypes && this.settings.windowTypesOpenTypes.length) {
+                const ots = this.settings.windowTypesOpenTypes.find(_ => _.windowType === templateIdx);
+                if (ots) {
+                    // const defot = ['none','left','right','down','up','left-down','right-down'];
+                    const defot = [
+                        'none',
+                        'down',
+                        'left',
+                        'right',
+                        'left-down',
+                        'right-down',
+                        'slide-left',
+                        'slide-right'
+                    ];
+                    if (templateIdx < 4) {
+                        for (let i = 0; i < tmp.models[0].fills.length; i++) {
+                            const choised = [];
+                            ots.openTypes[i].forEach(ot => choised.push(defot.indexOf(ot)));
+                            tmp.models[0].fills[i].available_open_types = choised.filter(_ => _ > -1);
+                        }
+                    } else if (templateIdx == 4 && ots.openTypes && ots.openTypes.length === 2) {
+                        let choised = [];
+                        ots.openTypes[0].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[0].fills[0].available_open_types = choised.filter(_ => _ > -1);
+                        choised = [];
+                        ots.openTypes[1].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[1].fills[0].available_open_types = choised.filter(_ => _ > -1);
+                    } else if (templateIdx == 5 && ots.openTypes && ots.openTypes.length === 3) {
+                        let choised = [];
+                        ots.openTypes[0].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[0].fills[0].available_open_types = choised.filter(_ => _ > -1);
+                        choised = [];
+                        ots.openTypes[1].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[1].fills[0].available_open_types = choised.filter(_ => _ > -1);
+                        choised = [];
+                        ots.openTypes[2].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[1].fills[1].available_open_types = choised.filter(_ => _ > -1);
+                    } else if (templateIdx == 6 && ots.openTypes && ots.openTypes.length === 2) {
+                        let choised = [];
+                        ots.openTypes[1].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[1].fills[0].available_open_types = choised.filter(_ => _ > -1);
+                        choised = [];
+                        ots.openTypes[0].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[0].fills[0].available_open_types = choised.filter(_ => _ > -1);
+
+                    } else if (templateIdx == 7 && ots.openTypes && ots.openTypes.length === 3) {
+
+                        let choised = [];
+                        ots.openTypes[2].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[1].fills[0].available_open_types = choised.filter(_ => _ > -1);
+                        choised = [];
+                        ots.openTypes[0].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[0].fills[0].available_open_types = choised.filter(_ => _ > -1);
+                        choised = [];
+                        ots.openTypes[1].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[0].fills[1].available_open_types = choised.filter(_ => _ > -1);
+
+                    } else if (templateIdx == 20 || templateIdx == 21 && ots.openTypes && ots.openTypes.length === 1) {
+                        let choised = [];
+                        ots.openTypes[0].forEach(ot => choised.push(defot.indexOf(ot)));
+                        tmp.models[0].fills[0].available_open_types = choised.filter(_ => _ > -1);
+                    }
+                }
+            }
+            // убираем недоступные типы изделий
+            if (this.settings.visibleWindowTypes && this.settings.visibleWindowTypes.length) {
+                
+                if (!this.settings.visibleWindowTypes.includes(templateIdx)) {
+                    this.settings.prodtypes = this.settings.prodtypes.filter(pt => pt.idtemplate !== templateIdx+'');
+                }
+            }
         }
 
 

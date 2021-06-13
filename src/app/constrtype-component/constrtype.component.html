@@ -8,7 +8,7 @@
             </div>
             <!-- <div class="flex-1 no-mobile" style="min-width: 30px; max-width: 30px;"></div> -->
             <div class="border flex-1 constrtype">
-                <div *ngFor="let ct of constrtypes; let idx = index;" class="flex-row ct" (click)="changeTemplate(idx)">
+                <div *ngFor="let ct of constrtypes; let idx = index;" class="flex-row ct" (click)="changeTemplate(idx, ct.idtemplate)">
                     <div class="flex-1 ct-image flex-row">
                         <div class="flex-1"></div>
                         <div class="flex-1">

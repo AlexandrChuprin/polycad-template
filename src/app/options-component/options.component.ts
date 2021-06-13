@@ -21,6 +21,18 @@ export class OptionsComponent extends CommonComponent implements AfterViewChecke
   optionsCommon = [];
   optionsWithSuboptions = [];
 
+  get optionsToCheck_() {
+    return this.optionsToCheck.filter(_ => !_.disabledProducts || !_.disabledProducts.includes(this.state.simpleJSON.idproduct));
+  }
+
+  get optionsCommon_() {
+    return this.optionsCommon.filter(_ => !_.disabledProducts || !_.disabledProducts.includes(this.state.simpleJSON.idproduct));
+  }
+
+  get optionsWithSuboptions_() {
+    return this.optionsWithSuboptions.filter(_ => !_.disabledProducts || !_.disabledProducts.includes(this.state.simpleJSON.idproduct));
+  }
+
   get options() {
     const filtered = SettingsPolycad.options.filter(_ => (_.isActive || isUndefined(_.isActive)));
     const sorted = filtered.sort((a, b) => a.numpos - b.numpos);

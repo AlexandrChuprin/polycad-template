@@ -259,6 +259,7 @@ export interface IOption {
     idoption: string;
     description: string;
     disabledOpenTypes: string[];
+    disabledProducts: string[];
     suboptions: IOption[];
     image: string;
     checked: boolean;

@@ -169,6 +169,51 @@ export class Settings {
     public lang = DefaultSettingsLanguage.lang;
     /***/
     public polycadType = 'default';
+    public visibleWindowTypes = [1,2,3,4,5,6,7,20,21];
+    public windowTypesOpenTypes: IOpenTypeDescriptor[] = [
+        // 1 - одностворчатое
+        { windowType: 1, openTypes: [['none','left','right','down','up','left-down','right-down']]},
+        // 2 - двустворчатое
+        { windowType: 2, openTypes: [
+            ['none','left','down','up','left-down'],
+            ['none','right','down','up','right-down']
+        ]},
+        // 3 - трехстворчатое
+        { windowType: 3, openTypes: [
+            ['none','left','down','up','left-down'],
+            ['none','left','right','down','up','left-down','right-down'],
+            ['none','right','down','up','right-down']
+        ]},
+        
+        // 4 - ББ окно (одностворчатое) справа, дверь с импостом и сендвичем
+        { windowType: 4, openTypes: [
+            ['left','right'],
+            ['none','left','right','down','up','left-down','right-down']
+        ]},
+        // 5 - ББ окно (двустворчатое) справа, дверь с импостом и сендвичем
+        { windowType: 5, openTypes: [
+            ['left','right'],
+            ['none','left','down','up','left-down'],
+            ['none','right','down','up','right-down']
+        ]},
+        // 6 - ББ окно (одностворчатое) слева, дверь с импостом и сендвичем
+        { windowType: 6, openTypes: [
+            ['none','left','right','down','up','left-down','right-down'],
+            ['left','right']
+        ]},
+        // 7 - ББ окно (двустворчатое) слева, дверь с импостом и сендвичем
+        { windowType: 7, openTypes: [
+            ['none','left','down','up','left-down'],
+            ['none','right','down','up','right-down'],
+            ['left','right']
+        ]},
+
+        // 20 - Дверь без импоста
+        { windowType: 20, openTypes: [['left','right']]},
+        // 21 - Дверь с горизонтальным импостом и сендвичем
+        { windowType: 21, openTypes: [['left','right']]},
+
+    ];
     public polycadValut: PolycadValut = 'RUB';
     public isCreateAgreementAvailable = false;
     public isOptionsGroupsVisible = false;
@@ -215,7 +260,7 @@ export class Settings {
                         option.visibility,
                         option.dependsOn,
                         option.isActive,
-                        option.isSuboption, []
+                        option.isSuboption, [], []
                     );
                 }
             }
@@ -237,7 +282,7 @@ export class Settings {
                         option.visibility,
                         option.dependsOn,
                         option.isActive,
-                        option.isSuboption, []
+                        option.isSuboption, [], []
                     );
                 }
             }
@@ -259,7 +304,7 @@ export class Settings {
                         option.visibility,
                         option.dependsOn,
                         option.isActive,
-                        option.isSuboption, []
+                        option.isSuboption, [], []
                     );
                 }
             }
@@ -268,6 +313,12 @@ export class Settings {
     }
     public loadPolycadSettings(settingsPolycad: any, settingsDynamic: PolycadSettings, polycadLang: any) {
         if (settingsPolycad) {
+            if (settingsPolycad.visibleWindowTypes instanceof Array) {
+                this.visibleWindowTypes = [...settingsPolycad.visibleWindowTypes];
+            }
+            if (settingsPolycad.windowTypesOpenTypes instanceof Array) {
+                this.windowTypesOpenTypes = [...settingsPolycad.windowTypesOpenTypes];
+            }
             if (settingsPolycad.additions instanceof Array) {
                 this.additions = [...settingsPolycad.additions];
             }
@@ -371,14 +422,14 @@ export class Settings {
 
             const options = [
                 this.getEmptyOption(1),
-                new Option('option-ps-cheap', profiles[0].id, 'profile', '', 1, '', '', '', true, false, false, 'showed', [], true, false, []),
-                new Option('option-ps-expensive', profiles[1].id, 'profile', '', 1, '', '', '', false, false, false, 'showed', [], true, false, []),
-                new Option('option-fill-cheap', fills[0].id, 'fill', '', 2, '', '', '', true, false, false, 'showed', [], true, false, []),
-                new Option('option-fill-expensive', fills[1].id, 'fill', '', 2, '', '', '', true, false, false, 'showed', [], true, false, []),
+                new Option('option-ps-cheap', profiles[0].id, 'profile', '', 1, '', '', '', true, false, false, 'showed', [], true, false, [], []),
+                new Option('option-ps-expensive', profiles[1].id, 'profile', '', 1, '', '', '', false, false, false, 'showed', [], true, false, [], []),
+                new Option('option-fill-cheap', fills[0].id, 'fill', '', 2, '', '', '', true, false, false, 'showed', [], true, false, [], []),
+                new Option('option-fill-expensive', fills[1].id, 'fill', '', 2, '', '', '', true, false, false, 'showed', [], true, false, [], []),
 
-                new Option('antiburglary-common', '', '', '', 2, ' assets/images/options/antiburglary.jpg', 'Противо - взломность', '', true, true, false, 'showed', [], true, false, []),
-                new Option('energyefficient-common', '', '', '', 2, 'assets/images/options/energyefficient.jpg', 'Энерго - эффективность', '', true, true, false, 'showed', [], true, false, []),
-                new Option('noiseprotection-common', '', '', '' ,2, 'assets/images/options/noiseprotection.jpg', 'Шумозащита', '', true, true, false, 'showed', [], true, false, []),
+                new Option('antiburglary-common', '', '', '', 2, ' assets/images/options/antiburglary.jpg', 'Противо - взломность', '', true, true, false, 'showed', [], true, false, [], []),
+                new Option('energyefficient-common', '', '', '', 2, 'assets/images/options/energyefficient.jpg', 'Энерго - эффективность', '', true, true, false, 'showed', [], true, false, [], []),
+                new Option('noiseprotection-common', '', '', '' ,2, 'assets/images/options/noiseprotection.jpg', 'Шумозащита', '', true, true, false, 'showed', [], true, false, [], []),
             ];
             this.options = options;
 
@@ -596,7 +647,7 @@ export class Settings {
                             option.visibility,
                             option.dependsOn,
                             option.isActive,
-                            option.isSuboption, []),
+                            option.isSuboption, [], []),
                             settingsDynamic
                     )
                 );
@@ -605,7 +656,7 @@ export class Settings {
     }
 
     public getEmptyOption(numpos: number): Option {
-        const res = new Option('option-empty', '', '', '', numpos, 'assets/images/options/empty.jpg', '', '', false, false, false, '', [], true, false, []);
+        const res = new Option('option-empty', '', '', '', numpos, 'assets/images/options/empty.jpg', '', '', false, false, false, '', [], true, false, [], []);
         return res;
     }
 
@@ -743,4 +794,10 @@ export class DefaultSettingsLanguage {
         'isOptionsGroupsVisible': 'Видимость групп опций',
         'readOnlyMode': 'Режим просмотра. Документ недоступен для изменений.'
     };
+}
+
+
+interface IOpenTypeDescriptor {
+    windowType: number;
+    openTypes: string[][];
 }
