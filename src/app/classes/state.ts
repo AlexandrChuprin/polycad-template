@@ -384,7 +384,7 @@ export class State {
             if (this.settings.visibleWindowTypes && this.settings.visibleWindowTypes.length) {
                 
                 if (!this.settings.visibleWindowTypes.includes(templateIdx)) {
-                    this.settings.prodtypes = this.settings.prodtypes.filter(pt => pt.idtemplate !== templateIdx+'');
+                    this.settings.prodtypes = this.settings.prodtypes.filter(pt => pt.idtemplate != templateIdx+'');
                 }
             }
         }
