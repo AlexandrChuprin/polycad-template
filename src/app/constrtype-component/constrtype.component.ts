@@ -42,6 +42,21 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
   comment = 'выберите тип конструкции';
   lastPic: SafeResourceUrl = '';
 
+  avalibleOpenTypes(fillIdx: number) {
+    let res = [
+      'none',
+      'left',
+      'right',
+      'down',
+      'up',
+      'left-down',
+      'right-down',
+    ];
+    const modelIdx = +this.state.simpleJSON.idtemplate;
+    res = res.filter(_ => this.state.settings.windowTypesOpenTypes.find(m => m.windowType == modelIdx).openTypes[fillIdx].includes(_));
+    return res;
+  }
+
   constrtypes_: ICT[] = [];
   get constrtypes() {
     const data = [];

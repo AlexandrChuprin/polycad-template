@@ -239,6 +239,19 @@ export class Settings {
     constructor() {
     }
 
+    public initProdtypes() {
+        this.prodtypes = [];
+        this.prodtypes.push(new ProductionType('Окно', 'assets/images/templates/template-1.png', '1'));
+        this.prodtypes.push(new ProductionType('Окно с импостом', 'assets/images/templates/template-2.png', '2'));
+        this.prodtypes.push(new ProductionType('Окно с импостами', 'assets/images/templates/template-3.png', '3'));
+        this.prodtypes.push(new ProductionType('Дверь', 'assets/images/templates/template-20.png', '20'));
+        this.prodtypes.push(new ProductionType('Дверь с импостом', 'assets/images/templates/template-21.png', '21'));
+        this.prodtypes.push(new ProductionType('Балконный блок левый', 'assets/images/templates/template-4.png', '4'));
+        this.prodtypes.push(new ProductionType('Балконный блок левый с импостом', 'assets/images/templates/template-5.png', '5'));
+        this.prodtypes.push(new ProductionType('Балконный блок правый', 'assets/images/templates/template-6.png', '6'));
+        this.prodtypes.push(new ProductionType('Балконный блок правый с импостом', 'assets/images/templates/template-7.png', '7'));
+    }
+
     tryCreateOptionFromSettings(option: Option, settingsDynamic: PolycadSettings) {
         let optionLocal = option;
         if (option.settingsId) {

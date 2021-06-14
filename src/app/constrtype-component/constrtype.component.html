@@ -39,13 +39,7 @@
                     <div class="flex-1" style="min-width: 20px; max-width: 20px;"></div>
                     <div *ngFor="let openType of openTypes; let idx = index;" class="flex-1 cb">
                         <select class="ot ot-text" name="open-type-{{idx}}" id="open-type-{{idx}}" (change)="setOpenType(idx, $event.target.value)">
-                            <option value="none" [selected]="openType === 'none'">{{openTypeDescription('none')}}</option>
-                            <option value="left" [selected]="openType === 'left'">{{openTypeDescription('left')}}</option>
-                            <option value="right" [selected]="openType === 'right'">{{openTypeDescription('right')}}</option>
-                            <option value="down" [selected]="openType === 'down'">{{openTypeDescription('down')}}</option>
-                            <option value="up" [selected]="openType === 'up'">{{openTypeDescription('up')}}</option>
-                            <option value="left-down" [selected]="openType === 'left-down'">{{openTypeDescription('left-down')}}</option>
-                            <option value="right-down" [selected]="openType === 'right-down'">{{openTypeDescription('right-down')}}</option>
+                            <option *ngFor="let ot of avalibleOpenTypes(idx);" [value]="ot" [selected]="openType === ot">{{openTypeDescription(ot)}}</option>
                         </select>
                     </div>
                 </div>

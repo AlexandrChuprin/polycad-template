@@ -382,7 +382,7 @@ export class State {
             }
             // убираем недоступные типы изделий
             if (this.settings.visibleWindowTypes && this.settings.visibleWindowTypes.length) {
-                
+                this.settings.initProdtypes();
                 if (!this.settings.visibleWindowTypes.includes(templateIdx)) {
                     this.settings.prodtypes = this.settings.prodtypes.filter(pt => pt.idtemplate != templateIdx+'');
                 }
