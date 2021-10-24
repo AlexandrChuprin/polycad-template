@@ -42,6 +42,12 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
   comment = 'выберите тип конструкции';
   lastPic: SafeResourceUrl = '';
 
+  isSelectedOpenType(idx: number, avalibleOpenType: OpenType) {
+    const isSame = avalibleOpenType === this.getOpenType(idx);
+    // console.log(`avalibleOpenType: ${avalibleOpenType}, openType: ${openType}, isSame: ${isSame}`);
+    return isSame;
+  }
+
   avalibleOpenTypes(fillIdx: number) {
     let res = [
       'none',
@@ -52,8 +58,18 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
       'left-down',
       'right-down',
     ];
-    const modelIdx = +this.state.simpleJSON.idtemplate;
-    res = res.filter(_ => this.state.settings.windowTypesOpenTypes.find(m => m.windowType == modelIdx).openTypes[fillIdx].includes(_));
+    const templateId = +this.state.simpleJSON.idtemplate;
+    const constrTypeOpentypes = this.state.settings.windowTypesOpenTypes.find(m => m.windowType == templateId);
+    // console.log(`constrTypeOpentypes:`);
+    // console.log(constrTypeOpentypes);
+    if (constrTypeOpentypes) {
+      const openTypes = constrTypeOpentypes.openTypes[fillIdx];
+      // console.log(`openTypes:`);
+      // console.log(openTypes);
+      if (openTypes && openTypes.length) {
+        res = res.filter(_ => openTypes.includes(_));
+      }
+    }
     return res;
   }
 
@@ -84,7 +100,13 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
         ...this.state.simpleJSON.fields.map(_ => _.open_type)
       ];
     }
+    // console.log(`openTypesResult:`);
+    // console.log(openTypesResult);
     return openTypesResult;
+  }
+
+  getOpenType(idx: number) {
+    return this.openTypes[idx];
   }
 
   get image() {
@@ -140,23 +162,26 @@ export class ConstrtypeComponent extends CommonComponent implements OnInit, Afte
   }
 
   setOpenTypeWindow(fillIdx: number, value: OpenType) {
-    console.log('setOpenTypeWindow_' + fillIdx);
-    console.log(value);
+    // console.log('setOpenTypeWindow_' + fillIdx);
+    // console.log(value);
     const fills = this.state.simpleJSON.fields;
     fills[fillIdx].open_type = value;
     this.process(new SetWindowFills(fills));
   }
 
   setOpenTypeDoor(fillIdx: number, value: OpenType) {
-    console.log('setOpenTypeDoor_');
-    console.log(value);
+    // console.log('setOpenTypeDoor_');
+    // console.log(value);
     const fills = this.state.simpleJSON.fields_door;
     fills[0].open_type = value;
     this.process(new SetDoorFills(fills));
   }
 
   openTypeDescription(opentype: OpenType) {
-    return getOpenTypeDescription(opentype);
+    const ot = getOpenTypeDescription(opentype);
+    // const sot = this.isSelectedOpenType(avalableopentype, opentype);
+    // console.log(`ot: ${ot}, aot: ${avalableopentype}, sot: ${sot}`);
+    return ot;
   }
 
   ngOnInit() {

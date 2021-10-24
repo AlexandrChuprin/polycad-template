@@ -37,11 +37,33 @@
                 </div>
                 <div class="border flex-1 flex-row opentypes">
                     <div class="flex-1" style="min-width: 20px; max-width: 20px;"></div>
-                    <div *ngFor="let openType of openTypes; let idx = index;" class="flex-1 cb">
-                        <select class="ot ot-text" name="open-type-{{idx}}" id="open-type-{{idx}}" (change)="setOpenType(idx, $event.target.value)">
-                            <option *ngFor="let ot of avalibleOpenTypes(idx);" [value]="ot" [selected]="openType === ot">{{openTypeDescription(ot)}}</option>
-                        </select>
-                    </div>
+
+                    <select *ngIf="openTypes.length >= 1"
+                        class="flex-1 cb ot ot-text"
+                        (change)="setOpenType(0, $event.target.value)"
+                    >
+                        <option *ngFor="let avalibleOpenType of avalibleOpenTypes(0);" [value]="avalibleOpenType" [selected]="isSelectedOpenType(0, avalibleOpenType)">
+                            {{openTypeDescription(avalibleOpenType)}}
+                        </option>
+                    </select>
+
+                    <select *ngIf="openTypes.length >= 2"
+                        class="flex-1 cb ot ot-text"
+                        (change)="setOpenType(1, $event.target.value)"
+                    >
+                        <option *ngFor="let avalibleOpenType of avalibleOpenTypes(1);" [value]="avalibleOpenType" [selected]="isSelectedOpenType(1, avalibleOpenType)">
+                            {{openTypeDescription(avalibleOpenType)}}
+                        </option>
+                    </select>
+
+                    <select *ngIf="openTypes.length >= 3"
+                        class="flex-1 cb ot ot-text"
+                        (change)="setOpenType(2, $event.target.value)"
+                    >
+                        <option *ngFor="let avalibleOpenType of avalibleOpenTypes(2);" [value]="avalibleOpenType" [selected]="isSelectedOpenType(2, avalibleOpenType)">
+                            {{openTypeDescription(avalibleOpenType)}}
+                        </option>
+                    </select>
                 </div>
             </div>
         </div>

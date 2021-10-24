@@ -66,9 +66,9 @@ export class SelectTemplate extends StoreAction {
             newStateObject.simpleJSON.idproduct = 'balkon';
             newStateObject.simpleJSON.width = 700;
             newStateObject.simpleJSON.height = 1200;
-            newStateObject.simpleJSON.imposts_door = [600];
+            newStateObject.simpleJSON.imposts = [];
             newStateObject.simpleJSON.fields = [
-                {open_type: 'right', moskit: false, handle: ''} as SimpleJSONFill
+                {open_type: 'none', moskit: false, handle: ''} as SimpleJSONFill
             ];
             newStateObject.simpleJSON.width_door = 600;
             newStateObject.simpleJSON.height_door = 2000;
@@ -235,12 +235,12 @@ export class SetDoorImpPositions extends StoreAction {
 }
 
 export class SetDoorFills extends StoreAction {
-    constructor(private fills: SimpleJSONFill[]) {
+    constructor(private fills_door: SimpleJSONFill[]) {
         super();
     }
     perform(lastState: State) {
         const newStateObject = super.perform(lastState);
-        newStateObject.simpleJSON.fields_door = [...this.fills];
+        newStateObject.simpleJSON.fields_door = [...this.fills_door];
         return newStateObject;
     }
 }
